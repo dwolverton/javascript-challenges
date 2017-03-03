@@ -1,0 +1,20 @@
+* ~~run a test~~
+* ~~run a test and post results~~
+* post console & errors
+* assert correct console.
+* ~~run multiple tests and post results~~
+* protect against infinite loop
+* navigate through list of challenges
+* load selected challenge
+* code editor
+* make it presentable
+* parse challenges from MarkDown
+* load challenges into database from MarkDown
+* select challenge set from database (#!/c/basic-js/1)
+* auto-run and run on click options
+* slack login limited to GC
+
+
+https://github.com/sitepoint-editors/angular-js-unit-testing-services-controllers-providers
+https://github.com/angular/angular-seed/blob/master/karma.conf.js
+https://docs.angularjs.org/guide/unit-testing
