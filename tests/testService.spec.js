@@ -23,9 +23,9 @@ describe("testService", function() {
 
     it("fails with incorrect solution", function(done) {
         testService.runTestCase(mock.challenge.testCases[0], mock.brokenCode).then(function(result) {
+            delete result.console;
             expect(result).toEqual({
                 expressionResult: -2,
-                console: [],
                 status: "fail"
             });
             done();
@@ -35,9 +35,9 @@ describe("testService", function() {
 
     it("errors with erroring solution", function(done) {
         testService.runTestCase(mock.challenge.testCases[0], mock.erroringFunctionCode).then(function(result) {
+            delete result.console;
             expect(result).toEqual({
                 error: "ReferenceError: Can't find variable: huh",
-                console: [],
                 status: "error"
             });
             done();
@@ -47,9 +47,9 @@ describe("testService", function() {
 
     it("errors with broken syntax within function", function(done) {
         testService.runTestCase(mock.challenge.testCases[0], mock.brokenSyntaxWithinCode).then(function(result) {
+            delete result.console;
             expect(result).toEqual({
                 error: "SyntaxError: Expected an identifier but found 'plus' instead",
-                console: [],
                 status: "error"
             });
             done();
@@ -59,9 +59,9 @@ describe("testService", function() {
 
     it("errors with broken syntax", function(done) {
         testService.runTestCase(mock.challenge.testCases[0], mock.brokenSyntaxCode).then(function(result) {
+            delete result.console;
             expect(result).toEqual({
                 error: "SyntaxError: Expected token ')'",
-                console: [],
                 status: "error"
             });
             done();
@@ -71,9 +71,9 @@ describe("testService", function() {
 
     it("errors with unclosed bracket", function(done) {
         testService.runTestCase(mock.challenge.testCases[0], mock.openBracketCode).then(function(result) {
+            delete result.console;
             expect(result).toEqual({
                 error: "SyntaxError: Unexpected token ')'",
-                console: [],
                 status: "error"
             });
             done();
@@ -83,9 +83,9 @@ describe("testService", function() {
 
     it("errors if function does not exist", function(done) {
         testService.runTestCase(mock.challenge.testCases[0], mock.missingFunctionCode).then(function(result) {
+            delete result.console;
             expect(result).toEqual({
                 error: "ReferenceError: Can't find variable: add",
-                console: [],
                 status: "error"
             });
             done();
@@ -110,6 +110,26 @@ describe("testService", function() {
                 console: [],
                 status: "pass"
             }}]);
+            done();
+        });
+        $rootScope.$digest();
+    });
+
+    it("collects console logs", function(done) {
+        testService.runTestCase(mock.challenge.testCases[0], mock.consoleCode.string).then(function(result) {
+            expect(result.console).toEqual([
+                { level: "log", values: ["Hello World"]}
+            ]);
+            done();
+        });
+        $rootScope.$digest();
+    });
+
+    it("collects console errors", function(done) {
+        testService.runTestCase(mock.challenge.testCases[0], mock.consoleCode.error).then(function(result) {
+            expect(result.console).toEqual([
+                { level: "error", values: ["Aaaaah!"]}
+            ]);
             done();
         });
         $rootScope.$digest();

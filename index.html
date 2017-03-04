@@ -6,8 +6,8 @@
         <link rel="stylesheet" href="styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-route.min.js"></script>
-        <script src="app.js" charset="utf-8"></script>
-        <script src="mock.js" charset="utf-8"></script>
+        <script src="src/app.js" charset="utf-8"></script>
+        <script src="src/mock.js" charset="utf-8"></script>
     </head>
     <body ng-app="jsExercises" ng-controller="main">
         <div ng-bind-html="challengeDescriptionHtml"></div>
@@ -27,7 +27,7 @@
                     <td>{{test.case.result}}</td>
                     <td><p ng-repeat="line in test.case.console track by $index">&gt; {{line}}</p></td>
                     <td>{{test.result.expressionResult}}{{test.result.error}}</td>
-                    <td><p ng-repeat="line in test.result.console track by $index">&gt; {{line}}</p></td>
+                    <td><p ng-repeat="line in test.result.console track by $index" ng-class="line.level">&gt; <span ng-repeat="val in line.values track by $index">{{val}}</span></p></td>
                 </tr>
             </tbody>
         </table>

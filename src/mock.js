@@ -28,6 +28,13 @@ angular.module("jsExercises")
     this.brokenSyntaxWithinCode = "function add(num1, num2) {\n  return num1 plus num2; }";
     this.openBracketCode = "function add(num1, num2) {\n  return num1 + num2;";
     this.missingFunctionCode = "console.log('hello world');"
+    this.consoleCode = {
+        string: this.challenge.solution + " console.log('Hello World')",
+        object: this.challenge.solution + " console.log({x: 1})",
+        combo: this.challenge.solution + " console.log({x: 1})",
+        error: this.challenge.solution + " console.error('Aaaaah!')"
+    };
+
     this.testCaseResults = [
         {
             functionCall: "add(1, 3)",
