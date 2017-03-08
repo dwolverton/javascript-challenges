@@ -1,0 +1,23 @@
+<div class="code-challenge">
+    <div ng-bind-html="challengeDescriptionHtml" class="description"></div>
+    <textarea ng-model="code" ng-model-options="{debounce: 500}"></textarea>
+    <table class="test-cases">
+        <thead>
+            <tr>
+                <th rowspan="2">Test Case</th><th colspan="2">Expected</th><th colspan="2">Actual</th>
+            </tr>
+            <tr>
+                <th>Result</th><th>Console</th><th>Result</th><th>Console</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="test in testCaseResults" ng-class="test.result.status">
+                <td>{{test.case.expression}}</td>
+                <td>{{test.case.result}}</td>
+                <td><p ng-repeat="line in test.case.console track by $index" ng-class="line.level">&gt; <span ng-repeat="val in line.values track by $index">{{val}}</span></p></td>
+                <td>{{test.result.expressionResult}}{{test.result.error}}</td>
+                <td><p ng-repeat="line in test.result.console track by $index" ng-class="line.level">&gt; <span ng-repeat="val in line.values track by $index">{{val}}</span></p></td>
+            </tr>
+        </tbody>
+    </table>
+</body>

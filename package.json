@@ -9,6 +9,7 @@
     "karma-phantomjs-launcher": "1.0.2"
   },
   "dependencies": {
-    "angular": "1.6.2"
+    "angular": "1.6.2",
+    "angular-route": "1.6.2"
   }
 }

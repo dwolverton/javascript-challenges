@@ -1,6 +1,7 @@
 angular.module("jsExercises")
 .service("mock", function() {
     this.challenge = {
+        title: "Add Function",
         description: "<p>Return the sum of two numbers.</p>",
         starterCode: "function add(num1, num2) {\n  // write code here.\n}",
         solution: "function add(num1, num2) {\n  return num1 + num2;\n}",
@@ -8,17 +9,17 @@ angular.module("jsExercises")
             {
                 expression: "add(1, 3)",
                 result: 4,
-                console: []
+                console: null
             },
             {
                 expression: "add(1, -1)",
                 result: 0,
-                console: []
+                console: null
             },
             {
                 expression: "add(-2, -1)",
                 result: -3,
-                console: []
+                console: null
             }
         ]
     };
@@ -33,6 +34,27 @@ angular.module("jsExercises")
         object: this.challenge.solution + " console.log({x: 1})",
         combo: this.challenge.solution + " console.log({x: 1})",
         error: this.challenge.solution + " console.error('Aaaaah!')"
+    };
+
+    this.challenge2 = {
+        title: "Function Result to Variable",
+        description: "<p>Call the <code>add</code> function to with inputs 2 and 4. Store the result in a variable named <code>total</code></p>",
+        starterCode: "function add(num1, num2) {\n  console.log('called add');\n  return num1 + num2;\n}",
+        solution: "function add(num1, num2) {\n  console.log('called add');\n  return num1 + num2;\n}\n\nvar total = add(2, 4);",
+        testCases: [
+            {
+                expression: "total",
+                result: 6,
+                console: null
+            },
+            {
+                expression: "true",
+                result: true,
+                console: [
+                    { level: "log", values: ["called add"] }
+                ]
+            }
+        ]
     };
 
     this.testCaseResults = [

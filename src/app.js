@@ -1,92 +1,24 @@
-angular.module("jsExercises", [])
-.controller("main", function($scope, $sce, testService, mock) {
-    $scope.challengeDescriptionHtml = $sce.trustAsHtml(mock.challenge.description);
-    $scope.code = mock.challenge.starterCode;
+angular.module("jsExercises", ["ngRoute"])
+.controller("challengeListController", function($scope, $rootScope, $routeParams, challengeService) {
 
-    $scope.generalError = "Infinite Loop!";
+    $scope.$on("$routeChangeSuccess", loadChallenges);
+
+    function loadChallenges() {
+        $scope.challengeSetId = $routeParams.challengeSetId;
+        $scope.challenges = challengeService.getChallenges($routeParams.challengeSetId);
+    }
+})
+.controller("challengeController", function($scope, $routeParams, $sce, challengeService, testService) {
+    var challenge = challengeService.getChallenge($routeParams.challengeSetId, $routeParams.challengeNumber);
+
+    $scope.challengeDescriptionHtml = $sce.trustAsHtml(challenge.description);
+    $scope.code = challenge.starterCode;
+
     $scope.testCaseResults = [];
 
     $scope.$watch('code', function(code) {
-        testService.runTestCases(mock.challenge.testCases, code).then(function (testResults) {
-            console.log(testResults);
+        testService.runTestCases(challenge.testCases, code).then(function (testResults) {
             $scope.testCaseResults = testResults;
         });
     });
-})
-.factory("challengesService", function(mock) {
-    return {
-        challengeOne: mock.challenge
-    };
-})
-.factory("testService", function($q) {
-
-    function execCodeAndTestExpression(code, expression) {
-        var codeToRun = "(function(){" + code + "\ntry { __result = " +
-                        expression +
-                        "; } catch (e) { __error = e; }})()";
-
-        var __result = null, __error = null;
-        var console = new ConsoleProxy();
-        try {
-            eval(codeToRun);
-        } catch(e) {
-            __error = e;
-        }
-
-        var __deferred = $q.defer();
-        if (__error) {
-            __deferred.reject({error: __error, console: console.__log });
-        } else {
-            __deferred.resolve({result: __result, console: console.__log });
-        }
-        return __deferred.promise;
-    }
-
-    function ConsoleProxy() {
-        this.__log = [];
-    }
-    ["log", "error", "warn"].forEach(function(level) {
-        ConsoleProxy.prototype[level] = function() {
-            this.__log.push({
-                level: level, values: Array.prototype.slice.call(arguments)
-            });
-            console[level].apply(console, arguments);
-        };
-    });
-
-
-    var testService = {
-        runTestCases: function(testCases, code) {
-            return $q.all(testCases.map(function(testCase) {
-                return testService.runTestCase(testCase, code).then(function(testResult) {
-                    return {
-                        case: testCase,
-                        result: testResult
-                    };
-                });
-            }));
-        },
-        runTestCase: function(testCase, code) {
-
-            function handleResult(result) {
-                return {
-                    expressionResult: result.result,
-                    console: result.console,
-                    status: result.result === testCase.result ? "pass" : "fail"
-                };
-            }
-
-            function handleError(result) {
-                return {
-                    error: result.error.toString(),
-                    console: result.console,
-                    status: "error"
-                };
-            }
-
-            return execCodeAndTestExpression(code, testCase.expression)
-                   .then(handleResult, handleError);
-        }
-    }
-    return testService;
 });

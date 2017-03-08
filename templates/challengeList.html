@@ -1,0 +1,5 @@
+<div class="main-challenge-list">
+    <p ng-repeat="challenge in challenges">
+        <a ng-href="#!/c/{{challengeSetId}}/{{$index + 1}}">{{$index + 1}}. {{challenge.title}}</a>
+    </p>
+</div>
