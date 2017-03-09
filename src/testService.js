@@ -1,39 +1,66 @@
 angular.module("jsExercises")
 .factory("testService", function($q) {
+    var LOG_LIMIT = 100;
+    var RUNNER_TIMEOUT = 500;
 
     function execCodeAndTestExpression(code, expression) {
-        var codeToRun = "(function(){" + code + "\ntry { __result = " +
-                        expression +
-                        "; } catch (e) { __error = e; }})()";
+        var deferred = $q.defer();
+        var log = [];
 
-        var __result = null, __error = null;
-        var console = new ConsoleProxy();
-        try {
-            eval(codeToRun);
-        } catch(e) {
-            __error = e;
-        }
+        // Prepare the worker to run the code
+        var codeToRun = decorateCode(code, expression);
+        var worker = new Worker(createWorkerUrl(codeToRun));
 
-        var __deferred = $q.defer();
-        if (__error) {
-            __deferred.reject({error: __error, console: console.__log });
-        } else {
-            __deferred.resolve({result: __result, console: console.__log });
-        }
-        return __deferred.promise;
+        // add a listener for messages from the Worker
+        worker.addEventListener('message', function(e){
+            if (e.data.type === 'console') {
+                var level = e.data.level;
+                var values = e.data.values;
+                if (log.length < LOG_LIMIT) {
+                    log.push({ level: level, values: values });
+                }
+            } else if (e.data.type === 'result') {
+                clearTimeout(timeout);
+                deferred.resolve({result: e.data.result, console: log });
+            }
+        });
+
+        // add a listener for errors from the Worker
+        worker.addEventListener('error', function(e){
+            e.preventDefault();
+            clearTimeout(timeout);
+            deferred.reject({error: { message: e.message, lineNumber: e.lineno - 1 }, console: log });
+        });
+
+        // Kick off the script.
+        worker.postMessage({ code: code });
+
+        var timeout = setTimeout(function() {
+            worker.terminate();
+            deferred.reject({error: { message: 'Infinite Loop'}, console: log });
+        }, RUNNER_TIMEOUT);
+
+        return deferred.promise;
     }
 
-    function ConsoleProxy() {
-        this.__log = [];
+    function createWorkerUrl(code) {
+        var codeBlob = new Blob([code], {
+            type: 'text/javascript'
+        });
+        return URL.createObjectURL(codeBlob);
     }
-    ["log", "error", "warn", "info"].forEach(function(level) {
-        ConsoleProxy.prototype[level] = function() {
-            this.__log.push({
-                level: level, values: Array.prototype.slice.call(arguments)
-            });
-            console[level].apply(console, arguments);
-        };
-    });
+
+    function decorateCode(code, expression) {
+        var start = 'var console = {};' +
+        '["log", "error", "warn", "info"].forEach(function(level) {' +
+            'console[level] = function() {' +
+                'postMessage({type:"console", level: level, values: Array.prototype.slice.call(arguments) });' +
+            '};' +
+        '}); self.addEventListener("message", function(__e__) { __code__ = __e__.data.code;\n'; // The code should not run immediately, but run when we send the start message.
+        var end = '\npostMessage({type:"result", result:' + expression + "}); });";
+
+        return start + code + end;
+    }
 
 
     var testService = {
@@ -59,7 +86,7 @@ angular.module("jsExercises")
 
             function handleError(result) {
                 return {
-                    error: result.error.toString(),
+                    error: result.error,
                     console: result.console,
                     status: "error"
                 };

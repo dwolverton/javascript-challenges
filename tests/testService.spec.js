@@ -18,7 +18,9 @@ describe("testService", function() {
             });
             done();
         });
-        $rootScope.$digest();
+        setTimeout(function() {
+            $rootScope.$digest();
+        }, 100);
     });
 
     it("fails with incorrect solution", function(done) {
@@ -30,67 +32,79 @@ describe("testService", function() {
             });
             done();
         });
-        $rootScope.$digest();
+        setTimeout(function() {
+            $rootScope.$digest();
+        }, 100);
     });
 
     it("errors with erroring solution", function(done) {
         testService.runTestCase(mock.challenge.testCases[0], mock.erroringFunctionCode).then(function(result) {
             delete result.console;
             expect(result).toEqual({
-                error: "ReferenceError: Can't find variable: huh",
+                error: { message: "ReferenceError: Can't find variable: huh", lineNumber: 2 },
                 status: "error"
             });
             done();
         });
-        $rootScope.$digest();
+        setTimeout(function() {
+            $rootScope.$digest();
+        }, 100);
     });
 
     it("errors with broken syntax within function", function(done) {
         testService.runTestCase(mock.challenge.testCases[0], mock.brokenSyntaxWithinCode).then(function(result) {
             delete result.console;
             expect(result).toEqual({
-                error: "SyntaxError: Expected an identifier but found 'plus' instead",
+                error: { message: "SyntaxError: Expected an identifier but found 'plus' instead", lineNumber: 2 },
                 status: "error"
             });
             done();
         });
-        $rootScope.$digest();
+        setTimeout(function() {
+            $rootScope.$digest();
+        }, 100);
     });
 
     it("errors with broken syntax", function(done) {
         testService.runTestCase(mock.challenge.testCases[0], mock.brokenSyntaxCode).then(function(result) {
             delete result.console;
             expect(result).toEqual({
-                error: "SyntaxError: Expected token ')'",
+                error: { message: "SyntaxError: Expected token ')'", lineNumber: 1 },
                 status: "error"
             });
             done();
         });
-        $rootScope.$digest();
+        setTimeout(function() {
+            $rootScope.$digest();
+        }, 100);
     });
 
     it("errors with unclosed bracket", function(done) {
         testService.runTestCase(mock.challenge.testCases[0], mock.openBracketCode).then(function(result) {
             delete result.console;
             expect(result).toEqual({
-                error: "SyntaxError: Unexpected token ')'",
+                error: { message: "SyntaxError: Unexpected token ')'", lineNumber: 3 },
                 status: "error"
             });
             done();
         });
-        $rootScope.$digest();
+        setTimeout(function() {
+            $rootScope.$digest();
+        }, 100);
     });
 
     it("errors if function does not exist", function(done) {
         testService.runTestCase(mock.challenge.testCases[0], mock.missingFunctionCode).then(function(result) {
             delete result.console;
             expect(result).toEqual({
-                error: "ReferenceError: Can't find variable: add",
+                error: { message: "ReferenceError: Can't find variable: add", lineNumber: 2 },
                 status: "error"
             });
             done();
         });
-        $rootScope.$digest();
+        setTimeout(function() {
+            $rootScope.$digest();
+        }, 100);
     });
 
     it("can run multiple test cases", function(done) {
@@ -112,7 +126,9 @@ describe("testService", function() {
             }}]);
             done();
         });
-        $rootScope.$digest();
+        setTimeout(function() {
+            $rootScope.$digest();
+        }, 100);
     });
 
     it("collects console logs", function(done) {
@@ -122,7 +138,9 @@ describe("testService", function() {
             ]);
             done();
         });
-        $rootScope.$digest();
+        setTimeout(function() {
+            $rootScope.$digest();
+        }, 100);
     });
 
     it("collects console errors", function(done) {
@@ -132,6 +150,8 @@ describe("testService", function() {
             ]);
             done();
         });
-        $rootScope.$digest();
+        setTimeout(function() {
+            $rootScope.$digest();
+        }, 100);
     });
 });

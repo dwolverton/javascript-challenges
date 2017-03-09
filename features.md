@@ -6,13 +6,15 @@
 * ~~load selected challenge~~
 * ~~descriptions on test cases~~
 * ~~override/descriptions for test expressions~~
+* protect against infinite loop
+  * limit to one at a time.
 * assert correct console
 * code editor
 * make it presentable
-* protect against infinite loop
 * view solution
 * parse challenges from MarkDown
 * ~~ show line numbers of errors ~~
+* if error line number is in eval expression, don't show line number
 * lint
 * regex test cases
 * load challenges into database from MarkDown

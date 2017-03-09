@@ -18,7 +18,10 @@
                 <td>{{test.case.expressionDisplay || test.case.expression}}</td>
                 <td>{{test.case.result}}</td>
                 <td><p ng-repeat="line in test.case.console track by $index" ng-class="line.level">&gt; <span ng-repeat="val in line.values track by $index">{{val}}</span></p></td>
-                <td>{{test.result.expressionResult}}{{test.result.error}}</td>
+                <td>
+                    {{test.result.expressionResult}}{{test.result.error.message}}
+                    <span ng-if="test.result.error.lineNumber"class="lineno">at line {{test.result.error.lineNumber}}</span>
+                </td>
                 <td><p ng-repeat="line in test.result.console track by $index" ng-class="line.level">&gt; <span ng-repeat="val in line.values track by $index">{{val}}</span></p></td>
             </tr>
         </tbody>
