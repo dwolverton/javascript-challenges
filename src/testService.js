@@ -17,6 +17,7 @@ angular.module("jsExercises")
                 var level = e.data.level;
                 var values = e.data.values;
                 if (log.length < LOG_LIMIT) {
+                    console[level].apply(console, values);
                     log.push({ level: level, values: values });
                 }
             } else if (e.data.type === 'result') {
