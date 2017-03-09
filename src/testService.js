@@ -26,7 +26,7 @@ angular.module("jsExercises")
     function ConsoleProxy() {
         this.__log = [];
     }
-    ["log", "error", "warn"].forEach(function(level) {
+    ["log", "error", "warn", "info"].forEach(function(level) {
         ConsoleProxy.prototype[level] = function() {
             this.__log.push({
                 level: level, values: Array.prototype.slice.call(arguments)

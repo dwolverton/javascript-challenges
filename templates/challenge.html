@@ -11,8 +11,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="test in testCaseResults" ng-class="test.result.status">
-                <td>{{test.case.expression}}</td>
+            <tr ng-repeat-start="test in testCaseResults" class="test-case-description" ng-class="test.result.status" ng-if="test.case.description">
+                <td colspan="5">{{test.case.description}}</td>
+            </tr>
+            <tr ng-repeat-end class="test-case-details" ng-class="test.result.status">
+                <td>{{test.case.expressionDisplay || test.case.expression}}</td>
                 <td>{{test.case.result}}</td>
                 <td><p ng-repeat="line in test.case.console track by $index" ng-class="line.level">&gt; <span ng-repeat="val in line.values track by $index">{{val}}</span></p></td>
                 <td>{{test.result.expressionResult}}{{test.result.error}}</td>

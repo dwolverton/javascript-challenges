@@ -39,68 +39,51 @@ angular.module("jsExercises")
     this.challenge2 = {
         title: "Function Result to Variable",
         description: "<p>Call the <code>add</code> function to with inputs 2 and 4. Store the result in a variable named <code>total</code></p>",
-        starterCode: "function add(num1, num2) {\n  console.log('called add');\n  return num1 + num2;\n}",
+        starterCode: "function add(num1, num2) {\n  return num1 + num2;\n}",
         solution: "function add(num1, num2) {\n  console.log('called add');\n  return num1 + num2;\n}\n\nvar total = add(2, 4);",
         testCases: [
             {
+                description: "It stores the result in a variable named total.",
                 expression: "total",
-                result: 6,
-                console: null
+                result: 6
             },
             {
-                expression: "true",
-                result: true,
-                console: [
-                    { level: "log", values: ["called add"] }
-                ]
+                description: "It calls the function once.",
+                expressionDisplay: "Number of function calls",
+                expression: "code.match(/add\\([^\\)]*\\)/g).length - 1",
+                result: 1
+            },
+            {
+                description: "It calls the function with inputs 2 and 4.",
+                expression: "code.match(/add\\(\\s*2\\s*,\\s*4\\s*\\)/g) && true",
+                expressionDisplay: "Called with inputs 2 and 4",
+                result: true
             }
         ]
     };
 
-    this.testCaseResults = [
-        {
-            functionCall: "add(1, 3)",
-            expected: {
-                result: 4,
-                console: []
-            },
-            actual: {
-                result: 4,
+    this.challenge3 = {
+        title: "Loop from 1 to 5",
+        description: "<p>Use a loop to log the numbers 1 through 5 to the console.</p>",
+        starterCode: "",
+        solution: "for (var i = 1; i <= 5; i++) {\n  console.log(i)\n}",
+        testCases: [
+            {
+                description: "It logs 1 - 5 to the console.",
                 console: [
-                    "3",
-                    "Hello World"
+                    { level: "log", values: [1] },
+                    { level: "log", values: [2] },
+                    { level: "log", values: [3] },
+                    { level: "log", values: [4] },
+                    { level: "log", values: [5] }
                 ]
             },
-            status: "pass"
-        },
-        {
-            functionCall: "add(1, -1)",
-            expected: {
-                result: 0,
-                console: []
-            },
-            actual: {
-                result: 2,
-                console: [
-                    "2",
-                    "Hello World"
-                ]
-            },
-            status: "fail"
-        },
-        {
-            functionCall: "add(-2, -1)",
-            expected: {
-                result: -3,
-                console: []
-            },
-            actual: {
-                result: undefined,
-                console: [
-                ],
-                error: "num7 is undefined"
-            },
-            status: "error"
-        }
-    ];
+            {
+                description: "It uses a loop.",
+                expressionDisplay: "A loop is used",
+                expression: "code.match(/(for|while)\\s*\\(/) && true",
+                result: true
+            }
+        ]
+    };
 });

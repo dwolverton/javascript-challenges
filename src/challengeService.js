@@ -3,7 +3,8 @@ angular.module("jsExercises")
 
     var challenges = [
         mock.challenge,
-        mock.challenge2
+        mock.challenge2,
+        mock.challenge3
     ];
 
     return {
