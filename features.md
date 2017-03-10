@@ -10,13 +10,13 @@
   * limit to one at a time.
 * ~~assert correct console~~
 * ~~regex test cases~~
-* add all basic JS challenges
+* ~~add all basic JS challenges~~
+* ~~show line numbers of errors~~
 * if error line number is in eval expression, don't show line number
 * make it presentable
 * code editor
 * view solution
 * parse challenges from MarkDown
-* ~~ show line numbers of errors ~~
 * lint
 * load challenges into database from MarkDown
 * select challenge set from database (#!/c/basic-js/1)

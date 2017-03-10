@@ -298,4 +298,38 @@ describe("testService", function() {
             done();
         });
     });
+
+    it("when expression is multiple lines, the last line is the result", function(done) {
+        var code = "var x = 1;";
+        var testCase = {
+            expression: "var y = 7;\nx + y;",
+            result: 8
+        };
+
+        testService.runTestCase(testCase, code).then(function(result) {
+            expect(result).toEqual({
+                expressionResult: 8,
+                status: "pass",
+                console: []
+            });
+            done();
+        });
+    });
+
+    it("compares arrays without using strict comparison", function(done) {
+        var code = "var x = [1, 2, 3];";
+        var testCase = {
+            expression: "x",
+            result: [1, 2, 3]
+        };
+
+        testService.runTestCase(testCase, code).then(function(result) {
+            expect(result).toEqual({
+                expressionResult: [1, 2, 3],
+                status: "pass",
+                console: []
+            });
+            done();
+        });
+    });
 });

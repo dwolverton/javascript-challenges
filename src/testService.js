@@ -61,6 +61,8 @@ angular.module("jsExercises")
     }
 
     function decorateCode(code, expression) {
+        expression = adjustMultilineExpression(expression);
+
         var start = 'var console = {};' +
         '["log", "error", "warn", "info"].forEach(function(level) {' +
             'console[level] = function() {' +
@@ -70,6 +72,17 @@ angular.module("jsExercises")
         var end = '\npostMessage({type:"result", result:' + expression + "}); });";
 
         return start + code + end;
+    }
+
+    function adjustMultilineExpression(expression) {
+        if (typeof expression === 'string') {
+            var pos = expression.lastIndexOf('\n') + 1;
+            if (pos !== 0) {
+                expression = "(function() {" + expression.substr(0, pos) + "return " + expression.substr(pos) + "})()"
+
+            }
+        }
+        return expression;
     }
 
 
@@ -87,7 +100,7 @@ angular.module("jsExercises")
         runTestCase: function(testCase, code) {
 
             function handleResult(result) {
-                var resultMatches = result.result === testCase.result;
+                var resultMatches = doesResultMatch(testCase, result);
                 var logsMatch = doLogsMatch(testCase, result);
                 var outcome = {
                     expressionResult: result.result,
@@ -98,6 +111,22 @@ angular.module("jsExercises")
                     outcome.error = { message: "Console logs do not match." };
                 }
                 return outcome;
+            }
+
+            function doesResultMatch(testCase, result) {
+                if (useStrictMatch(testCase)) {
+                    return result.result === testCase.result;
+                } else {
+                    return angular.equals(result.result, testCase.result);
+                }
+            }
+
+            function useStrictMatch(testCase) {
+                if (typeof testCase.result === 'object') {
+                    return false;
+                } else {
+                    return true;
+                }
             }
 
             function doLogsMatch(testCase, result) {
