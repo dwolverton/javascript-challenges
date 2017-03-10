@@ -6,11 +6,11 @@
 * ~~load selected challenge~~
 * ~~descriptions on test cases~~
 * ~~override/descriptions for test expressions~~
-* protect against infinite loop
+* ~~protect against infinite loop~~
   * limit to one at a time.
 * assert correct console
-* code editor
 * make it presentable
+* code editor
 * view solution
 * parse challenges from MarkDown
 * ~~ show line numbers of errors ~~

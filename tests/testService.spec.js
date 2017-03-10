@@ -1,6 +1,16 @@
 describe("testService", function() {
 
     var testService, mock, $rootScope;
+    var digestInterval;
+
+    beforeAll(function() {
+        digestInterval = setInterval(function() {
+            $rootScope && $rootScope.$apply();
+        }, 50);
+    });
+    afterAll(function() {
+        clearInterval(digestInterval);
+    });
 
     beforeEach(module("jsExercises"));
     beforeEach(inject(function(_testService_, _mock_, _$rootScope_) {
@@ -18,9 +28,6 @@ describe("testService", function() {
             });
             done();
         });
-        setTimeout(function() {
-            $rootScope.$digest();
-        }, 100);
     });
 
     it("fails with incorrect solution", function(done) {
@@ -32,9 +39,6 @@ describe("testService", function() {
             });
             done();
         });
-        setTimeout(function() {
-            $rootScope.$digest();
-        }, 100);
     });
 
     it("errors with erroring solution", function(done) {
@@ -46,9 +50,6 @@ describe("testService", function() {
             });
             done();
         });
-        setTimeout(function() {
-            $rootScope.$digest();
-        }, 100);
     });
 
     it("errors with broken syntax within function", function(done) {
@@ -60,9 +61,6 @@ describe("testService", function() {
             });
             done();
         });
-        setTimeout(function() {
-            $rootScope.$digest();
-        }, 100);
     });
 
     it("errors with broken syntax", function(done) {
@@ -74,9 +72,6 @@ describe("testService", function() {
             });
             done();
         });
-        setTimeout(function() {
-            $rootScope.$digest();
-        }, 100);
     });
 
     it("errors with unclosed bracket", function(done) {
@@ -88,9 +83,6 @@ describe("testService", function() {
             });
             done();
         });
-        setTimeout(function() {
-            $rootScope.$digest();
-        }, 100);
     });
 
     it("errors if function does not exist", function(done) {
@@ -102,9 +94,134 @@ describe("testService", function() {
             });
             done();
         });
-        setTimeout(function() {
-            $rootScope.$digest();
-        }, 100);
+    });
+
+    it("passess with correct single log", function(done) {
+        var code = "console.log('a'); console.log('b');";
+        var testCase = {
+            console: [
+                { level: "log", values: ["a"] },
+                { level: "log", values: ["b"] }
+            ]
+        };
+
+        testService.runTestCase(testCase, code).then(function(result) {
+            expect(result).toEqual({
+                expressionResult: undefined,
+                console: testCase.console,
+                status: "pass"
+            });
+            done();
+        });
+    });
+
+    it("passess with correct logs", function(done) {
+        var code = "console.log('a'); console.warn('b');";
+        var testCase = {
+            console: [
+                { level: "log", values: ["a"] },
+                { level: "warn", values: ["b"] }
+            ]
+        };
+
+        testService.runTestCase(testCase, code).then(function(result) {
+            expect(result).toEqual({
+                expressionResult: undefined,
+                console: testCase.console,
+                status: "pass"
+            });
+            done();
+        });
+    });
+
+    it("fails if logs missing", function(done) {
+        var code = "";
+        var testCase = {
+            console: [
+                { level: "log", values: ["a"] }
+            ]
+        };
+
+        testService.runTestCase(testCase, code).then(function(result) {
+            expect(result).toEqual({
+                expressionResult: undefined,
+                error: { message: "Console logs do not match." },
+                console: [],
+                status: "fail"
+            });
+            done();
+        });
+    });
+
+    it("fails if logs extra", function(done) {
+        var code = "console.log('a')";
+        var testCase = {
+            console: []
+        };
+
+        testService.runTestCase(testCase, code).then(function(result) {
+            expect(result).toEqual({
+                expressionResult: undefined,
+                error: { message: "Console logs do not match." },
+                console: [ { level: "log", values: ["a"] } ],
+                status: "fail"
+            });
+            done();
+        });
+    });
+
+    it("fails if logs different", function(done) {
+        var code = "console.log('a')";
+        var testCase = {
+            console: [ { level: "log", values: ["b"] } ]
+        };
+
+        testService.runTestCase(testCase, code).then(function(result) {
+            expect(result).toEqual({
+                expressionResult: undefined,
+                error: { message: "Console logs do not match." },
+                console: [ { level: "log", values: ["a"] } ],
+                status: "fail"
+            });
+            done();
+        });
+    });
+
+    it("fails if logs different level", function(done) {
+        var code = "console.log('a')";
+        var testCase = {
+            console: [ { level: "warn", values: ["a"] } ]
+        };
+
+        testService.runTestCase(testCase, code).then(function(result) {
+            expect(result).toEqual({
+                expressionResult: undefined,
+                error: { message: "Console logs do not match." },
+                console: [ { level: "log", values: ["a"] } ],
+                status: "fail"
+            });
+            done();
+        });
+    });
+
+    it("fails if log count different", function(done) {
+        var code = "console.log('a')";
+        var testCase = {
+            console: [
+                { level: "log", values: ["a"] },
+                { level: "log", values: ["a"] }
+            ]
+        };
+
+        testService.runTestCase(testCase, code).then(function(result) {
+            expect(result).toEqual({
+                expressionResult: undefined,
+                error: { message: "Console logs do not match." },
+                console: [ { level: "log", values: ["a"] } ],
+                status: "fail"
+            });
+            done();
+        });
     });
 
     it("can run multiple test cases", function(done) {
@@ -126,9 +243,6 @@ describe("testService", function() {
             }}]);
             done();
         });
-        setTimeout(function() {
-            $rootScope.$digest();
-        }, 100);
     });
 
     it("collects console logs", function(done) {
@@ -138,9 +252,6 @@ describe("testService", function() {
             ]);
             done();
         });
-        setTimeout(function() {
-            $rootScope.$digest();
-        }, 100);
     });
 
     it("collects console errors", function(done) {
@@ -150,8 +261,5 @@ describe("testService", function() {
             ]);
             done();
         });
-        setTimeout(function() {
-            $rootScope.$digest();
-        }, 100);
     });
 });
