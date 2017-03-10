@@ -44,6 +44,15 @@ angular.module("jsExercises")
         return deferred.promise;
     }
 
+    function execOnlyTestExpression(__code__, expression) {
+        try {
+            var __result__ = eval(expression);
+            return $q.resolve({result: __result__});
+        } catch (err) {
+            return $q.reject({error: { message: err.message }})
+        }
+    }
+
     function createWorkerUrl(code) {
         var codeBlob = new Blob([code], {
             type: 'text/javascript'
@@ -107,7 +116,9 @@ angular.module("jsExercises")
                 };
             }
 
-            return execCodeAndTestExpression(code, testCase.expression)
+            return (testCase.skipCode ?
+                execOnlyTestExpression(code, testCase.expression) :
+                execCodeAndTestExpression(code, testCase.expression) )
                    .then(handleResult, handleError);
         }
     }

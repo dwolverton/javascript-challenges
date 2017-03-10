@@ -51,14 +51,14 @@ angular.module("jsExercises")
                 description: "It calls the function once.",
                 expressionDisplay: "Number of function calls",
                 expression: "__code__.match(/add\\([^\\)]*\\)/g).length - 1",
-                skipCode: false,
+                skipCode: true,
                 result: 1
             },
             {
                 description: "It calls the function with inputs 2 and 4.",
                 expressionDisplay: "Called with inputs 2 and 4",
                 expression: "__code__.match(/add\\(\\s*2\\s*,\\s*4\\s*\\)/g) && true",
-                skipCode: false,
+                skipCode: true,
                 result: true
             }
         ]
@@ -84,7 +84,7 @@ angular.module("jsExercises")
                 description: "It uses a loop.",
                 expressionDisplay: "A loop is used",
                 expression: "__code__.match(/(for|while)\\s*\\(/) && true",
-                skipCode: false,
+                skipCode: true,
                 result: true
             }
         ]

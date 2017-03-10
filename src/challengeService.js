@@ -1,14 +1,9 @@
 angular.module("jsExercises")
-.factory("challengeService", function(mock) {
+.factory("challengeService", function(challengeData) {
 
-    var challenges = [
-        mock.challenge,
-        mock.challenge2,
-        mock.challenge3
-    ];
+    var challenges = challengeData.basic;
 
     return {
-        challengeOne: mock.challenge,
         getChallenges: function(setId) {
             return challenges;
         },

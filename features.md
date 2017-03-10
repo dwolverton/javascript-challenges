@@ -8,17 +8,19 @@
 * ~~override/descriptions for test expressions~~
 * ~~protect against infinite loop~~
   * limit to one at a time.
-* assert correct console
+* ~~assert correct console~~
+* ~~regex test cases~~
+* add all basic JS challenges
+* if error line number is in eval expression, don't show line number
 * make it presentable
 * code editor
 * view solution
 * parse challenges from MarkDown
 * ~~ show line numbers of errors ~~
-* if error line number is in eval expression, don't show line number
 * lint
-* regex test cases
 * load challenges into database from MarkDown
 * select challenge set from database (#!/c/basic-js/1)
 * auto-run and run on click options
 * slack login limited to GC
 * reporting
+* ability to define your own challenges and/or test cases

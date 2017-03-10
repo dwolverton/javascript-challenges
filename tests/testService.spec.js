@@ -262,4 +262,40 @@ describe("testService", function() {
             done();
         });
     });
+
+    it("does not execute code if skipCode option set, and can pass", function(done) {
+        var code = "console.log('a');";
+        var testCase = {
+            expression: '__code__ === "console.log(\'a\');"',
+            result: true,
+            skipCode: true
+        };
+
+        testService.runTestCase(testCase, code).then(function(result) {
+            expect(result).toEqual({
+                expressionResult: true,
+                status: "pass",
+                console: undefined
+            });
+            done();
+        });
+    });
+
+    it("does not execute code if skipCode option set, and can fail", function(done) {
+        var code = "console.log('a');";
+        var testCase = {
+            expression: '__code__ === "something else"',
+            result: true,
+            skipCode: true
+        };
+
+        testService.runTestCase(testCase, code).then(function(result) {
+            expect(result).toEqual({
+                expressionResult: false,
+                status: "fail",
+                console: undefined
+            });
+            done();
+        });
+    });
 });
