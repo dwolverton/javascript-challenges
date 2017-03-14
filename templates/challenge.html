@@ -15,14 +15,18 @@
                 <td colspan="5">{{test.case.description}}</td>
             </tr>
             <tr ng-repeat-end class="test-case-details" ng-class="test.result.status">
-                <td>{{test.case.expressionDisplay || test.case.expression}}</td>
-                <td>{{test.case.result}}</td>
+                <td>
+                    <pre ng-if="!test.case.expressionDisplay"><code class="hljs js" ng-bind-html="test.case.expression | highlightjs"></code></pre>
+                    {{test.case.expressionDisplay}}
+                </td>
+                <td><code class="hljs js" ng-bind-html="test.case.result | json | highlightjs"></code></td>
                 <td><p ng-repeat="line in test.case.console track by $index" ng-class="line.level">&gt; <span ng-repeat="val in line.values track by $index">{{val}}</span></p></td>
                 <td>
-                    {{test.result.expressionResult}}{{test.result.error.message}}
+                    <code class="hljs js" ng-if="test.result.expressionResult !== undefined" ng-bind-html="test.result.expressionResult | json | highlightjs"></code>
+                    {{test.result.error.message}}
                     <span ng-if="test.result.error.lineNumber"class="lineno">at line {{test.result.error.lineNumber}}</span>
                 </td>
-                <td><p ng-repeat="line in test.result.console track by $index" ng-class="line.level">&gt; <span ng-repeat="val in line.values track by $index">{{val}}</span></p></td>
+                <td><p ng-repeat="line in test.result.console track by $index" ng-class="line.level">&gt; <span ng-repeat="val in line.values track by $index" ng-bind-html="val | json | highlightjs"></span></p></td>
             </tr>
         </tbody>
     </table>

@@ -9,13 +9,13 @@ td {
 }
 
 .pass td {
-    background-color: green;
+    border-color: green;
 }
 
 .fail td {
-    background-color: yellow;
+    border-color: yellow;
 }
 
 .error td {
-    background-color: red;
+    border-color: red;
 }

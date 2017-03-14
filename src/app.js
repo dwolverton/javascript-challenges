@@ -21,4 +21,10 @@ angular.module("jsExercises", ["ngRoute"])
             $scope.testCaseResults = testResults;
         });
     });
+})
+.filter('highlightjs', function($sce) {
+  return function(input) {
+    if (input) return $sce.trustAsHtml( hljs.highlight('js', input).value );
+    return input;
+  }
 });

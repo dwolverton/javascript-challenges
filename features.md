@@ -14,6 +14,7 @@
 * ~~show line numbers of errors~~
 * if error line number is in eval expression, don't show line number
 * make it presentable
+  * code formatting
 * code editor
 * view solution
 * parse challenges from MarkDown

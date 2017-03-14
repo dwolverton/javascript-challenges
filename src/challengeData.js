@@ -101,7 +101,7 @@ angular.module("jsExercises")
             ]
         }, {
             title: "forEach word",
-            description: '<p>Use a <em>forEach</em> loop to log all the words in this array to the console.</p><pre><code>var words = [ "JavaScript", "for", "the", "win" ];</code></pre>',
+            description: '<p>Use a <em>forEach</em> loop to log all the words in this array to the console.</p><pre><code class="js">var words = [ "JavaScript", "for", "the", "win" ];</code></pre>',
             starterCode: "function printWords(words) {\n  // write code here\n}",
             solution: "",
             testCases: [{
@@ -158,7 +158,7 @@ angular.module("jsExercises")
             ]
         }, {
             title: "for each word",
-            description: '<p>Use a <em>for</em> loop to log all the words in this array to the console.</p><pre><code>var words = [ "JavaScript", "for", "the", "win" ];</code></pre>',
+            description: '<p>Use a <em>for</em> loop to log all the words in this array to the console.</p><pre><code class="js">var words = [ "JavaScript", "for", "the", "win" ];</code></pre>',
             starterCode: "function printWords(words) {\n  // write code here\n}",
             solution: "",
             testCases: [{
@@ -215,7 +215,7 @@ angular.module("jsExercises")
             ]
         }, {
             title: "Increment Array Values",
-            description: "<p>Write a loop to add one to all the numbers in this array.</p><pre><code>var numbers = [ 3, 21, 8 ];</code></pre><p>After your loop runs, the array will contain <code>[ 4, 22, 9 ]</code>. You will be modifying each of the numbers in the array.</p>",
+            description: "<p>Write a loop to add one to all the numbers in this array.</p><pre><code class='js'>var numbers = [ 3, 21, 8 ];</code></pre><p>After your loop runs, the array will contain <code>[ 4, 22, 9 ]</code>. You will be modifying each of the numbers in the array.</p>",
             starterCode: "function incrementNumbers(numbers) {\n  // write code here.\n}",
             solution: "function incrementNumbers(numbers) {\n  for (var i = 0; i < numbers.length; i++)\n    numbers[i]++;\n  }\n}",
             testCases: [{
