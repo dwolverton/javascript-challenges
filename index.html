@@ -2,7 +2,11 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>JS Exercises</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-route.min.js"></script>
@@ -12,15 +16,29 @@
         <script src="src/challengeService.js" charset="utf-8"></script>
         <script src="src/challengeData.js" charset="utf-8"></script>
         <script src="src/testService.js" charset="utf-8"></script>
+
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/idea.min.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
     </head>
     <body ng-app="jsExercises">
-        <div ng-controller="challengeListController">
-            <span ng-repeat="challenge in challenges">
-                <a ng-href="#!/c/{{challengeSetId}}/{{$index + 1}}">{{$index + 1}}. {{challenge.title}}</a>
-            </span>
+        <div ng-controller="challengeListController" class="challenge-list">
+            <h3>Basic Structures</h3>
+            <p ng-repeat="challenge in challenges" ng-class="{ current: challenge.current }" class="{{'status-' + challenge.status}}">
+                <a ng-href="#!/c/{{challengeSetId}}/{{$index + 1}}">
+                    <span class="status-indicator"></span>
+                    <span class="number">{{$index + 1}}.</span>
+                    <span class="title">{{challenge.challenge.title}}</span>
+                </a>
+            </p>
         </div>
-        <ng-view></ng-view>
+
+        <div class="wrapper">
+            <ng-view></ng-view>
+        </div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>
 </html>

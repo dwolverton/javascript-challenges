@@ -19,3 +19,87 @@ td {
 .error td {
     border-color: red;
 }
+
+.wrapper {
+    margin: 0 2.5em 0 2.5em;
+    padding: .5em 0 1em 0;
+}
+
+.wrapper h2 {
+    margin-top: 0px;
+}
+
+pre {
+    background-color: transparent;
+    border: none;
+}
+
+/* -- Challenge List Sidebar -- */
+.challenge-list {
+    position: absolute;
+    height: 100%;
+    width: 20px;
+    overflow-x: hidden;
+    background-color: white;
+    border-right: 1px solid silver;
+}
+
+.challenge-list.pinned, .challenge-list:hover {
+    width: 250px;
+}
+
+.challenge-list h3 {
+    width: 250px;
+    padding: 0 .5em 0 20px;
+}
+
+.challenge-list p {
+    width: 250px;
+    padding: 0 .5em 0 2px;
+}
+
+.challenge-list a {
+    text-decoration: none;
+}
+
+.challenge-list a:hover .title {
+    text-decoration: underline;
+}
+
+.status-indicator {
+    display: inline-block;
+    position: relative;
+    border: 1px solid silver;
+    width: 1.1em;
+    height: 1.1em;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.current .status-indicator {
+    border-width: 2px;
+}
+
+.current .status-indicator:after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 30%;
+    left: 30%;
+    width: 40%;
+    height: 40%;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.current.status-unvisited .status-indicator:after {
+    background-color: black;
+}
+
+.status-visited .status-indicator {
+    background-color: gray;
+}
+
+.status-done .status-indicator {
+    background-color: green;
+}
