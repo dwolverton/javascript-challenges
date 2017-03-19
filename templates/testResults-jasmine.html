@@ -1,0 +1,26 @@
+<div ng-repeat="test in results" class="test-result">
+    <div class="description" ng-if="test.case.description">{{test.case.description}}</div>
+    <div class="expectation" ng-if="!isConsoleTest(test)">Expected
+        <pre ng-if="!test.case.expressionDisplay"><code class="hljs js" ng-bind-html="test.case.expression | highlightjs"></code></pre>
+        {{test.case.expressionDisplay}}
+        to be
+        <code class="hljs js" ng-bind-html="test.case.result | json | highlightjs"></code>
+        <div class="but-was" ng-if="test.result.status === 'fail'">
+            but was <code class="hljs js" ng-bind-html="test.result.expressionResult | json | highlightjs"></code>
+        </div>
+        <div class="but-error" ng-if="test.result.status === 'error'">
+            but errored with <span class="error">{{test.result.error.message}}</span>
+            <span ng-if="test.result.error.lineNumber"class="lineno">at line <code>{{test.result.error.lineNumber}}</code></span>
+        </div>
+    </div>
+    <div class="expectation" ng-if="isConsoleTest(test)">
+        <div>
+            Expected console
+            <console console-lines="test.case.console"></console>
+        </div>
+        <div>
+            Actual console
+            <console console-lines="test.result.console"></console>
+        </div>
+    </div>
+</div>

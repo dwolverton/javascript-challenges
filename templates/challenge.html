@@ -2,33 +2,7 @@
     <h2>{{title}}</h2>
     <div ng-bind-html="challengeDescriptionHtml" class="description"></div>
     <textarea id="code-editor" ng-model="code" ng-model-options="{debounce: 1000}"></textarea>
-    <table class="test-cases">
-        <thead>
-            <tr>
-                <th rowspan="2">Test Case</th><th colspan="2">Expected</th><th colspan="2">Actual</th>
-            </tr>
-            <tr>
-                <th>Result</th><th>Console</th><th>Result</th><th>Console</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat-start="test in testCaseResults" class="test-case-description" ng-class="test.result.status" ng-if="test.case.description">
-                <td colspan="5">{{test.case.description}}</td>
-            </tr>
-            <tr ng-repeat-end class="test-case-details" ng-class="test.result.status">
-                <td>
-                    <pre ng-if="!test.case.expressionDisplay"><code class="hljs js" ng-bind-html="test.case.expression | highlightjs"></code></pre>
-                    {{test.case.expressionDisplay}}
-                </td>
-                <td><code class="hljs js" ng-bind-html="test.case.result | json | highlightjs"></code></td>
-                <td><p ng-repeat="line in test.case.console track by $index" ng-class="line.level">&gt; <span ng-repeat="val in line.values track by $index">{{val}}</span></p></td>
-                <td>
-                    <code class="hljs js" ng-if="test.result.expressionResult !== undefined" ng-bind-html="test.result.expressionResult | json | highlightjs"></code>
-                    {{test.result.error.message}}
-                    <span ng-if="test.result.error.lineNumber"class="lineno">at line {{test.result.error.lineNumber}}</span>
-                </td>
-                <td><p ng-repeat="line in test.result.console track by $index" ng-class="line.level">&gt; <span ng-repeat="val in line.values track by $index" ng-bind-html="val | json | highlightjs"></span></p></td>
-            </tr>
-        </tbody>
-    </table>
+
+    <h3>Test Results</h3>
+    <test-results results="testCaseResults"></test-results>
 </body>

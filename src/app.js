@@ -18,7 +18,6 @@ angular.module("jsExercises", ["ngRoute"])
             }
             return decorated;
         });
-        console.log($scope.challenges);
     }
 })
 .controller("challengeController", function($scope, $routeParams, $sce, challengeService, testService) {

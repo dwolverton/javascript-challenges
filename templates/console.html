@@ -1,0 +1,3 @@
+<div class="console">
+    <p ng-repeat="line in consoleLines track by $index" ng-class="'level-' + line.level"><span class="value" ng-repeat="val in line.values track by $index" ng-bind-html="val | json | highlightjs"></span></p>
+</div>

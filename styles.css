@@ -35,6 +35,58 @@ pre {
     height: 12em;
 }
 
+/* -- Test Results -- */
+.test-result .expectation div, .test-result .expectation code {
+    display: inline;
+    padding: 0;
+}
+
+.test-result .expectation pre {
+    display: inline-block;
+}
+
+/* -- Console -- */
+.console {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 12px;
+}
+
+.console p {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #eee;
+}
+
+.console p:last-child {
+    border-bottom: none;
+}
+
+.console p:before {
+    content: '>';
+    color: #666;
+    font-weight: bold;
+}
+
+.console .value {
+    padding-left: .5em;
+}
+
+.console p.level-info {
+    background-color: #eef;
+    border-bottom-color: #ccf;
+}
+
+.console p.level-warn {
+    background-color: #ffe;
+    border-bottom-color: #ffa;
+}
+
+.console p.level-error {
+    background-color: #fee;
+    border-bottom-color: #fcc;
+}
+
+
 /* -- Challenge List Sidebar -- */
 .challenge-list {
     position: absolute;

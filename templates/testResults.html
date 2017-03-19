@@ -1,0 +1,29 @@
+<table class="test-cases">
+    <thead>
+        <tr>
+            <th rowspan="2">Test Case</th><th colspan="2">Expected</th><th colspan="2">Actual</th>
+        </tr>
+        <tr>
+            <th>Result</th><th>Console</th><th>Result</th><th>Console</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat-start="test in results" class="test-case-description" ng-class="test.result.status" ng-if="test.case.description">
+            <td colspan="5">{{test.case.description}}</td>
+        </tr>
+        <tr ng-repeat-end class="test-case-details" ng-class="test.result.status">
+            <td>
+                <pre ng-if="!test.case.expressionDisplay"><code class="hljs js" ng-bind-html="test.case.expression | highlightjs"></code></pre>
+                {{test.case.expressionDisplay}}
+            </td>
+            <td><code class="hljs js" ng-bind-html="test.case.result | json | highlightjs"></code></td>
+            <td><console console-lines="test.case.console"></console></td>
+            <td>
+                <code class="hljs js" ng-if="test.result.expressionResult !== undefined" ng-bind-html="test.result.expressionResult | json | highlightjs"></code>
+                {{test.result.error.message}}
+                <span ng-if="test.result.error.lineNumber"class="lineno">at line {{test.result.error.lineNumber}}</span>
+            </td>
+            <td><console console-lines="test.result.console"></console></td>
+        </tr>
+    </tbody>
+</table>
