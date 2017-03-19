@@ -1,20 +1,3 @@
-td {
-    border: 1px solid black;
-    padding: 3px;
-}
-
-.pass td {
-    border-color: green;
-}
-
-.fail td {
-    border-color: yellow;
-}
-
-.error td {
-    border-color: red;
-}
-
 .wrapper {
     margin: 0 2.5em 0 2.5em;
     padding: .5em 0 1em 0;
@@ -36,52 +19,130 @@ pre {
 }
 
 /* -- Test Results -- */
-.test-result .expectation div, .test-result .expectation code {
-    display: inline;
-    padding: 0;
+
+
+.test-cases th {
+    vertical-align: top;
+    padding: 3px .7em;
+    border: 1px solid #ccc;
 }
 
-.test-result .expectation pre {
-    display: inline-block;
+.test-cases td {
+    vertical-align: top;
+    padding: 3px 1em;
+    border: 1px solid #ccc;
 }
+
+.test-cases .test-case-spacer td {
+    border: none;
+    background-color: white;
+}
+
+.test-case-description {
+    font-size: 110%;
+}
+
+.test-case-details td {
+    border-bottom-width: 2px;
+}
+
+.test-cases h4 {
+    font-size: 1em;
+    margin: 0;
+    margin-bottom: 4px;
+}
+
+.test-case-error-message {
+    color: red;
+}
+
+.test-cases td.test-case-status {
+    vertical-align: middle;
+    border-bottom-width: 2px;
+}
+
+.test-case-status span {
+    color: white;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.pass .test-case-status span {
+    background-color: green;
+}
+
+.fail .test-case-status span {
+    background-color: orange;
+}
+
+.error .test-case-status span {
+    background-color: red;
+}
+
+.test-cases td.test-case-expression {
+    font-style: italic;
+    vertical-align: middle;
+}
+
+.test-case-expression pre {
+    font-style: normal;
+}
+
+/*.test-cases .test-case-spacer td:first-child {
+    display: none;
+}*/
+
+/*.pass td {
+    border-color: green;
+}
+
+.fail td {
+    border-color: yellow;
+}
+
+.error td {
+    border-color: red;
+}*/
 
 /* -- Console -- */
-.console {
+div.console {
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
     font-size: 12px;
 }
 
-.console p {
+div.console p {
     margin: 0;
     padding: 0;
     border-bottom: 1px solid #eee;
 }
 
-.console p:last-child {
+div.console p:last-child {
     border-bottom: none;
 }
 
-.console p:before {
+div.console p:before {
     content: '>';
     color: #666;
     font-weight: bold;
 }
 
-.console .value {
+div.console .value {
     padding-left: .5em;
 }
 
-.console p.level-info {
+div.console p.level-info {
     background-color: #eef;
     border-bottom-color: #ccf;
 }
 
-.console p.level-warn {
+div.console p.level-warn {
     background-color: #ffe;
     border-bottom-color: #ffa;
 }
 
-.console p.level-error {
+div.console p.level-error {
     background-color: #fee;
     border-bottom-color: #fcc;
 }

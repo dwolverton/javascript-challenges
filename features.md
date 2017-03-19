@@ -12,13 +12,14 @@
 * ~~regex test cases~~
 * ~~add all basic JS challenges~~
 * ~~show line numbers of errors~~
-* if error line number is in eval expression, don't show line number
-* make it presentable
-  * code formatting
+* ~~make it presentable~~
+  * ~~code formatting~~
 * code editor
+* view console
+* if error line number is in eval expression, don't show line number
 * view solution
-* parse challenges from MarkDown
 * lint
+* parse challenges from MarkDown
 * load challenges into database from MarkDown
 * select challenge set from database (#!/c/basic-js/1)
 * auto-run and run on click options

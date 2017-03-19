@@ -1,29 +1,55 @@
 <table class="test-cases">
     <thead>
         <tr>
-            <th rowspan="2">Test Case</th><th colspan="2">Expected</th><th colspan="2">Actual</th>
-        </tr>
-        <tr>
-            <th>Result</th><th>Console</th><th>Result</th><th>Console</th>
+            <th></th><th>Test Case</th><th>Expected</th><th>Actual</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat-start="test in results" class="test-case-description" ng-class="test.result.status" ng-if="test.case.description">
-            <td colspan="5">{{test.case.description}}</td>
+        <tr ng-repeat-start="test in results" class="test-case-spacer" ng-class="test.result.status">
+            <td colspan="4"></td>
         </tr>
-        <tr ng-repeat-end class="test-case-details" ng-class="test.result.status">
-            <td>
+        <tr class="test-case-description" ng-class="test.result.status" ng-if="test.case.description">
+            <td class="test-case-status" ng-switch="test.result.status" rowspan="2">
+                <span ng-switch-when="pass">Pass</span>
+                <span ng-switch-when="fail">Fail</span>
+                <span ng-switch-when="error">Error</span>
+            </td>
+            <td colspan="3">{{test.case.description}}</td>
+        </tr>
+        <tr ng-repeat-end class="test-case-details" ng-class="test.result.status" ng-switch="isConsoleTest(test)">
+            <td class="test-case-status" ng-switch="test.result.status" ng-if="!test.case.description">
+                <span ng-switch-when="pass">Pass</span>
+                <span ng-switch-when="fail">Fail</span>
+                <span ng-switch-when="error">Error</span>
+            </td>
+
+            <td class="test-case-expression">
                 <pre ng-if="!test.case.expressionDisplay"><code class="hljs js" ng-bind-html="test.case.expression | highlightjs"></code></pre>
                 {{test.case.expressionDisplay}}
             </td>
-            <td><code class="hljs js" ng-bind-html="test.case.result | json | highlightjs"></code></td>
-            <td><console console-lines="test.case.console"></console></td>
-            <td>
-                <code class="hljs js" ng-if="test.result.expressionResult !== undefined" ng-bind-html="test.result.expressionResult | json | highlightjs"></code>
-                {{test.result.error.message}}
-                <span ng-if="test.result.error.lineNumber"class="lineno">at line {{test.result.error.lineNumber}}</span>
+
+            <td ng-switch-when="false" class="test-case-result expected">
+                <h4>Expected Result</h4>
+                <code class="hljs js" ng-bind-html="test.case.result | json | highlightjs"></code>
             </td>
-            <td><console console-lines="test.result.console"></console></td>
+            <td ng-switch-when="true" class="test-case-console expected">
+                <h4>Expected Console</h4>
+                <console console-lines="test.case.console"></console>
+            </td>
+
+            <td ng-switch-when="false" ng-if="test.result.status !== 'error'" class="test-case-result actual">
+                <h4>Result</h4>
+                <code class="hljs js" ng-if="test.result.expressionResult !== undefined" ng-bind-html="test.result.expressionResult | json | highlightjs"></code>
+            </td>
+            <td ng-switch-when="true" ng-if="test.result.status !== 'error'" class="test-case-console actual">
+                <h4>Console</h4>
+                <console console-lines="test.result.console"></console>
+            </td>
+            <td ng-if="test.result.status === 'error'" class="test-case-error-message">
+                <h4>Error</h4>
+                {{test.result.error.message}}
+                <span ng-if="test.result.error.lineNumber" class="lineno">at line {{test.result.error.lineNumber}}</span>
+            </td>
         </tr>
     </tbody>
 </table>
