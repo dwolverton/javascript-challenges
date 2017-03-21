@@ -19,7 +19,11 @@ pre {
 }
 
 /* -- Test Results -- */
-
+h3 .test-status-indicator {
+    font-size: 75%;
+    position: relative;
+    top: -2px;
+}
 
 .test-cases th {
     vertical-align: top;
@@ -179,7 +183,7 @@ div.console p.level-error {
     width: 1.1em;
     height: 1.1em;
     border-radius: 50%;
-    vertical-align: middle;
+    top: 3px;
 }
 
 .current .status-indicator {
