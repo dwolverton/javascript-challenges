@@ -90,21 +90,9 @@ pre {
     font-style: normal;
 }
 
-/*.test-cases .test-case-spacer td:first-child {
-    display: none;
-}*/
-
-/*.pass td {
-    border-color: green;
+.test-case-lint ul {
+    padding-left: 10px;
 }
-
-.fail td {
-    border-color: yellow;
-}
-
-.error td {
-    border-color: red;
-}*/
 
 /* -- Console -- */
 div.console {

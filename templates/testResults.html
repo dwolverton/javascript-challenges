@@ -16,7 +16,7 @@
             </td>
             <td colspan="3">{{test.case.description}}</td>
         </tr>
-        <tr ng-repeat-end class="test-case-details" ng-class="test.result.status" ng-switch="isConsoleTest(test)">
+        <tr ng-repeat-end class="test-case-details" ng-class="test.result.status" ng-switch="getTestType(test)">
             <td class="test-case-status" ng-switch="test.result.status" ng-if="!test.case.description">
                 <span ng-switch-when="pass">Pass</span>
                 <span ng-switch-when="fail">Fail</span>
@@ -28,20 +28,20 @@
                 {{test.case.expressionDisplay}}
             </td>
 
-            <td ng-switch-when="false" class="test-case-result expected">
+            <td ng-switch-when="result" class="test-case-result expected">
                 <h4>Expected Result</h4>
                 <code class="hljs js" ng-bind-html="test.case.result | json | highlightjs"></code>
             </td>
-            <td ng-switch-when="true" class="test-case-console expected">
+            <td ng-switch-when="console" class="test-case-console expected">
                 <h4>Expected Console</h4>
                 <console console-lines="test.case.console"></console>
             </td>
 
-            <td ng-switch-when="false" ng-if="test.result.status !== 'error'" class="test-case-result actual">
+            <td ng-switch-when="result" ng-if="test.result.status !== 'error'" class="test-case-result actual">
                 <h4>Result</h4>
                 <code class="hljs js" ng-if="test.result.expressionResult !== undefined" ng-bind-html="test.result.expressionResult | json | highlightjs"></code>
             </td>
-            <td ng-switch-when="true" ng-if="test.result.status !== 'error'" class="test-case-console actual">
+            <td ng-switch-when="console" ng-if="test.result.status !== 'error'" class="test-case-console actual">
                 <h4>Console</h4>
                 <console console-lines="test.result.console"></console>
             </td>
@@ -49,6 +49,15 @@
                 <h4>Error</h4>
                 {{test.result.error.message}}
                 <span ng-if="test.result.error.lineNumber" class="lineno">at line {{test.result.error.lineNumber}}</span>
+            </td>
+
+            <td ng-switch-when="lint" colspan="3" class="test-case-lint">
+                <ul ng-if="test.result.errors.length">
+                    <li ng-repeat="error in test.result.errors">
+                        {{error.raw}}
+                        (at or near <code ng-bind-html="error.evidence | highlightjs"></code> on line <span  class="lineno">{{error.line}}:{{error.character}}</span>)
+                    </li>
+                </ul>
             </td>
         </tr>
     </tbody>

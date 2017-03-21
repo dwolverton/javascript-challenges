@@ -95,7 +95,10 @@ angular.module("jsExercises")
                         result: testResult
                     };
                 });
-            }));
+            })).then(function(testCaseResults) {
+                testCaseResults.push(testService.lint(code));
+                return testCaseResults;
+            });
         },
         runTestCase: function(testCase, code) {
 
@@ -149,6 +152,30 @@ angular.module("jsExercises")
                 execOnlyTestExpression(code, testCase.expression) :
                 execCodeAndTestExpression(code, testCase.expression) )
                    .then(handleResult, handleError);
+        },
+        lint: function(code) {
+            var LINT_CASE = {
+                lint: true,
+                expressionDisplay: "Code Quality Check"
+            }
+
+            JSHINT(code);
+            if (JSHINT.errors && JSHINT.errors.length) {
+                return {
+                    case: LINT_CASE,
+                    result: {
+                        status: "fail",
+                        errors: JSHINT.errors
+                    }
+                }
+            } else {
+                return {
+                    case: LINT_CASE,
+                    result: {
+                        status: "pass"
+                    }
+                }
+            }
         }
     }
     return testService;

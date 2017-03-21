@@ -68,7 +68,7 @@ angular.module("jsExercises")
                 {
                     description: "It uses a loop.",
                     expressionDisplay: "A loop is used",
-                    expression: "__code__.match(/(for|while)\\s*\\(/) && true",
+                    expression: "!!__code__.match(/(for|while)\\s*\\(/)",
                     skipCode: true,
                     result: true
                 }
