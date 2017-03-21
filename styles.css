@@ -23,6 +23,7 @@ h3 .test-status-indicator {
     font-size: 75%;
     position: relative;
     top: -2px;
+    z-index: -1;
 }
 
 .test-cases th {
