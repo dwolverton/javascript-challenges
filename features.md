@@ -14,11 +14,12 @@
 * ~~show line numbers of errors~~
 * ~~make it presentable~~
   * ~~code formatting~~
+* ~~lint~~
 * code editor
 * view console
 * if error line number is in eval expression, don't show line number
 * view solution
-* lint
+* pass functions back as toString to avoid DataCloneError
 * parse challenges from MarkDown
 * load challenges into database from MarkDown
 * select challenge set from database (#!/c/basic-js/1)

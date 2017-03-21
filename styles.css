@@ -38,7 +38,7 @@ pre {
     background-color: white;
 }
 
-.test-case-description {
+td.test-case-description {
     font-size: 110%;
 }
 
@@ -61,7 +61,11 @@ pre {
     border-bottom-width: 2px;
 }
 
-.test-case-status span {
+.test-case-status {
+    font-size: 100%;
+}
+
+.test-status-indicator {
     color: white;
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
     font-weight: bold;
@@ -69,15 +73,15 @@ pre {
     border-radius: 3px;
 }
 
-.pass .test-case-status span {
+.test-status-indicator-pass {
     background-color: green;
 }
 
-.fail .test-case-status span {
+.test-status-indicator-fail {
     background-color: orange;
 }
 
-.error .test-case-status span {
+.test-status-indicator-error {
     background-color: red;
 }
 

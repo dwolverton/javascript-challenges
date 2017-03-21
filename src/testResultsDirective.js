@@ -21,4 +21,24 @@ angular.module("jsExercises")
             }
         }
     }
+})
+.directive("statusBadge", function() {
+    return {
+        scope: {
+            status: "="
+        },
+        template: '<span class="test-status-indicator test-status-indicator-{{status}}">{{text()}}</span>',
+        controller: function($scope) {
+            $scope.text = function() {
+                switch ($scope.status) {
+                    case 'pass':
+                        return 'Pass';
+                    case 'fail':
+                        return 'Fail';
+                    case 'error':
+                        return 'Error';
+                }
+            }
+        }
+    }
 });

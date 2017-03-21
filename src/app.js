@@ -32,6 +32,16 @@ angular.module("jsExercises", ["ngRoute"])
     $scope.$watch('code', function(code) {
         testService.runTestCases(challenge.testCases, code).then(function (testResults) {
             $scope.testCaseResults = testResults;
+            $scope.overallResult = testResults.reduce(function(prev, test) {
+                if (test.result.status === 'error') {
+                    return 'error';
+                } else if (test.result.status === 'fail' && prev !== 'error') {
+                    return 'fail';
+                } else {
+                    return prev;
+                }
+            }, 'pass');
+            console.log("or", $scope.overallResult);
         });
     });
 })

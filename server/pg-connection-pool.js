@@ -13,4 +13,4 @@ const config = {
   ssl: true
 };
 
-const pool = new pg.Pool(config);
+module.exports = new pg.Pool(config);
