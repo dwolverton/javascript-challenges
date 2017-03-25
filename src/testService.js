@@ -69,7 +69,7 @@ angular.module("jsExercises")
                 'postMessage({type:"console", level: level, values: Array.prototype.slice.call(arguments) });' +
             '};' +
         '}); self.addEventListener("message", function(__e__) { __code__ = __e__.data.code;\n'; // The code should not run immediately, but run when we send the start message.
-        var end = '\npostMessage({type:"result", result:' + expression + "}); });";
+        var end = ';\n\n\npostMessage({type:"result", result:' + expression + "}); });";
 
         return start + code + end;
     }
