@@ -20,7 +20,7 @@ angular.module("jsExercises", ["ngRoute"])
         });
     }
 })
-.controller("challengeController", function($scope, $routeParams, $sce, challengeService, testService) {
+.controller("challengeController", function($scope, $routeParams, $sce, challengeService, testService, serialize) {
     var challenge = challengeService.getChallenge($routeParams.challengeSetId, $routeParams.challengeNumber);
 
     $scope.title = challenge.title;
@@ -29,7 +29,7 @@ angular.module("jsExercises", ["ngRoute"])
 
     $scope.testCaseResults = [];
 
-    $scope.$watch('code', function(code) {
+    $scope.$watch('code', serialize(function(done, code) {
         testService.runTestCases(challenge.testCases, code).then(function (testResults) {
             $scope.testCaseResults = testResults;
             $scope.overallResult = testResults.reduce(function(prev, test) {
@@ -41,13 +41,45 @@ angular.module("jsExercises", ["ngRoute"])
                     return prev;
                 }
             }, 'pass');
-            console.log("or", $scope.overallResult);
-        });
-    });
+        }).finally(done);
+    }));
 })
 .filter('highlightjs', function($sce) {
   return function(input) {
     if (input) return $sce.trustAsHtml( hljs.highlight('js', input).value );
     return input;
   }
+})
+/**
+ * wrap a function that has asynchronous components so that it will only run
+ * once at a time. The function is passed a `done` function as the first
+ * parameter, which it must call when all async processing is complete.
+ */
+.factory('serialize', function() {
+    return function(fn) {
+        var queued;
+        var running = false;
+
+        function run(args) {
+            running = true;
+            args = [done].concat(Array.prototype.slice.call(args));
+            fn.apply(this, args);
+        }
+
+        function done() {
+            running = false;
+            if (queued) {
+                run(queued);
+                queued = null;
+            }
+        }
+
+        return function() {
+            if (running) {
+                queued = arguments;
+            } else {
+                run(arguments);
+            }
+        }
+    }
 });
