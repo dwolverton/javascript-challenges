@@ -1,4 +1,4 @@
-angular.module("jsExercises", ["ngRoute"])
+angular.module("jsExercises", ["ngRoute", "ui.codemirror"])
 .controller("challengeListController", function($scope, $rootScope, $routeParams, challengeService) {
 
     $scope.$on("$routeChangeSuccess", loadChallenges);

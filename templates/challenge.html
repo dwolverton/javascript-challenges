@@ -1,7 +1,7 @@
 <div class="code-challenge">
     <h2>{{title}}</h2>
     <div ng-bind-html="challengeDescriptionHtml" class="description"></div>
-    <textarea id="code-editor" ng-model="code" ng-model-options="{debounce: 250}"></textarea>
+    <textarea ui-codemirror="{mode: 'javascript', lineNumbers: true}" class="code-editor" ng-model="code" ng-model-options="{debounce: 250}"></textarea>
 
     <h3>Test Results <status-badge status="overallResult"></status-badge></h3>
     <test-results results="testCaseResults"></test-results>
