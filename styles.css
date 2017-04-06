@@ -3,6 +3,10 @@
     padding: .5em 0 1em 0;
 }
 
+.open-sidebar .wrapper {
+    margin-left: 265px;
+}
+
 .wrapper h2 {
     margin-top: 0px;
 }
@@ -153,13 +157,31 @@ div.console p.level-error {
     z-index: 10;
 }
 
-.challenge-list.pinned, .challenge-list:hover {
+.challenge-list.pinned, .challenge-list:hover, .open-sidebar .challenge-list {
     width: 250px;
+}
+
+.challenge-list nav {
+    width: 250px;
+    padding: 2px .5em 2px 20px;
+}
+
+.challenge-list nav a {
+    border: 1px solid #337ab7;
+    border-radius: 4px;
+    padding: 0 4px;
+    margin: 0 1px;
+}
+
+.challenge-list nav a:hover, .challenge-list nav a:focus {
+    border-color: #23527c;
+    background-color: #fcfcfc;
 }
 
 .challenge-list h3 {
     width: 250px;
     padding: 0 .5em 0 20px;
+    margin-top: 2px;
 }
 
 .challenge-list p {

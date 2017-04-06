@@ -1,9 +1,10 @@
 angular.module("jsExercises")
-.factory("challengeService", function($http, $q, challengeData) {
+.factory("challengeService", function($http, $q, $sce, challengeData) {
 
     var basic = highlightCodeInDescriptions(challengeData.basic);
     var basicPromise = $q.resolve(basic);
     var setsCache = { basic: basicPromise };
+    var cachedSets;
 
     function highlightCodeInDescriptions(set) {
         set.challenges.forEach(function(challenge) {
@@ -24,23 +25,37 @@ angular.module("jsExercises")
         return set;
     }
 
+    function htmlSafeDescriptions(sets) {
+        sets.forEach(function(set) {
+            set.description = $sce.trustAsHtml(set.description);
+        });
+        return sets;
+    }
+
     var challengesService = {
         clearCache: function() {
             setsCache = { basic: basicPromise };
         },
+        getSets: function() {
+            if (cachedSets === undefined) {
+                cachedSets = $http.get("mock-api/sets.json").then(function(response) {
+                    return htmlSafeDescriptions(response.data);
+                });
+            }
+            return cachedSets;
+        },
         getSet: function(setId) {
             var cached = setsCache[setId];
             if (cached === undefined) {
-                setsCache[setId] = $http.get("sets/" + encodeURIComponent(setId) + ".json").then(function(response) {
+                setsCache[setId] = cached = $http.get("mock-api/sets/" + encodeURIComponent(setId) + ".json")
+                .then(function(response) {
                     var set = response.data;
                     return highlightCodeInDescriptions(set);
                 }).catch(function(err) {
                     return basic;
                 });
-                return setsCache[setId];
-            } else {
-                return cached;
             }
+            return cached;
         },
         getChallenges: function(setId) {
             return this.getSet(setId).then(function(set) { return set.challenges; });

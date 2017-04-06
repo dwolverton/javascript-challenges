@@ -1,0 +1,11 @@
+[{
+    "id": "basic",
+    "title": "Basic Structures",
+    "challengeCount": 9,
+    "description": "<p>Why hello, I didn't see you there.</p>"
+},{
+    "id": "loops",
+    "title": "Loops",
+    "challengeCount": 2,
+    "description": "<p>Here be dragons.</p>"
+}]

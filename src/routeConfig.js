@@ -6,7 +6,10 @@ angular.module("jsExercises")
     }).when("/c/:challengeSetId/:challengeNumber", {
         controller: "challengeController",
         templateUrl: "templates/challenge.html"
+    }).when("/sets", {
+        controller: "setsController",
+        templateUrl: "templates/setsList.html"
     }).otherwise({
-        redirectTo: "/c/basic/1"
+        redirectTo: "/sets"
     });
 });

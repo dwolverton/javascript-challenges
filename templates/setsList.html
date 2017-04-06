@@ -1,0 +1,6 @@
+<div class="sets-list">
+    <div class="set" ng-repeat="set in sets">
+        <h3>{{set.title}} <a href="#!/c/{{set.id}}/1">GO</a></h3>
+        <div class="set-description" ng-bind-html="set.description"></div>
+    </div>
+</div>

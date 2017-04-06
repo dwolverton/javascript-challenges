@@ -26,8 +26,12 @@
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/idea.min.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
     </head>
-    <body ng-app="jsExercises">
+    <body ng-app="jsExercises" ng-class="{'open-sidebar': openSidebar}">
         <div ng-controller="challengeListController" class="challenge-list">
+            <nav>
+                <a href="#!/sets">Choose Set</a>
+                <a href="#!/sets">Login w/ Slack</a>
+            </nav>
             <h3>{{setTitle}}</h3>
             <p ng-repeat="challenge in challenges" ng-class="{ current: challenge.current }" class="{{'status-' + challenge.status}}">
                 <a ng-href="#!/c/{{challengeSetId}}/{{$index + 1}}">

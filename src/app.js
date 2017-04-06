@@ -6,24 +6,36 @@ angular.module("jsExercises", ["ngRoute", "ui.codemirror"])
     function loadChallenges() {
         $scope.challengeSetId = $routeParams.challengeSetId;
 
-        var count = 0;
-        challengeService.getSet($routeParams.challengeSetId).then(function(set) {
-            $scope.setTitle = set.title;
-            $scope.challenges = set.challenges.map(function(challenge) {
-                var decorated = {
-                    status: count < 2 ? 'done' : count < 5 ? 'visited' : 'unvisited',
-                    challenge: challenge
-                };
-                count++;
-                if (count === Number($routeParams.challengeNumber)) {
-                    decorated.current = true;
-                }
-                return decorated;
-            })
-        });
+        if ($scope.challengeSetId) {
+            challengeService.getSet($routeParams.challengeSetId).then(function(set) {
+                $scope.setTitle = set.title;
+                var count = 0;
+                $scope.challenges = set.challenges.map(function(challenge) {
+                    var decorated = {
+                        status: count < 2 ? 'done' : count < 5 ? 'visited' : 'unvisited',
+                        challenge: challenge
+                    };
+                    count++;
+                    if (count === Number($routeParams.challengeNumber)) {
+                        decorated.current = true;
+                    }
+                    return decorated;
+                })
+            });
+        } else {
+            $scope.setTitle = null;
+            $scope.challenges = null;
+        }
     }
 })
-.controller("challengeController", function($scope, $routeParams, $sce, challengeService, testService, serialize) {
+.controller("setsController", function($rootScope, $scope, challengeService) {
+    $rootScope.openSidebar = true;
+    challengeService.getSets().then(function(sets) {
+        $scope.sets = sets;
+    });
+})
+.controller("challengeController", function($rootScope, $scope, $routeParams, $sce, challengeService, testService, serialize) {
+    $rootScope.openSidebar = false;
     challengeService.getChallenge($routeParams.challengeSetId, $routeParams.challengeNumber).then(function(challenge) {
         $scope.title = challenge.title;
         $scope.challengeDescriptionHtml = $sce.trustAsHtml(challenge.description);
