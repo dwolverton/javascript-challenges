@@ -1,6 +1,8 @@
 angular.module("jsExercises")
-    .value("challengeData", {
-        "basic": [{
+.value("challengeData", {
+    "basic": {
+        title: "Basic Structures",
+        challenges: [{
             title: "Loop from 0 to 4",
             description: "<p>Write a loop to log the numbers 0 through 4 to the console.</p>",
             starterCode: "",
@@ -323,4 +325,5 @@ angular.module("jsExercises")
                 }
             ]
         }]
-    });
+    }
+});

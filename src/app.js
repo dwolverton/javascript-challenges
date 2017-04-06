@@ -7,42 +7,45 @@ angular.module("jsExercises", ["ngRoute", "ui.codemirror"])
         $scope.challengeSetId = $routeParams.challengeSetId;
 
         var count = 0;
-        $scope.challenges = challengeService.getChallenges($routeParams.challengeSetId).map(function(challenge) {
-            var decorated = {
-                status: count < 2 ? 'done' : count < 5 ? 'visited' : 'unvisited',
-                challenge: challenge
-            };
-            count++;
-            if (count === Number($routeParams.challengeNumber)) {
-                decorated.current = true;
-            }
-            return decorated;
+        challengeService.getSet($routeParams.challengeSetId).then(function(set) {
+            $scope.setTitle = set.title;
+            $scope.challenges = set.challenges.map(function(challenge) {
+                var decorated = {
+                    status: count < 2 ? 'done' : count < 5 ? 'visited' : 'unvisited',
+                    challenge: challenge
+                };
+                count++;
+                if (count === Number($routeParams.challengeNumber)) {
+                    decorated.current = true;
+                }
+                return decorated;
+            })
         });
     }
 })
 .controller("challengeController", function($scope, $routeParams, $sce, challengeService, testService, serialize) {
-    var challenge = challengeService.getChallenge($routeParams.challengeSetId, $routeParams.challengeNumber);
+    challengeService.getChallenge($routeParams.challengeSetId, $routeParams.challengeNumber).then(function(challenge) {
+        $scope.title = challenge.title;
+        $scope.challengeDescriptionHtml = $sce.trustAsHtml(challenge.description);
+        $scope.code = challenge.starterCode;
 
-    $scope.title = challenge.title;
-    $scope.challengeDescriptionHtml = $sce.trustAsHtml(challenge.description);
-    $scope.code = challenge.starterCode;
+        $scope.testCaseResults = [];
 
-    $scope.testCaseResults = [];
-
-    $scope.$watch('code', serialize(function(done, code) {
-        testService.runTestCases(challenge.testCases, code).then(function (testResults) {
-            $scope.testCaseResults = testResults;
-            $scope.overallResult = testResults.reduce(function(prev, test) {
-                if (test.result.status === 'error') {
-                    return 'error';
-                } else if (test.result.status === 'fail' && prev !== 'error') {
-                    return 'fail';
-                } else {
-                    return prev;
-                }
-            }, 'pass');
-        }).finally(done);
-    }));
+        $scope.$watch('code', serialize(function(done, code) {
+            testService.runTestCases(challenge.testCases, code).then(function (testResults) {
+                $scope.testCaseResults = testResults;
+                $scope.overallResult = testResults.reduce(function(prev, test) {
+                    if (test.result.status === 'error') {
+                        return 'error';
+                    } else if (test.result.status === 'fail' && prev !== 'error') {
+                        return 'fail';
+                    } else {
+                        return prev;
+                    }
+                }, 'pass');
+            }).finally(done);
+        }));
+    });
 })
 .filter('highlightjs', function($sce) {
   return function(input) {

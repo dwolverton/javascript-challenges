@@ -28,7 +28,7 @@
     </head>
     <body ng-app="jsExercises">
         <div ng-controller="challengeListController" class="challenge-list">
-            <h3>Basic Structures</h3>
+            <h3>{{setTitle}}</h3>
             <p ng-repeat="challenge in challenges" ng-class="{ current: challenge.current }" class="{{'status-' + challenge.status}}">
                 <a ng-href="#!/c/{{challengeSetId}}/{{$index + 1}}">
                     <span class="status-indicator"></span>
