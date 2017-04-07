@@ -16,18 +16,19 @@
   * ~~code formatting~~
 * ~~lint~~
 * ~~code editor~~
-* if error line number is in eval expression, don't show line number
-* reset code
-* load challenges from server
+* ~~load challenges from server~~
+* ~~load additional challenges from database~~
+* ~~select challenge set from database (#!/c/basic-js/1)~~
 * slack login limited to GC
-* load additional challenges from database
+* submit solution
 * track your progress
 * reporting
 * view solution (disable easy copy-paste)
+* if error line number is in eval expression, don't show line number
+* reset code
 * View console for non-console test cases
 * pass functions back as toString to avoid DataCloneError
 * parse challenges from MarkDown
 * load challenges into database from MarkDown
-* select challenge set from database (#!/c/basic-js/1)
 * auto-run and run on click options
 * ability to define your own challenges and/or test cases

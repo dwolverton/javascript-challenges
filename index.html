@@ -19,6 +19,8 @@
         <script src="src/routeConfig.js" charset="utf-8"></script>
         <script src="src/challengeService.js" charset="utf-8"></script>
         <script src="src/challengeData.js" charset="utf-8"></script>
+        <script src="src/apiService.js" charset="utf-8"></script>
+        <script src="src/userService.js" charset="utf-8"></script>
         <script src="src/testService.js" charset="utf-8"></script>
         <script src="src/testResultsDirective.js" charset="utf-8"></script>
         <script src="src/consoleDirective.js" charset="utf-8"></script>
@@ -30,7 +32,7 @@
         <div ng-controller="challengeListController" class="challenge-list">
             <nav>
                 <a href="#!/sets">Choose Set</a>
-                <a href="#!/sets">Login w/ Slack</a>
+                <a ng-if="!loggedInUser" href="{{slackLoginUrl}}">Login w/ Slack</a>
             </nav>
             <h3>{{setTitle}}</h3>
             <p ng-repeat="challenge in challenges" ng-class="{ current: challenge.current }" class="{{'status-' + challenge.status}}">

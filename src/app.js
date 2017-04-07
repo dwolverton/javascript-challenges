@@ -1,6 +1,11 @@
 angular.module("jsExercises", ["ngRoute", "ui.codemirror"])
+.constant("serverUrl", "http://localhost:5000")
+.run(function($rootScope, serverUrl) {
+    var redirectUri = encodeURIComponent(serverUrl + "/slack-login");
+    var returnUri = encodeURIComponent(location.href);
+    $rootScope.slackLoginUrl = "https://slack.com/oauth/authorize?scope=identity.basic,identity.email&client_id=4975543103.166932015414&team_id=T04UPFZ31&redirect_uri=" + redirectUri + "&state=" + returnUri;
+})
 .controller("challengeListController", function($scope, $rootScope, $routeParams, challengeService) {
-
     $scope.$on("$routeChangeSuccess", loadChallenges);
 
     function loadChallenges() {

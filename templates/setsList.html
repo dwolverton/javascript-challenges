@@ -3,4 +3,5 @@
         <h3>{{set.title}} <a href="#!/c/{{set.id}}/1">GO</a></h3>
         <div class="set-description" ng-bind-html="set.description"></div>
     </div>
+    <a ng-if="!loggedInUser" href="{{slackLoginUrl}}"><img src="https://api.slack.com/img/sign_in_with_slack.png" /></a>
 </div>
