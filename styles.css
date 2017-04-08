@@ -20,6 +20,12 @@ pre {
     border: 1px solid silver;
 }
 
+.button-bar {
+    text-align: right;
+    margin-top: 5px;
+    margin-bottom: -35px;
+}
+
 /* -- Test Results -- */
 h3 .test-status-indicator {
     font-size: 75%;

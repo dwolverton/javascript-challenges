@@ -41,10 +41,22 @@ angular.module("jsExercises", ["ngRoute", "ui.codemirror"])
 })
 .controller("challengeController", function($rootScope, $scope, $routeParams, $sce, challengeService, testService, serialize) {
     $rootScope.openSidebar = false;
+
+    $scope.isSubmitEnabled = $scope.isResetEnabled = function() { return false };
     challengeService.getChallenge($routeParams.challengeSetId, $routeParams.challengeNumber).then(function(challenge) {
         $scope.title = challenge.title;
         $scope.challengeDescriptionHtml = $sce.trustAsHtml(challenge.description);
         $scope.code = challenge.starterCode;
+
+        $scope.reset = function() {
+            $scope.code = challenge.starterCode;
+        };
+        $scope.isSubmitEnabled = function() {
+            return $scope.code !== challenge.starterCode;
+        };
+        $scope.isResetEnabled = function() {
+            return $scope.code !== challenge.starterCode;
+        };
 
         $scope.testCaseResults = [];
 

@@ -32,7 +32,7 @@
         <div ng-controller="challengeListController" class="challenge-list">
             <nav>
                 <a href="#!/sets">Choose Set</a>
-                <a ng-if="!loggedInUser" href="{{slackLoginUrl}}">Login w/ Slack</a>
+                <a ng-if="!isLoggedIn" href="{{slackLoginUrl}}">Login w/ Slack</a>
             </nav>
             <h3>{{setTitle}}</h3>
             <p ng-repeat="challenge in challenges" ng-class="{ current: challenge.current }" class="{{'status-' + challenge.status}}">
