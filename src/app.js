@@ -10,14 +10,17 @@ angular.module("jsExercises", ["ngRoute", "ui.codemirror"])
 
     function loadChallenges() {
         $scope.challengeSetKey = $routeParams.challengeSetKey;
+        $scope.challengeStatuses = {};
 
         if ($scope.challengeSetKey) {
-            challengeService.getSet($routeParams.challengeSetKey).then(function(set) {
+            challengeService.getSet($scope.challengeSetKey).then(function(set) {
                 $scope.setTitle = set.title;
                 var count = 0;
                 $scope.challenges = set.challenges.map(function(challenge) {
                     var decorated = {
-                        status: count < 2 ? 'done' : count < 5 ? 'visited' : 'unvisited',
+                        getStatus: function() {
+                          return $scope.challengeStatuses[this.challenge.id] || 'unvisited';
+                        },
                         challenge: challenge
                     };
                     count++;
@@ -26,6 +29,9 @@ angular.module("jsExercises", ["ngRoute", "ui.codemirror"])
                     }
                     return decorated;
                 })
+            });
+            challengeService.getUserSubmissionStatusesForSet($scope.challengeSetKey).then(function(challengeStatuses) {
+              $scope.challengeStatuses = challengeStatuses;
             });
         } else {
             $scope.setTitle = null;
@@ -37,46 +43,6 @@ angular.module("jsExercises", ["ngRoute", "ui.codemirror"])
     $rootScope.openSidebar = true;
     challengeService.getSets().then(function(sets) {
         $scope.sets = sets;
-    });
-})
-.controller("challengeController", function($rootScope, $scope, $routeParams, $sce, challengeService, testService, serialize) {
-    $rootScope.openSidebar = false;
-
-    $scope.isSubmitEnabled = $scope.isResetEnabled = function() { return false };
-    challengeService.getChallenge($routeParams.challengeSetKey, $routeParams.challengeNumber).then(function(challenge) {
-        $scope.title = challenge.title;
-        $scope.challengeDescriptionHtml = $sce.trustAsHtml(challenge.description);
-        $scope.code = challenge.starterCode;
-
-        $scope.reset = function() {
-            $scope.code = challenge.starterCode;
-        };
-        $scope.submit = function() {
-            challengeService.submit(challenge.setId, challenge.id, $scope.code, $scope.overallResult === 'pass');
-        };
-        $scope.isSubmitEnabled = function() {
-            return $scope.code !== challenge.starterCode;
-        };
-        $scope.isResetEnabled = function() {
-            return $scope.code !== challenge.starterCode;
-        };
-
-        $scope.testCaseResults = [];
-
-        $scope.$watch('code', serialize(function(done, code) {
-            testService.runTestCases(challenge.testCases, code).then(function (testResults) {
-                $scope.testCaseResults = testResults;
-                $scope.overallResult = testResults.reduce(function(prev, test) {
-                    if (test.result.status === 'error') {
-                        return 'error';
-                    } else if (test.result.status === 'fail' && prev !== 'error') {
-                        return 'fail';
-                    } else {
-                        return prev;
-                    }
-                }, 'pass');
-            }).finally(done);
-        }));
     });
 })
 .filter('highlightjs', function($sce) {

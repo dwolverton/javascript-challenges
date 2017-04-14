@@ -12,9 +12,9 @@ angular.module("jsExercises")
                 return response.data;
             });
         },
-        getSet: function(setId) {
+        getSet: function(setKey) {
             return $http({
-                url: API_URL + "/sets/" + encodeURIComponent(setId),
+                url: API_URL + "/sets/" + encodeURIComponent(setKey),
                 headers: { "X-Auth-Token": userService.getAuthToken() }
             }).then(function(response) {
                 return response.data;
@@ -29,6 +29,18 @@ angular.module("jsExercises")
             }).then(function(response) {
                 return response.data;
             });
+        },
+        /**
+         * Returns a map of challenge ID to status: done or visited. unvisited
+         * Items are absent from the map.
+         */
+        getUserSubmissionStatusesForSet: function(setKey) {
+          return $http({
+              url: API_URL + "/sets/" + encodeURIComponent(setKey) + "/my-submission-statuses",
+              headers: { "X-Auth-Token": userService.getAuthToken() }
+          }).then(function(response) {
+              return response.data;
+          });
         }
     };
     return apiService;

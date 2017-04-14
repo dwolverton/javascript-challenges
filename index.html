@@ -16,6 +16,7 @@
         <script src="lib/ui-codemirror.js"></script>
         <script src="lib/jshint.js"></script>
         <script src="src/app.js" charset="utf-8"></script>
+        <script src="src/challengeController.js" charset="utf-8"></script>
         <script src="src/routeConfig.js" charset="utf-8"></script>
         <script src="src/challengeService.js" charset="utf-8"></script>
         <script src="src/challengeData.js" charset="utf-8"></script>
@@ -32,10 +33,10 @@
         <div ng-controller="challengeListController" class="challenge-list">
             <nav>
                 <a href="#!/sets">Choose Set</a>
-                <a ng-if="!isLoggedIn" href="{{slackLoginUrl}}">Login w/ Slack</a>
+                <a ng-if="!isLoggedIn" href="{{slackLoginUrl}}">Sign in with Slack</a>
             </nav>
             <h3>{{setTitle}}</h3>
-            <p ng-repeat="challenge in challenges" ng-class="{ current: challenge.current }" class="{{'status-' + challenge.status}}">
+            <p ng-repeat="challenge in challenges" ng-class="{ current: challenge.current }" class="{{'status-' + challenge.getStatus()}}">
                 <a ng-href="#!/c/{{challengeSetKey}}/{{$index + 1}}">
                     <span class="status-indicator"></span>
                     <span class="number">{{$index + 1}}.</span>

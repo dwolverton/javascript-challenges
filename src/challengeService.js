@@ -3,12 +3,12 @@ angular.module("jsExercises")
 
     var basic = highlightCodeInDescriptions(challengeData.basic);
     var basicPromise = $q.resolve(basic);
-    var setsCache = { basic: basicPromise };
+    var setsCache = {};
     var cachedSets;
 
     var challengesService = {
         clearCache: function() {
-            setsCache = { basic: basicPromise };
+            setsCache = {};
         },
         getSets: function() {
             if (cachedSets === undefined) {
@@ -49,6 +49,13 @@ angular.module("jsExercises")
                 code: code,
                 status: isPass ? 'pass' : 'fail'
             });
+        },
+        getUserSubmissionStatusesForSet: function(setKey) {
+          if (userService.isLoggedIn()) {
+              return apiService.getUserSubmissionStatusesForSet(setKey);
+          } else {
+              return $q.resolve({});
+          }
         }
     };
 
