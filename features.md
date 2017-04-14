@@ -21,7 +21,10 @@
 * ~~select challenge set from database (#!/c/basic-js/1)~~
 * ~~slack login limited to GC~~
 * ~~submit solution~~
-* track your progress
+* ~~track your progress~~
+  * ~~Update progress dot immediately when you submit~~
+* UI For adding challenges. (admin users only)
+* UI For associating challenges with sets.
 * reporting
 * view solution (disable easy copy-paste)
 * if error line number is in eval expression, don't show line number

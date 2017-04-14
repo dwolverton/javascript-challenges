@@ -5,40 +5,6 @@ angular.module("jsExercises", ["ngRoute", "ui.codemirror"])
     var returnUri = encodeURIComponent(location.href);
     $rootScope.slackLoginUrl = "https://slack.com/oauth/authorize?scope=identity.basic,identity.email&client_id=4975543103.166932015414&team_id=T04UPFZ31&redirect_uri=" + redirectUri + "&state=" + returnUri;
 })
-.controller("challengeListController", function($scope, $rootScope, $routeParams, challengeService) {
-    $scope.$on("$routeChangeSuccess", loadChallenges);
-
-    function loadChallenges() {
-        $scope.challengeSetKey = $routeParams.challengeSetKey;
-        $scope.challengeStatuses = {};
-
-        if ($scope.challengeSetKey) {
-            challengeService.getSet($scope.challengeSetKey).then(function(set) {
-                $scope.setTitle = set.title;
-                var count = 0;
-                $scope.challenges = set.challenges.map(function(challenge) {
-                    var decorated = {
-                        getStatus: function() {
-                          return $scope.challengeStatuses[this.challenge.id] || 'unvisited';
-                        },
-                        challenge: challenge
-                    };
-                    count++;
-                    if (count === Number($routeParams.challengeNumber)) {
-                        decorated.current = true;
-                    }
-                    return decorated;
-                })
-            });
-            challengeService.getUserSubmissionStatusesForSet($scope.challengeSetKey).then(function(challengeStatuses) {
-              $scope.challengeStatuses = challengeStatuses;
-            });
-        } else {
-            $scope.setTitle = null;
-            $scope.challenges = null;
-        }
-    }
-})
 .controller("setsController", function($rootScope, $scope, challengeService) {
     $rootScope.openSidebar = true;
     challengeService.getSets().then(function(sets) {

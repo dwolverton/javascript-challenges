@@ -1,5 +1,5 @@
 angular.module("jsExercises")
-.factory("challengeService", function($http, $q, $sce, challengeData, apiService, userService) {
+.factory("challengeService", function($rootScope, $http, $q, $sce, challengeData, apiService, userService) {
 
     var basic = highlightCodeInDescriptions(challengeData.basic);
     var basicPromise = $q.resolve(basic);
@@ -48,6 +48,9 @@ angular.module("jsExercises")
                 challengeId: challengeId,
                 code: code,
                 status: isPass ? 'pass' : 'fail'
+            }).then(function(result) {
+              $rootScope.$broadcast("submitSuccess");
+              return result;
             });
         },
         getUserSubmissionStatusesForSet: function(setKey) {
