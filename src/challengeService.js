@@ -21,25 +21,33 @@ angular.module("jsExercises")
             }
             return cachedSets;
         },
-        getSet: function(setId) {
-            var cached = setsCache[setId];
+        getSet: function(setKey) {
+            var cached = setsCache[setKey];
             if (cached === undefined) {
                 if (userService.isLoggedIn()) {
-                    cached = apiService.getSet(setId).then(highlightCodeInDescriptions);
+                    cached = apiService.getSet(setKey).then(highlightCodeInDescriptions);
                 } else {
                     cached = basicPromise;
                 }
-                setsCache[setId] = cached;
+                setsCache[setKey] = cached;
             }
             return cached;
         },
-        getChallenges: function(setId) {
-            return this.getSet(setId).then(function(set) { return set.challenges; });
+        getChallenges: function(setKey) {
+            return this.getSet(setKey).then(function(set) { return set.challenges; });
         },
-        getChallenge: function(setId, number) {
+        getChallenge: function(setKey, number) {
             number = Number(number);
-            return this.getChallenges(setId).then(function(challenges) {
+            return this.getChallenges(setKey).then(function(challenges) {
                 return challenges[number - 1];
+            });
+        },
+        submit: function(setId, challengeId, code, isPass) {
+            return apiService.addSubmission({
+                setId: setId,
+                challengeId: challengeId,
+                code: code,
+                status: isPass ? 'pass' : 'fail'
             });
         }
     };

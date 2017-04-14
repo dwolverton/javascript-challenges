@@ -1,6 +1,6 @@
 <div class="main-challenge-list">
     <p ng-repeat="challenge in challenges" ng-class="challenge.status">
         <div class="status-indicator"></div>
-        <a ng-href="#!/c/{{challengeSetId}}/{{$index + 1}}">{{$index + 1}}. {{challenge.challenge.title}}</a>
+        <a ng-href="#!/c/{{challengeSetKey}}/{{$index + 1}}">{{$index + 1}}. {{challenge.challenge.title}}</a>
     </p>
 </div>

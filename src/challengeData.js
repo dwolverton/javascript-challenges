@@ -1,7 +1,8 @@
 angular.module("jsExercises")
 .value("challengeData", {
     "_sets": [{
-        id: "basic",
+        id: 1,
+        key: "basic",
         title: "Basic Structures",
         description: "<p>Practice the funamental JavaScript structures such as loops, conditionals and functions.</p>"
     }],

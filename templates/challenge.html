@@ -4,7 +4,7 @@
     <textarea ui-codemirror="{mode: 'javascript', lineNumbers: true}" class="code-editor" ng-model="code" ng-model-options="{debounce: 250}"></textarea>
     <div class="button-bar">
         <button type="button" class="btn btn-default" ng-disabled="!isResetEnabled()" ng-click="reset()">Reset</button>
-        <button type="button" class="btn btn-success" ng-disabled="!isSubmitEnabled()" ng-if="isLoggedIn">Submit</button>
+        <button type="button" class="btn btn-success" ng-disabled="!isSubmitEnabled()" ng-if="isLoggedIn" ng-click="submit()">Submit</button>
     </div>
 
     <h3>Test Results <status-badge status="overallResult"></status-badge></h3>

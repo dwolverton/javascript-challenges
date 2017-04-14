@@ -36,7 +36,7 @@
             </nav>
             <h3>{{setTitle}}</h3>
             <p ng-repeat="challenge in challenges" ng-class="{ current: challenge.current }" class="{{'status-' + challenge.status}}">
-                <a ng-href="#!/c/{{challengeSetId}}/{{$index + 1}}">
+                <a ng-href="#!/c/{{challengeSetKey}}/{{$index + 1}}">
                     <span class="status-indicator"></span>
                     <span class="number">{{$index + 1}}.</span>
                     <span class="title">{{challenge.challenge.title}}</span>

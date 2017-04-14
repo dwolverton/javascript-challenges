@@ -7,7 +7,7 @@ angular.module("jsExercises")
         getSets: function() {
             return $http({
                 url: API_URL + "/sets",
-                params: { auth_token: userService.getAuthToken() }
+                headers: { "X-Auth-Token": userService.getAuthToken() }
             }).then(function(response) {
                 return response.data;
             });
@@ -15,7 +15,17 @@ angular.module("jsExercises")
         getSet: function(setId) {
             return $http({
                 url: API_URL + "/sets/" + encodeURIComponent(setId),
-                params: { auth_token: userService.getAuthToken() }
+                headers: { "X-Auth-Token": userService.getAuthToken() }
+            }).then(function(response) {
+                return response.data;
+            });
+        },
+        addSubmission: function(submission) {
+            return $http({
+                method: "post",
+                url: API_URL + "/submissions",
+                headers: { "X-Auth-Token": userService.getAuthToken() },
+                data: submission
             }).then(function(response) {
                 return response.data;
             });

@@ -19,8 +19,8 @@
 * ~~load challenges from server~~
 * ~~load additional challenges from database~~
 * ~~select challenge set from database (#!/c/basic-js/1)~~
-* slack login limited to GC
-* submit solution
+* ~~slack login limited to GC~~
+* ~~submit solution~~
 * track your progress
 * reporting
 * view solution (disable easy copy-paste)

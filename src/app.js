@@ -9,10 +9,10 @@ angular.module("jsExercises", ["ngRoute", "ui.codemirror"])
     $scope.$on("$routeChangeSuccess", loadChallenges);
 
     function loadChallenges() {
-        $scope.challengeSetId = $routeParams.challengeSetId;
+        $scope.challengeSetKey = $routeParams.challengeSetKey;
 
-        if ($scope.challengeSetId) {
-            challengeService.getSet($routeParams.challengeSetId).then(function(set) {
+        if ($scope.challengeSetKey) {
+            challengeService.getSet($routeParams.challengeSetKey).then(function(set) {
                 $scope.setTitle = set.title;
                 var count = 0;
                 $scope.challenges = set.challenges.map(function(challenge) {
@@ -43,13 +43,16 @@ angular.module("jsExercises", ["ngRoute", "ui.codemirror"])
     $rootScope.openSidebar = false;
 
     $scope.isSubmitEnabled = $scope.isResetEnabled = function() { return false };
-    challengeService.getChallenge($routeParams.challengeSetId, $routeParams.challengeNumber).then(function(challenge) {
+    challengeService.getChallenge($routeParams.challengeSetKey, $routeParams.challengeNumber).then(function(challenge) {
         $scope.title = challenge.title;
         $scope.challengeDescriptionHtml = $sce.trustAsHtml(challenge.description);
         $scope.code = challenge.starterCode;
 
         $scope.reset = function() {
             $scope.code = challenge.starterCode;
+        };
+        $scope.submit = function() {
+            challengeService.submit(challenge.setId, challenge.id, $scope.code, $scope.overallResult === 'pass');
         };
         $scope.isSubmitEnabled = function() {
             return $scope.code !== challenge.starterCode;
