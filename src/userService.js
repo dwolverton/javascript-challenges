@@ -1,7 +1,7 @@
 angular.module("jsExercises")
 .run(function($rootScope, $location) {
     if ($location.hash().startsWith("login=")) {
-        var userId = $location.hash().match(/login=(\d+)/)[1];
+        var userId = $location.hash().match(/login=([a-zA-Z0-9\/\+]+)/)[1];
         $rootScope.loggedInUser = {
             id: userId
         };
