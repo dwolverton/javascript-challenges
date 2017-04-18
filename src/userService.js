@@ -30,6 +30,7 @@ angular.module("jsExercises")
             $rootScope.isLoggedIn = false;
             delete $rootScope.loggedInUser;
             setPersistentUserToken(null);
+            location.reload();
         }
     }
     return userService;
@@ -45,7 +46,11 @@ function getPersistentUserToken() {
 }
 function setPersistentUserToken(token) {
     try {
-      localStorage.jsChallengeUserToken = token;
+      if (token) {
+          localStorage.jsChallengeUserToken = token;
+      } else {
+          delete localStorage.jsChallengeUserToken
+      }
     } catch (e) {
       // if localStorage is not available, no big deal.
     };

@@ -15,6 +15,9 @@ angular.module("jsExercises")
             challengeService.submit(challenge.setId, challenge.id, $scope.code, $scope.overallResult === 'pass');
         };
         $scope.isSubmitEnabled = function() {
+            return $scope.code !== challenge.starterCode && $scope.overallResult === 'pass';
+        };
+        $scope.isSaveEnabled = function() {
             return $scope.code !== challenge.starterCode;
         };
         $scope.isResetEnabled = function() {

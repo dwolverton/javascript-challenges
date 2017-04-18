@@ -24,7 +24,8 @@
 * ~~track your progress~~
   * ~~Update progress dot immediately when you submit~~
 * ~~UI For adding challenges. (admin users only)~~
-* Hold onto session during refresh.
+* ~~Hold onto session during refresh.~~
+* ~~Deploy~~
 * UI For associating challenges with sets.
 * reporting
 * view solution (disable easy copy-paste)
