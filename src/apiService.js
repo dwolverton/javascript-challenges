@@ -20,6 +20,35 @@ angular.module("jsExercises")
                 return response.data;
             });
         },
+        getChallenge: function(challengeId) {
+            return $http({
+                url: API_URL + "/challenges/" + encodeURIComponent(challengeId),
+                headers: { "X-Auth-Token": userService.getAuthToken() }
+            }).then(function(response) {
+                return response.data;
+            });
+        },
+        saveChallenge: function(challenge) {
+            if (challenge.id) {
+                return $http({
+                    method: "PUT",
+                    url: API_URL + "/challenges/" + encodeURIComponent(challenge.id),
+                    data: challenge,
+                    headers: { "X-Auth-Token": userService.getAuthToken() }
+                }).then(function(response) {
+                    return response.data;
+                });
+            } else {
+                return $http({
+                    method: "POST",
+                    url: API_URL + "/challenges",
+                    data: challenge,
+                    headers: { "X-Auth-Token": userService.getAuthToken() }
+                }).then(function(response) {
+                    return response.data;
+                });
+            }
+        },
         addSubmission: function(submission) {
             return $http({
                 method: "post",

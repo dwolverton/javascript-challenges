@@ -17,6 +17,24 @@ angular.module("jsExercises", ["ngRoute", "ui.codemirror"])
     return input;
   }
 })
+.filter('highlightjsBlocks', function($sce) {
+  return function(input) {
+    if (input) {
+        var wrapper = document.createElement("div");
+        wrapper.innerHTML = input;
+
+        var modified = false;
+        wrapper.querySelectorAll("pre code").forEach(function(codeBlock) {
+            hljs.highlightBlock(codeBlock);
+            modified = true;
+        });
+        if (modified) {
+            input = wrapper.innerHTML;
+        }
+    }
+    return $sce.trustAsHtml(input);;
+  }
+})
 /**
  * wrap a function that has asynchronous components so that it will only run
  * once at a time. The function is passed a `done` function as the first

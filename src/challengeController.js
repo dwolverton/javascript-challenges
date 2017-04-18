@@ -5,7 +5,7 @@ angular.module("jsExercises")
 
     challengeService.getChallenge($routeParams.challengeSetKey, $routeParams.challengeNumber).then(function(challenge) {
         $scope.title = challenge.title;
-        $scope.challengeDescriptionHtml = $sce.trustAsHtml(challenge.description);
+        $scope.description = challenge.description;
         $scope.code = challenge.starterCode;
 
         $scope.reset = function() {

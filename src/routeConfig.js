@@ -9,6 +9,22 @@ angular.module("jsExercises")
     }).when("/sets", {
         controller: "setsController",
         templateUrl: "templates/setsList.html"
+    }).when("/admin/challenge/new", {
+        controller: "adminChallengeController",
+        templateUrl: "templates/edit-challenge.html",
+        resolve: {
+          challenge: function() {
+            return { testCases: [] };
+          }
+        }
+    }).when("/admin/challenge/:challengeId", {
+        controller: "adminChallengeController",
+        templateUrl: "templates/edit-challenge.html",
+        resolve: {
+          challenge: function(apiService, $route) {
+            return apiService.getChallenge($route.current.params.challengeId);
+          }
+        }
     }).otherwise({
         redirectTo: "/sets"
     });

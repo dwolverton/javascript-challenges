@@ -1,7 +1,7 @@
 angular.module("jsExercises")
 .factory("challengeService", function($rootScope, $http, $q, $sce, challengeData, apiService, userService) {
 
-    var basic = highlightCodeInDescriptions(challengeData.basic);
+    var basic = challengeData.basic;
     var basicPromise = $q.resolve(basic);
     var setsCache = {};
     var cachedSets;
@@ -25,7 +25,7 @@ angular.module("jsExercises")
             var cached = setsCache[setKey];
             if (cached === undefined) {
                 if (userService.isLoggedIn()) {
-                    cached = apiService.getSet(setKey).then(highlightCodeInDescriptions);
+                    cached = apiService.getSet(setKey);
                 } else {
                     cached = basicPromise;
                 }
@@ -61,25 +61,6 @@ angular.module("jsExercises")
           }
         }
     };
-
-    function highlightCodeInDescriptions(set) {
-        set.challenges.forEach(function(challenge) {
-            if (challenge.description) {
-                var wrapper = document.createElement("div");
-                wrapper.innerHTML = challenge.description;
-
-                var modified = false;
-                wrapper.querySelectorAll("pre code").forEach(function(codeBlock) {
-                    hljs.highlightBlock(codeBlock);
-                    modified = true;
-                });
-                if (modified) {
-                    challenge.description = wrapper.innerHTML;
-                }
-            }
-        });
-        return set;
-    }
 
     function htmlSafeDescriptions(sets) {
         sets.forEach(function(set) {

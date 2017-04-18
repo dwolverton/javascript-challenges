@@ -23,7 +23,8 @@
 * ~~submit solution~~
 * ~~track your progress~~
   * ~~Update progress dot immediately when you submit~~
-* UI For adding challenges. (admin users only)
+* ~~UI For adding challenges. (admin users only)~~
+* Hold onto session during refresh.
 * UI For associating challenges with sets.
 * reporting
 * view solution (disable easy copy-paste)

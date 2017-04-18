@@ -1,0 +1,64 @@
+<div class="edit-challenge">
+  <form>
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" class="form-control" ng-model="challenge.title" id="title">
+    </div>
+    <div class="form-group">
+      <label for="description">Description (HTML):</label>
+      <textarea class="form-control" ng-model="challenge.description" id="description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="starterCode">Starter Code:</label>
+      <textarea rows="5" class="form-control" ng-model="challenge.starterCode" id="starterCode"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="solution">Solution:</label>
+      <textarea rows="5" class="form-control" ng-model="challenge.solution" id="solution"></textarea>
+    </div>
+    <h4>Test Cases</h4>
+    <div ng-repeat="testCase in challenge.testCases" class="well">
+      <div class="form-group">
+        <label>Description:</label>
+        <input type="text" class="form-control" ng-model="testCase.description">
+      </div>
+      <div class="form-group">
+        <label>Expression Display:</label>
+        <input type="text" class="form-control" ng-model="testCase.expressionDisplay">
+      </div>
+      <div class="form-group">
+        <label>Expression:</label>
+        <textarea class="form-control" ng-model="testCase.expression"></textarea>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" ng-model="testCase.skipCode"/> Skip Code</label>
+      </div>
+      <div style="float: right;">
+        <button type="button" class="btn btn-default" ng-click="removeTestCase($index)"><span class="glyphicon glyphicon-minus"></span> Remove Test Case</button>
+      </div>
+      <div class="form-group">
+        <label>Test Type:</label>
+        <div>
+          <label class="radio-inline"><input type="radio" ng-model="testCase.type" name="tc-type-{{$index}}" value="result"/> Result</label>
+          <label class="radio-inline"><input type="radio" ng-model="testCase.type" name="tc-type-{{$index}}" value="console"/> Console</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-default" ng-click="addTestCase()"><span class="glyphicon glyphicon-plus"></span> Add Test Case</button>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-primary" ng-click="preview()" ng-disabled="readyToSave">Preview</button>
+        <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="!readyToSave">Save</button>
+    </div>
+  </form>
+
+  <h2>{{challenge.title}}</h2>
+  <div ng-bind-html="challenge.description | highlightjsBlocks" class="description"></div>
+  <h4>Starter Code</h4>
+  <pre><code class="hljs js" ng-bind-html="challenge.starterCode | highlightjs"></code></pre>
+  <h4>Solution</h4>
+  <pre><code class="hljs js" ng-bind-html="challenge.solution | highlightjs"></code></pre>
+  <h3>Test Results</h3>
+  <test-results results="testCaseResults"></test-results>
+</div>
