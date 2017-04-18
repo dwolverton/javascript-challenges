@@ -1,14 +1,21 @@
 angular.module("jsExercises")
 .run(function($rootScope, $location) {
     if ($location.hash().startsWith("login=")) {
-        var userId = $location.hash().match(/login=([a-zA-Z0-9\/\+]+)/)[1];
-        $rootScope.loggedInUser = {
-            id: userId
-        };
-        $rootScope.isLoggedIn = true;
+        var token = $location.hash().match(/login=([a-zA-Z0-9\/\+]+)/)[1];
+        loginWithToken(token);
         $location.hash("");
+    } else if (getPersistentUserToken()) {
+        loginWithToken(getPersistentUserToken());
     } else {
         $rootScope.isLoggedIn = false;
+    }
+
+    function loginWithToken(token) {
+      $rootScope.loggedInUser = {
+          id: token
+      };
+      $rootScope.isLoggedIn = true;
+      setPersistentUserToken(token);
     }
 })
 .factory("userService", function($rootScope) {
@@ -22,7 +29,24 @@ angular.module("jsExercises")
         logOut: function() {
             $rootScope.isLoggedIn = false;
             delete $rootScope.loggedInUser;
+            setPersistentUserToken(null);
         }
     }
     return userService;
 });
+
+function getPersistentUserToken() {
+    try {
+      return localStorage.jsChallengeUserToken;
+    } catch (e) {
+      // if localStorage is not available, no big deal.
+      return null;
+    };
+}
+function setPersistentUserToken(token) {
+    try {
+      localStorage.jsChallengeUserToken = token;
+    } catch (e) {
+      // if localStorage is not available, no big deal.
+    };
+}

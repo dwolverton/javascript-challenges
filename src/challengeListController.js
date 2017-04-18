@@ -3,9 +3,11 @@
 var lastChallengeStatuses = {};
 
 angular.module("jsExercises")
-.controller("challengeListController", function($scope, $rootScope, $routeParams, challengeService) {
+.controller("challengeListController", function($scope, $rootScope, $routeParams, challengeService, userService) {
     $scope.$on("$routeChangeSuccess", loadChallenges);
     $scope.$on("submitSuccess", loadChallengeStatuses);
+
+    $scope.logOut = userService.logOut;
 
     function loadChallenges() {
         $scope.challengeSetKey = $routeParams.challengeSetKey;
