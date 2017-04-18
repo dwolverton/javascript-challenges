@@ -4,7 +4,7 @@ angular.module("jsExercises")
         id: 1,
         key: "basic",
         title: "Basic Structures",
-        description: "<p>Practice the funamental JavaScript structures such as loops, conditionals and functions.</p>"
+        description: "<p>Practice the fundamental JavaScript structures such as loops, conditionals and functions.</p>"
     }],
     "basic": {
         title: "Basic Structures",
