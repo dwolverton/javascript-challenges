@@ -38,7 +38,7 @@ angular.module("jsExercises")
             } else {
                 test.case.console = test.result.console;
             }
-            if (test.case.expressionDisplay !== 'Code Quality Check') {
+            if (test.result.status === 'fail' && test.case.expressionDisplay !== 'Code Quality Check') {
                 test.result.status = 'pass';
             }
           });

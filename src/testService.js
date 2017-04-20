@@ -1,6 +1,6 @@
 angular.module("jsExercises")
 .factory("testService", function($q) {
-    var LOG_LIMIT = 100;
+    var LOG_LIMIT = 110;
     var RUNNER_TIMEOUT = 500;
 
     function execCodeAndTestExpression(code, expression) {

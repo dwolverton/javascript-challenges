@@ -6,7 +6,7 @@ angular.module("jsExercises", ["ngRoute", "ui.codemirror"])
     $rootScope.slackLoginUrl = "https://slack.com/oauth/authorize?scope=identity.basic,identity.email&client_id=4975543103.166932015414&team_id=T04UPFZ31&redirect_uri=" + redirectUri + "&state=" + returnUri;
 })
 .controller("setsController", function($rootScope, $scope, challengeService) {
-    $rootScope.openSidebar = true;
+    $rootScope.openSidebar = false;
     challengeService.getSets().then(function(sets) {
         $scope.sets = sets;
     });

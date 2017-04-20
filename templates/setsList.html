@@ -1,10 +1,20 @@
 <div class="sets-list">
-    <div class="set" ng-repeat="set in sets">
-        <h3>{{set.title}} <a href="#!/c/{{set.key}}/1">GO</a></h3>
-        <div class="set-description" ng-bind-html="set.description"></div>
+    <h2>Choose a Set</h2>
+    <p>Select one of the following sets of challenges.</p>
+    <div class="panel panel-default" ng-repeat="set in sets">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="#!/c/{{set.key}}/1">{{set.title}}</a></h3>
+        </div>
+        <div class="panel-body">
+            <div class="set-description" ng-bind-html="set.description"></div>
+            <div>
+                <a href="#!/c/{{set.key}}/1" class="btn btn-primary">Go!</a>
+            </div>
+        </div>
     </div>
-    <div ng-if="!isLoggedIn" class="set">
-        <h3>For more Challenges...</h3>
+
+    <div ng-if="!isLoggedIn" class="more-challenges well">
+        <h4>Want more Challenges?</h4>
         <div class="set-description sign-in-with-slack">
           <a href="{{slackLoginUrl}}"><img src="https://api.slack.com/img/sign_in_with_slack.png" /></a>
         </div>
