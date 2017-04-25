@@ -15,6 +15,7 @@
         <script src="lib/codemirror-mode-javascript.js"></script>
         <script src="lib/ui-codemirror.js"></script>
         <script src="lib/jshint.js"></script>
+        <script src="lib/ng-sortable.min.js"></script>
         <script src="src/app.js" charset="utf-8"></script>
         <script src="src/challengeController.js" charset="utf-8"></script>
         <script src="src/challengeListController.js" charset="utf-8"></script>
@@ -27,9 +28,13 @@
         <script src="src/testResultsDirective.js" charset="utf-8"></script>
         <script src="src/consoleDirective.js" charset="utf-8"></script>
         <script src="src/adminChallengeController.js" charset="utf-8"></script>
+        <script src="src/adminSetsController.js" charset="utf-8"></script>
 
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/idea.min.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
+
+        <link rel="stylesheet" href="lib/ng-sortable.min.css">
+        <link rel="stylesheet" href="lib/ng-sortable.style.min.css">
     </head>
     <body ng-app="jsExercises" ng-class="{'open-sidebar': openSidebar}">
         <div ng-controller="challengeListController" class="challenge-list">

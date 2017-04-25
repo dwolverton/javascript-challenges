@@ -1,0 +1,17 @@
+<div class="edit-sets">
+    <div class="row">
+        <div class="col-xs-3">
+            <ul class="nav nav-pills nav-stacked">
+                <li ng-repeat="set in sets" ng-class="{active: set.active}"><a href="#!/admin/sets/{{set.id}}">{{set.title}}</a></li>
+            </ul>
+        </div>
+        <div class="col-xs-9" as-sortable="sortOptions" ng-model="challenges">
+            <div ng-repeat="challenge in challenges" as-sortable-item class="panel panel-default">
+                <div class="panel-body">
+                    <span as-sortable-item-handle class="glyphicon glyphicon-menu-hamburger"></span>
+                    {{challenge.title}} <a href="#!/admin/challenge/{{challenge.id}}" class="pull-right glyphicon glyphicon-edit"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-angular.module("jsExercises", ["ngRoute", "ui.codemirror"])
+angular.module("jsExercises", ["ngRoute", "ui.codemirror", "as.sortable"])
 .constant("serverUrl", (localStorage && localStorage.jsChallengeApiUrl) || "https://gc-code-challenge.herokuapp.com")
 .run(function($rootScope, serverUrl) {
     var redirectUri = encodeURIComponent(serverUrl + "/slack-login");

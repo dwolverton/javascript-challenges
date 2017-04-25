@@ -9,6 +9,9 @@ angular.module("jsExercises")
     }).when("/sets", {
         controller: "setsController",
         templateUrl: "templates/setsList.html"
+    }).when("/admin/sets", {
+        controller: "adminSetsController",
+        templateUrl: "templates/edit-sets"
     }).when("/admin/challenge/new", {
         controller: "adminChallengeController",
         templateUrl: "templates/edit-challenge.html",
