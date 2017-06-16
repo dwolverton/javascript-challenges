@@ -1,18 +1,34 @@
 angular.module("jsExercises")
-.controller("adminSetsController", function($rootScope, $scope) {
+.controller("adminSetsController", function($rootScope, $scope, challengeService, $routeParams) {
   $rootScope.openSidebar = false;
+  var setId = Number($routeParams.setId);
 
-  $scope.sets = [
-      { id: "uncategorized", title: "Uncategorized", challenges: [], active: true},
-      { id: 1, title: "Basic Challenges", challenges: []},
-      { id: 2, title: "Loops", challenges: []},
-  ];
+  challengeService.getChallengesGroupedBySet().then(sets => {
+      var uncategorized = sets.find(set => set.id === null);
+      if (uncategorized) {
+           // it always comes sorted to the end. remove so we can add to beginning
+          sets.pop();
+      } else {
+          uncategorized = { id: null, challenges: [] };
+      }
+      uncategorized.title = "Uncategorized";
+      sets.unshift(uncategorized);
 
-  $scope.challenges = [
-      { id: 1, title: "Count from 0 to 4" },
-      { id: 2, title: "Count from 1 to 5" },
-      { id: 3, title: "Proceed to the tree" }
-  ];
+      $scope.sets = sets;
+
+      if (setId) {
+          $scope.activeSet = sets.find(set => set.id === setId);
+      }
+      if (!$scope.activeSet) {
+          $scope.activeSet = uncategorized;
+          setId = null;
+      }
+      $scope.activeSet.active = true;
+
+      sets.forEach(set => {
+          set.dropTarget = !set.active && set !== uncategorized;
+      });
+  });
 
 
 

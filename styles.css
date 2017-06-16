@@ -255,3 +255,7 @@ div.console p.level-error {
     color: rgb(35, 82, 124);
     background-color: #eee;
 }
+
+.edit-sets .glyphicon-remove {
+    margin-right: .5em;
+}

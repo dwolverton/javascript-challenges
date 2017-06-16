@@ -42,6 +42,9 @@ angular.module("jsExercises")
                 return challenges[number - 1];
             });
         },
+        getChallengesGroupedBySet: function() {
+            return apiService.getChallengesGroupedBySet();
+        },
         submit: function(setId, challengeId, code, isPass) {
             return apiService.addSubmission({
                 setId: setId,

@@ -20,6 +20,14 @@ angular.module("jsExercises")
                 return response.data;
             });
         },
+        getChallengesGroupedBySet: function() {
+            return $http({
+                url: API_URL + "/challenges/by-set",
+                headers: { "X-Auth-Token": userService.getAuthToken() }
+            }).then(function(response) {
+                return response.data;
+            });
+        },
         getChallenge: function(challengeId) {
             return $http({
                 url: API_URL + "/challenges/" + encodeURIComponent(challengeId),

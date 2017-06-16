@@ -12,6 +12,9 @@ angular.module("jsExercises")
     }).when("/admin/sets", {
         controller: "adminSetsController",
         templateUrl: "templates/edit-sets"
+    }).when("/admin/sets/:setId", {
+        controller: "adminSetsController",
+        templateUrl: "templates/edit-sets"
     }).when("/admin/challenge/new", {
         controller: "adminChallengeController",
         templateUrl: "templates/edit-challenge.html",
