@@ -244,3 +244,14 @@ div.console p.level-error {
 .status-done .status-indicator {
     background-color: green;
 }
+
+/* -- Admin -- */
+.edit-sets .nav .as-sortable-placeholder {
+    background-color: red;
+    display: none !important;
+}
+
+.edit-sets .nav .drop {
+    color: rgb(35, 82, 124);
+    background-color: #eee;
+}

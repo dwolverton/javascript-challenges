@@ -1,8 +1,19 @@
 <div class="edit-sets">
+<!-- <div as-sortable="sortOptions" ng-model="challenges2" style="border: 1px solid red; padding-bottom: 20px; margin-top: 50px;">
+    <div ng-repeat="challenge in challenges2" as-sortable-item class="panel panel-default">
+        <div class="panel-body">
+            <span as-sortable-item-handle class="glyphicon glyphicon-menu-hamburger"></span>
+            {{challenge.title}} <a href="#!/admin/challenge/{{challenge.id}}" class="pull-right glyphicon glyphicon-edit"></a>
+        </div>
+    </div>
+</div> -->
     <div class="row">
         <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked">
-                <li ng-repeat="set in sets" ng-class="{active: set.active}"><a href="#!/admin/sets/{{set.id}}">{{set.title}}</a></li>
+                <li ng-repeat="set in sets" ng-class="{active: set.active}">
+                    <a ng-if="!set.active" href="#!/admin/sets/{{set.id}}" as-sortable="sortOptions" ng-model="set.challenges">{{set.title}} ({{set.challenges.length}})</a>
+                    <a ng-if="set.active" href="#!/admin/sets/{{set.id}}">{{set.title}} ({{set.challenges.length}})</a>
+                </li>
             </ul>
         </div>
         <div class="col-xs-9" as-sortable="sortOptions" ng-model="challenges">
