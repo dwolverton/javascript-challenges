@@ -28,12 +28,12 @@
 * ~~Deploy~~
 * ~~UI For associating challenges with sets.~~
 * reporting
+* save progress
+* associate sets with students / groups of students
 * view solution (disable easy copy-paste)
 * if error line number is in eval expression, don't show line number
 * reset code
 * View console for non-console test cases
 * pass functions back as toString to avoid DataCloneError
-* parse challenges from MarkDown
-* load challenges into database from MarkDown
 * auto-run and run on click options
 * ability to define your own challenges and/or test cases
