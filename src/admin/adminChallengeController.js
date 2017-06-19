@@ -1,5 +1,8 @@
 angular.module("jsExercises")
-.controller("adminChallengeController", function($rootScope, $scope, $location, challenge, testService, apiService) {
+.controller("adminChallengeController", function($rootScope, $scope, $location, challenge, testService, apiService, userService) {
+  if (!userService.enforceAdmin()) {
+      return;
+  }
   $rootScope.openSidebar = false;
   $scope.challenge = challenge;
   addTestTypes();

@@ -26,7 +26,7 @@
 * ~~UI For adding challenges. (admin users only)~~
 * ~~Hold onto session during refresh.~~
 * ~~Deploy~~
-* UI For associating challenges with sets.
+* ~~UI For associating challenges with sets.~~
 * reporting
 * view solution (disable easy copy-paste)
 * if error line number is in eval expression, don't show line number

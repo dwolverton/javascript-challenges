@@ -1,5 +1,8 @@
 angular.module("jsExercises")
-.controller("adminSetsController", function($rootScope, $scope, challengeService, $routeParams, $location) {
+.controller("adminSetsController", function($rootScope, $scope, challengeService, $routeParams, $location, userService) {
+  if (!userService.enforceAdmin()) {
+      return;
+  }
   $rootScope.openSidebar = false;
   $scope.state = {
       isDetailsOpen: false

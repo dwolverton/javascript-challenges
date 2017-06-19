@@ -1,27 +1,33 @@
+(function() {
 angular.module("jsExercises")
 .run(function($rootScope, $location) {
     if ($location.hash().startsWith("login=")) {
         var token = $location.hash().match(/login=([a-zA-Z0-9\/\+]+)/)[1];
-        loginWithToken(token);
+        var isAdmin = $location.hash().indexOf('admin=true') !== -1;
+        loginWithInfo({
+            id: token,
+            isAdmin: isAdmin
+        });
         $location.hash("");
-    } else if (getPersistentUserToken()) {
-        loginWithToken(getPersistentUserToken());
+    } else if (getPersistentUserInfo()) {
+        loginWithInfo(getPersistentUserInfo());
     } else {
         $rootScope.isLoggedIn = false;
     }
 
-    function loginWithToken(token) {
-      $rootScope.loggedInUser = {
-          id: token
-      };
+    function loginWithInfo(userInfo) {
+      $rootScope.loggedInUser = userInfo;
       $rootScope.isLoggedIn = true;
-      setPersistentUserToken(token);
+      setPersistentUserInfo(userInfo);
     }
 })
-.factory("userService", function($rootScope) {
+.factory("userService", function($rootScope, $location) {
     var userService = {
         isLoggedIn: function() {
             return $rootScope.isLoggedIn;
+        },
+        isAdmin: function() {
+            return $rootScope.loggedInUser ? $rootScope.loggedInUser.isAdmin : false;
         },
         getAuthToken: function() {
             return $rootScope.loggedInUser ? $rootScope.loggedInUser.id : null;
@@ -29,29 +35,50 @@ angular.module("jsExercises")
         logOut: function() {
             $rootScope.isLoggedIn = false;
             delete $rootScope.loggedInUser;
-            setPersistentUserToken(null);
+            setPersistentUserInfo(null);
             location.reload();
+        },
+        enforceAdmin: function() {
+            console.log('hi');
+            if (this.isAdmin()) {
+                return true;
+            } else {
+                location.hash = "#!/";
+                return false;
+            }
         }
     }
     return userService;
 });
 
-function getPersistentUserToken() {
+function getPersistentUserInfo() {
     try {
-      return localStorage.jsChallengeUserToken;
+      var token = localStorage.jsChallengeUserToken;
+      var isAdmin = localStorage.jsChallengeUserIsAdmin;
+      if (token) {
+          return {
+              id: token,
+              isAdmin: isAdmin
+          }
+      } else {
+          return null;
+      }
     } catch (e) {
       // if localStorage is not available, no big deal.
       return null;
     };
 }
-function setPersistentUserToken(token) {
+function setPersistentUserInfo(userInfo) {
     try {
-      if (token) {
-          localStorage.jsChallengeUserToken = token;
+      if (userInfo) {
+          localStorage.jsChallengeUserToken = userInfo.id;
+          localStorage.jsChallengeUserIsAdmin = userInfo.isAdmin;
       } else {
-          delete localStorage.jsChallengeUserToken
+          delete localStorage.jsChallengeUserToken;
+          delete localStorage.jsChallengeUserIsAdmin;
       }
     } catch (e) {
       // if localStorage is not available, no big deal.
     };
 }
+})();
