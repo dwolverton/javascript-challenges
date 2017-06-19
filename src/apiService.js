@@ -95,6 +95,33 @@ angular.module("jsExercises")
                 url: API_URL + "/sets/" + encodeURIComponent(setId) + "/challenges/" + encodeURIComponent(challengeId),
                 headers: { "X-Auth-Token": userService.getAuthToken() }
             });
+        },
+        addSet: function(set) {
+            return $http({
+                method: "post",
+                url: API_URL + "/sets",
+                headers: { "X-Auth-Token": userService.getAuthToken() },
+                data: set
+            }).then(function(response) {
+                return response.data;
+            });
+        },
+        updateSet: function(set) {
+            return $http({
+                method: "put",
+                url: API_URL + "/sets/" + encodeURIComponent(set.id),
+                headers: { "X-Auth-Token": userService.getAuthToken() },
+                data: set
+            }).then(function(response) {
+                return response.data;
+            });
+        },
+        removeSet: function(setId) {
+            return $http({
+                method: "delete",
+                url: API_URL + "/sets/" + encodeURIComponent(setId),
+                headers: { "X-Auth-Token": userService.getAuthToken() }
+            });
         }
     };
     return apiService;

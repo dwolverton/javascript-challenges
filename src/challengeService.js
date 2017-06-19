@@ -72,6 +72,15 @@ angular.module("jsExercises")
         },
         removeChallengeFromSet: function(setId, challengeId) {
             return apiService.removeChallengeFromSet(setId, challengeId);
+        },
+        addSet: function(set) {
+            return apiService.addSet(set);
+        },
+        updateSet: function(set) {
+            return apiService.updateSet(set);
+        },
+        removeSet: function(setId) {
+            return apiService.removeSet(setId);
         }
     };
 

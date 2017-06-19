@@ -1,6 +1,9 @@
 angular.module("jsExercises")
-.controller("adminSetsController", function($rootScope, $scope, challengeService, $routeParams) {
+.controller("adminSetsController", function($rootScope, $scope, challengeService, $routeParams, $location) {
   $rootScope.openSidebar = false;
+  $scope.state = {
+      isDetailsOpen: false
+  }
   var setId = Number($routeParams.setId);
 
   function refresh() {
@@ -29,9 +32,31 @@ angular.module("jsExercises")
           sets.forEach(set => {
               set.dropTarget = !set.active && set !== uncategorized;
           });
+
+          $scope.state.isDetailsOpen = $scope.activeSet.title === "New Set";
       });
   }
   refresh();
+
+  $scope.addSet = function() {
+      challengeService.addSet({
+          title: "New Set",
+          key: "tbd"
+      }).then(function(set) {
+          $location.path("/admin/sets/" + encodeURIComponent(set.id));
+      });
+  }
+  $scope.updateSet = function() {
+      challengeService.updateSet($scope.activeSet).then(function(set) {
+          $scope.state.isDetailsOpen = false; // as a visual confirmation.
+      });
+  }
+  $scope.removeSet = function() {
+      challengeService.removeSet(setId).then(function(set) {
+          $location.path("/admin/sets");
+      });
+  }
+
 
   $scope.removeFromSet = function(challenge) {
       challengeService.removeChallengeFromSet(setId, challenge.id).then(refresh);

@@ -9,6 +9,8 @@ angular.module("jsExercises")
     }).when("/sets", {
         controller: "setsController",
         templateUrl: "templates/setsList.html"
+    }).when("/admin", {
+        redirectTo: "/admin/sets"
     }).when("/admin/sets", {
         controller: "adminSetsController",
         templateUrl: "templates/edit-sets"

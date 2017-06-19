@@ -259,3 +259,7 @@ div.console p.level-error {
 .edit-sets .glyphicon-remove {
     margin-right: .5em;
 }
+
+.panel-heading--collapsible {
+    cursor: pointer;
+}
