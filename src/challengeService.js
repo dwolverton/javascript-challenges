@@ -57,11 +57,21 @@ angular.module("jsExercises")
             });
         },
         getUserSubmissionStatusesForSet: function(setKey) {
-          if (userService.isLoggedIn()) {
-              return apiService.getUserSubmissionStatusesForSet(setKey);
-          } else {
-              return $q.resolve({});
-          }
+            if (userService.isLoggedIn()) {
+                return apiService.getUserSubmissionStatusesForSet(setKey);
+            } else {
+                return $q.resolve({});
+            }
+        },
+        addChallengeToSet: function(setId, challengeId) {
+            return apiService.addChallengeToSet(setId, challengeId);
+        },
+        // leave insertBeforeChallengeId undefined to insert at end
+        repositionChallengeInSet: function(setId, challengeId, insertBeforeChallengeId) {
+            return apiService.addChallengeToSet(setId, challengeId, insertBeforeChallengeId);
+        },
+        removeChallengeFromSet: function(setId, challengeId) {
+            return apiService.removeChallengeFromSet(setId, challengeId);
         }
     };
 

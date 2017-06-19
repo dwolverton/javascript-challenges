@@ -78,6 +78,23 @@ angular.module("jsExercises")
           }).then(function(response) {
               return response.data;
           });
+        },
+        addChallengeToSet(setId, challengeId, insertBeforeChallengeId) {
+            return $http({
+                method: "post",
+                url: API_URL + "/sets/" + encodeURIComponent(setId) + "/challenges",
+                headers: { "X-Auth-Token": userService.getAuthToken() },
+                data: {
+                    setId, challengeId, insertBeforeChallengeId
+                }
+            });
+        },
+        removeChallengeFromSet: function(setId, challengeId) {
+            return $http({
+                method: "delete",
+                url: API_URL + "/sets/" + encodeURIComponent(setId) + "/challenges/" + encodeURIComponent(challengeId),
+                headers: { "X-Auth-Token": userService.getAuthToken() }
+            });
         }
     };
     return apiService;

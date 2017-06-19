@@ -1,18 +1,13 @@
 <div class="edit-sets">
-<!-- <div as-sortable="sortOptions" ng-model="challenges2" style="border: 1px solid red; padding-bottom: 20px; margin-top: 50px;">
-    <div ng-repeat="challenge in challenges2" as-sortable-item class="panel panel-default">
-        <div class="panel-body">
-            <span as-sortable-item-handle class="glyphicon glyphicon-menu-hamburger"></span>
-            {{challenge.title}} <a href="#!/admin/challenge/{{challenge.id}}" class="pull-right glyphicon glyphicon-edit"></a>
-        </div>
-    </div>
-</div> -->
     <div class="row">
         <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked">
                 <li ng-repeat="set in sets" ng-class="{active: set.active}">
                     <a ng-if="set.dropTarget" href="#!/admin/sets/{{set.id}}" as-sortable="sortOptions" ng-model="set.challenges">{{set.title}} ({{set.challenges.length}})</a>
                     <a ng-if="!set.dropTarget" href="#!/admin/sets/{{set.id}}">{{set.title}} ({{set.challenges.length}})</a>
+                </li>
+                <li>
+                    <a href="#!/admin/challenge/new"><span  class="glyphicon glyphicon-plus"></span> New Challenge</a>
                 </li>
             </ul>
         </div>
@@ -22,7 +17,7 @@
                     <span as-sortable-item-handle class="glyphicon glyphicon-menu-hamburger"></span>
                     {{challenge.title}}
                     <a href="#!/admin/challenge/{{challenge.id}}" class="pull-right glyphicon glyphicon-edit" title="Edit"></a>
-                    <a href="#!/admin/challenge/{{challenge.id}}" class="pull-right glyphicon glyphicon-remove" title="Remove from Set"></a>
+                    <a href="" ng-if="activeSet.id" ng-click="removeFromSet(challenge)" class="pull-right glyphicon glyphicon-remove" title="Remove from Set"></a>
                 </div>
             </div>
         </div>
