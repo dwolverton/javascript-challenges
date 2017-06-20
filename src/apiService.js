@@ -122,6 +122,51 @@ angular.module("jsExercises")
                 url: API_URL + "/sets/" + encodeURIComponent(setId),
                 headers: { "X-Auth-Token": userService.getAuthToken() }
             });
+        },
+        getGroups: function() {
+            return $http({
+                method: "get",
+                url: API_URL + "/groups",
+                headers: { "X-Auth-Token": userService.getAuthToken() }
+            }).then(function(response) {
+                return response.data;
+            });
+        },
+        getGroup: function(groupId) {
+            return $http({
+                method: "get",
+                url: API_URL + "/groups/" + encodeURIComponent(groupId),
+                headers: { "X-Auth-Token": userService.getAuthToken() }
+            }).then(function(response) {
+                return response.data;
+            });
+        },
+        addGroup: function(group) {
+            return $http({
+                method: "post",
+                url: API_URL + "/groups",
+                headers: { "X-Auth-Token": userService.getAuthToken() },
+                data: group
+            }).then(function(response) {
+                return response.data;
+            });
+        },
+        updateGroup: function(group) {
+            return $http({
+                method: "put",
+                url: API_URL + "/groups/" + encodeURIComponent(group.id),
+                headers: { "X-Auth-Token": userService.getAuthToken() },
+                data: group
+            }).then(function(response) {
+                return response.data;
+            });
+        },
+        removeGroup: function(groupId) {
+            return $http({
+                method: "delete",
+                url: API_URL + "/groups/" + encodeURIComponent(groupId),
+                headers: { "X-Auth-Token": userService.getAuthToken() }
+            });
         }
     };
     return apiService;

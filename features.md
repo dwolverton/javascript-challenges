@@ -27,8 +27,11 @@
 * ~~Hold onto session during refresh.~~
 * ~~Deploy~~
 * ~~UI For associating challenges with sets.~~
+* back link at top of edit challenge
+* increase size of description box in edit challenge
 * reporting
 * save progress
+* link to play a set from admin screen
 * associate sets with students / groups of students
 * view solution (disable easy copy-paste)
 * if error line number is in eval expression, don't show line number

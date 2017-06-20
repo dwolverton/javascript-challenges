@@ -1,0 +1,10 @@
+<div class="list-groups">
+    <h3>User Groups</h3>
+    <ul>
+        <li ng-repeat="group in groups | orderBy:'name'">
+            {{group.name}}
+            <a href="#!/admin/groups/{{group.id}}" class="glyphicon glyphicon-edit" title="Edit"></a>
+        </li>
+    </ul>
+    <button type="button" class="btn btn-default" ng-click="addGroup()"><span class="glyphicon glyphicon-plus"></span> Add Group</button>
+</div>

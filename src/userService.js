@@ -39,7 +39,6 @@ angular.module("jsExercises")
             location.reload();
         },
         enforceAdmin: function() {
-            console.log('hi');
             if (this.isAdmin()) {
                 return true;
             } else {

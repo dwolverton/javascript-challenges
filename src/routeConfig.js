@@ -13,13 +13,13 @@ angular.module("jsExercises")
         redirectTo: "/admin/sets"
     }).when("/admin/sets", {
         controller: "adminSetsController",
-        templateUrl: "templates/edit-sets"
+        templateUrl: "templates/admin/edit-sets"
     }).when("/admin/sets/:setId", {
         controller: "adminSetsController",
-        templateUrl: "templates/edit-sets"
+        templateUrl: "templates/admin/edit-sets"
     }).when("/admin/challenge/new", {
         controller: "adminChallengeController",
-        templateUrl: "templates/edit-challenge.html",
+        templateUrl: "templates/admin/edit-challenge.html",
         resolve: {
           challenge: function() {
             return { testCases: [] };
@@ -33,6 +33,12 @@ angular.module("jsExercises")
             return apiService.getChallenge($route.current.params.challengeId);
           }
         }
+    }).when("/admin/groups", {
+        controller: "adminGroupsController",
+        templateUrl: "templates/admin/list-groups.html"
+    }).when("/admin/groups/:groupId", {
+        controller: "adminGroupController",
+        templateUrl: "templates/admin/edit-group.html"
     }).otherwise({
         redirectTo: "/sets"
     });
