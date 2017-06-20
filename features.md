@@ -27,8 +27,8 @@
 * ~~Hold onto session during refresh.~~
 * ~~Deploy~~
 * ~~UI For associating challenges with sets.~~
-* back link at top of edit challenge
-* increase size of description box in edit challenge
+* ~~associate users with groups~~
+  * ~~preallocate users before they log in~~
 * reporting
 * save progress
 * link to play a set from admin screen

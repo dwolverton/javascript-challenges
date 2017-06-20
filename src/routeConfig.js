@@ -27,7 +27,7 @@ angular.module("jsExercises")
         }
     }).when("/admin/challenge/:challengeId", {
         controller: "adminChallengeController",
-        templateUrl: "templates/edit-challenge.html",
+        templateUrl: "templates/admin/edit-challenge.html",
         resolve: {
           challenge: function(apiService, $route) {
             return apiService.getChallenge($route.current.params.challengeId);

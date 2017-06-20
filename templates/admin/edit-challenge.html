@@ -1,13 +1,14 @@
 <div class="edit-challenge">
   <a href="#!/admin/sets">&lt; Back to Sets List</a>
-  <form>
+  <h3>Challenge: {{challenge.title}}</h3>
+  <form name="challengeForm">
     <div class="form-group">
       <label for="title">Title:</label>
       <input type="text" class="form-control" ng-model="challenge.title" id="title">
     </div>
     <div class="form-group">
       <label for="description">Description (HTML):</label>
-      <textarea class="form-control" ng-model="challenge.description" id="description"></textarea>
+      <textarea rows="5" class="form-control" ng-model="challenge.description" id="description"></textarea>
     </div>
     <div class="form-group">
       <label for="starterCode">Starter Code:</label>
@@ -51,7 +52,7 @@
     <div class="form-group">
         <button type="button" class="btn btn-primary" ng-click="preview()" ng-disabled="readyToSave">Preview</button>
         <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="!readyToSave">Save</button>
-        <a href="#!/admin/sets" class="btn btn-default">{{readyToSave ? 'Abandon Changes' : 'Done'}}</a>
+        <a href="#!/admin/sets" class="btn btn-default">{{readyToSave || challengeForm.$dirty ? 'Abandon Changes' : 'Done'}}</a>
     </div>
   </form>
 
