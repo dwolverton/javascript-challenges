@@ -18,7 +18,13 @@ module.exports = function(config) {
       'node_modules/angular/angular.min.js',
       'node_modules/angular-route/angular-route.min.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      'src/*.js',
+      'node_modules/angular-bootstrap/ui-bootstrap.min.js',
+      'lib/codemirror.js',
+      'lib/codemirror-mode-javascript.js',
+      'lib/ui-codemirror.js',
+      'lib/ng-sortable.min.js',
+      'src/app.js',
+      'src/**/*.js',
       'tests/*.js'
     ],
 
