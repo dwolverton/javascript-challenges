@@ -1,11 +1,13 @@
 angular.module("jsExercises")
-.controller("adminGroupController", function($scope, $rootScope, userService, apiService, $routeParams, $location) {
+.controller("adminGroupController", function($scope, $rootScope, userService, apiService, $routeParams, $location, parseMembers) {
     if (!userService.enforceAdmin()) {
         return;
     }
     $rootScope.openSidebar = false;
+    var groupId = parseInt($routeParams.groupId);
 
-    apiService.getGroup(parseInt($routeParams.groupId)).then(function(group) {
+    // -- Group Details --
+    apiService.getGroup(groupId).then(function(group) {
         $scope.group = group;
     });
 
@@ -19,5 +21,23 @@ angular.module("jsExercises")
 
     function goBack() {
         $location.path("/admin/groups");
+    }
+
+    // -- Members --
+    function refreshMembers() {
+        apiService.getGroupMembers(groupId).then(function(members) {
+            $scope.members = members;
+        });
+    }
+    refreshMembers();
+
+    $scope.addMembers = function(inputString) {
+        var newMembers = parseMembers(inputString);
+        apiService.addGroupMembers(groupId, newMembers).then(refreshMembers);
+        $scope.membersToAdd = "";
+    }
+
+    $scope.removeMember = function(member) {
+        apiService.removeGroupMember(groupId, member.id).then(refreshMembers);
     }
 });

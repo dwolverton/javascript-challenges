@@ -263,3 +263,11 @@ div.console p.level-error {
 .panel-heading--collapsible {
     cursor: pointer;
 }
+
+.user-table__cell--active .glyphicon {
+    color: green;
+}
+
+.user-table__cell--inactive .glyphicon {
+    color: red;
+}

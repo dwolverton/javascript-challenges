@@ -78,7 +78,7 @@ describe("testService", function() {
         testService.runTestCase(mock.challenge.testCases[0], mock.openBracketCode).then(function(result) {
             delete result.console;
             expect(result).toEqual({
-                error: { message: "SyntaxError: Unexpected token ')'", lineNumber: 3 },
+                error: { message: "SyntaxError: Unexpected token ')'", lineNumber: 5 },
                 status: "error"
             });
             done();
@@ -89,7 +89,7 @@ describe("testService", function() {
         testService.runTestCase(mock.challenge.testCases[0], mock.missingFunctionCode).then(function(result) {
             delete result.console;
             expect(result).toEqual({
-                error: { message: "ReferenceError: Can't find variable: add", lineNumber: 2 },
+                error: { message: "ReferenceError: Can't find variable: add", lineNumber: 4 },
                 status: "error"
             });
             done();
@@ -240,7 +240,10 @@ describe("testService", function() {
                 expressionResult: mock.challenge.testCases[2].result,
                 console: [],
                 status: "pass"
-            }}]);
+            }},
+            { case: { lint: true, expressionDisplay: 'Code Quality Check' }, result: {
+                status: 'pass'
+            }} ]);
             done();
         });
     });

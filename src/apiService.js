@@ -79,13 +79,15 @@ angular.module("jsExercises")
               return response.data;
           });
         },
-        addChallengeToSet(setId, challengeId, insertBeforeChallengeId) {
+        addChallengeToSet: function(setId, challengeId, insertBeforeChallengeId) {
             return $http({
                 method: "post",
                 url: API_URL + "/sets/" + encodeURIComponent(setId) + "/challenges",
                 headers: { "X-Auth-Token": userService.getAuthToken() },
                 data: {
-                    setId, challengeId, insertBeforeChallengeId
+                    setId: setId,
+                    challengeId: challengeId,
+                    insertBeforeChallengeId: insertBeforeChallengeId
                 }
             });
         },
@@ -165,6 +167,30 @@ angular.module("jsExercises")
             return $http({
                 method: "delete",
                 url: API_URL + "/groups/" + encodeURIComponent(groupId),
+                headers: { "X-Auth-Token": userService.getAuthToken() }
+            });
+        },
+        getGroupMembers: function(groupId) {
+            return $http({
+                method: "get",
+                url: API_URL + "/groups/" + encodeURIComponent(groupId) + "/members",
+                headers: { "X-Auth-Token": userService.getAuthToken() }
+            }).then(function(response) {
+                return response.data;
+            });
+        },
+        addGroupMembers: function(groupId, members) {
+            return $http({
+                method: "post",
+                url: API_URL + "/groups/" + encodeURIComponent(groupId) + "/members",
+                headers: { "X-Auth-Token": userService.getAuthToken() },
+                data: members
+            });
+        },
+        removeGroupMember: function(groupId, memberId) {
+            return $http({
+                method: "delete",
+                url: API_URL + "/groups/" + encodeURIComponent(groupId) + "/members/" + encodeURIComponent(memberId),
                 headers: { "X-Auth-Token": userService.getAuthToken() }
             });
         }

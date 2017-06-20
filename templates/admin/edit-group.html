@@ -20,23 +20,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="user-table__cell user-table__cell--active">Yes</td>
-                <td class="user-table__cell">Bob Loblaw</td>
-                <td class="user-table__cell">bob@bobslawblog <a href="" class="glyphicon glyphicon-remove pull-right" title="Remove"></a></td>
-            </tr>
-            <tr>
-                <td class="user-table__cell user-table__cell--inactive">No</td>
-                <td class="user-table__cell">Bob Loblaw</td>
-                <td class="user-table__cell">bob@bobslawblog <a href="" class="glyphicon glyphicon-remove pull-right" title="Remove"></a></td>
+            <tr ng-repeat="member in members | orderBy:'name'">
+                <td ng-if="member.active" class="user-table__cell user-table__cell--active"><span class="glyphicon glyphicon-ok-sign"></span> Yes</td>
+                <td ng-if="!member.active" class="user-table__cell user-table__cell--inactive"><span class="glyphicon glyphicon-minus-sign"></span> No</td>
+                <td class="user-table__cell">{{member.name}}</td>
+                <td class="user-table__cell">{{member.email}} <a href="" ng-click="removeMember(member)" class="glyphicon glyphicon-remove pull-right" title="Remove"></a></td>
             </tr>
         </tbody>
     </table>
 
-    <form class="well">
+    <form class="well" ng-submit="addMembers(membersToAdd)">
         <div class="form-group">
-          <label for="membersToAdd">Names &amp; Emails to Add</label>
-          <textarea type="text" class="form-control" ng-model="membersToAdd" id="membersToAdd" placeholder="comma- or semicolon- separated: e.g. bob@lawblog.com, or &quot;Bob Loblaw&quot; <bob@lawblog.com>"></textarea>
+          <label for="membersToAdd">Names &amp; Emails to add</label>
+          <textarea type="text" ng-model="membersToAdd" class="form-control" ng-model="membersToAdd" id="membersToAdd" placeholder="comma- or semicolon- separated: e.g. bob@lawblog.com, or &quot;Bob Loblaw&quot; <bob@lawblog.com>"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Add Members</button>
     </form>

@@ -16,15 +16,11 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'node_modules/angular/angular.min.js',
-      'node_modules/angular-route/angular-route.min.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      'node_modules/angular-bootstrap/ui-bootstrap.min.js',
-      'lib/codemirror.js',
-      'lib/codemirror-mode-javascript.js',
-      'lib/ui-codemirror.js',
-      'lib/ng-sortable.min.js',
-      'src/app.js',
-      'src/**/*.js',
+      'lib/jshint.js',
+      'tests/test-app.js',
+      'src/testService.js',
+      'src/admin/utils.js',
       'tests/*.js'
     ],
 

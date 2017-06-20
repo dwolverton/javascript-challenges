@@ -10,8 +10,8 @@ angular.module("jsExercises")
   var setId = Number($routeParams.setId);
 
   function refresh() {
-      challengeService.getChallengesGroupedBySet().then(sets => {
-          var uncategorized = sets.find(set => set.id === null);
+      challengeService.getChallengesGroupedBySet().then(function(sets) {
+          var uncategorized = sets.find(function(set) { return set.id === null; });
           if (uncategorized) {
                // it always comes sorted to the end. remove so we can add to beginning
               sets.pop();
@@ -24,7 +24,7 @@ angular.module("jsExercises")
           $scope.sets = sets;
 
           if (setId) {
-              $scope.activeSet = sets.find(set => set.id === setId);
+              $scope.activeSet = sets.find(function(set) { return set.id === setId; });
           }
           if (!$scope.activeSet) {
               $scope.activeSet = uncategorized;
@@ -32,7 +32,7 @@ angular.module("jsExercises")
           }
           $scope.activeSet.active = true;
 
-          sets.forEach(set => {
+          sets.forEach(function(set) {
               set.dropTarget = !set.active && set !== uncategorized;
           });
 
