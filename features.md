@@ -30,6 +30,7 @@
 * ~~associate users with groups~~
   * ~~preallocate users before they log in~~
 * reporting
+* UI while waiting for initial API call
 * save progress
 * link to play a set from admin screen
 * associate sets with students / groups of students

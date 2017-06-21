@@ -32,6 +32,7 @@
         <script src="src/admin/adminChallengeController.js" charset="utf-8"></script>
         <script src="src/admin/adminGroupsController.js" charset="utf-8"></script>
         <script src="src/admin/adminGroupController.js" charset="utf-8"></script>
+        <script src="src/admin/viewSubmissionsController.js" charset="utf-8"></script>
         <script src="src/admin/utils.js" charset="utf-8"></script>
 
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/idea.min.css">
@@ -40,7 +41,7 @@
         <link rel="stylesheet" href="lib/ng-sortable.min.css">
         <link rel="stylesheet" href="lib/ng-sortable.style.min.css">
     </head>
-    <body ng-app="jsExercises" ng-class="{'open-sidebar': openSidebar}">
+    <body ng-app="jsExercises" ng-class="{'open-sidebar': sidebar.keepOpen}">
         <div ng-controller="challengeListController" class="challenge-list">
             <nav>
                 <a href="#!/sets">Choose Set</a>

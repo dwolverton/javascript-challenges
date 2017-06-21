@@ -1,9 +1,9 @@
 angular.module("jsExercises")
-.controller("adminGroupController", function($scope, $rootScope, userService, apiService, $routeParams, $location, parseMembers) {
-    if (!userService.enforceAdmin()) {
+.controller("adminGroupController", function($scope, apiService, $routeParams, $location, parseMembers) {
+    if (!$scope.enforceAdmin()) {
         return;
     }
-    $rootScope.openSidebar = false;
+    $scope.sidebar.keepOpen = false;
     var groupId = parseInt($routeParams.groupId);
 
     // -- Group Details --

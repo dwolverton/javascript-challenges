@@ -39,6 +39,9 @@ angular.module("jsExercises")
     }).when("/admin/groups/:groupId", {
         controller: "adminGroupController",
         templateUrl: "templates/admin/edit-group.html"
+    }).when("/admin/submissions", {
+        controller: "viewSubmissionsController",
+        templateUrl: "templates/admin/view-submissions.html"
     }).otherwise({
         redirectTo: "/sets"
     });

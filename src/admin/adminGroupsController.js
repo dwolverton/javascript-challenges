@@ -1,9 +1,9 @@
 angular.module("jsExercises")
-.controller("adminGroupsController", function($scope, $rootScope, userService, apiService, $location) {
-    if (!userService.enforceAdmin()) {
+.controller("adminGroupsController", function($scope, apiService, $location) {
+    if (!$scope.enforceAdmin()) {
         return;
     }
-    $rootScope.openSidebar = false;
+    $scope.sidebar.keepOpen = false;
 
     function refresh() {
         apiService.getGroups().then(function(groups) {

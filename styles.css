@@ -271,3 +271,21 @@ div.console p.level-error {
 .user-table__cell--inactive .glyphicon {
     color: red;
 }
+
+
+.submission-report__table__count {
+    padding: 1px 5px;
+    border-radius: 2px;
+}
+
+.submission-report__table__count--done {
+    color: white;
+    background-color: green;
+    cursor: pointer;
+}
+
+.submission-report__table__count--visited {
+    color: white;
+    background-color: gray;
+    cursor: pointer;
+}

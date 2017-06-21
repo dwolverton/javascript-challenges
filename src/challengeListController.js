@@ -3,7 +3,7 @@
 var lastChallengeStatuses = {};
 
 angular.module("jsExercises")
-.controller("challengeListController", function($scope, $rootScope, $routeParams, challengeService, userService) {
+.controller("challengeListController", function($scope, $routeParams, challengeService, userService) {
     $scope.$on("$routeChangeSuccess", loadChallenges);
     $scope.$on("submitSuccess", loadChallengeStatuses);
 
