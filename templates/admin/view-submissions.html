@@ -4,7 +4,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Group</label>
                 <div class="col-sm-10">
-                    <select class="form-control">
+                    <select class="form-control" ng-model="groupId">
                         <option>-- Select One --</option>
                         <option ng-repeat="group in groups | orderBy:'name'" value="{{group.id}}">{{group.name}}</option>
                     </select>
@@ -13,7 +13,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Set</label>
                 <div class="col-sm-10">
-                    <select class="form-control">
+                    <select class="form-control" ng-model="setId">
                         <option>-- Select One --</option>
                         <option ng-repeat="set in sets | orderBy:'title'" value="{{set.id}}">{{set.title}}</option>
                     </select>
@@ -43,26 +43,25 @@
         </div>
     </div>
 
-    <table class="table submission-report__table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>1: Loop from 0 to 4</th>
-                <th>2: Loop from 1 to 5</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th>David Wolverton</th>
-                <td class="submission-report__table__cell"><span class="submission-report__table__count submission-report__table__count--done">2</span></td>
-                <td class="submission-report__table__cell"><span class="submission-report__table__count submission-report__table__count--unvisited">0</span></td>
-            </tr>
-            <tr>
-                <th>Grant Chirpus</th>
-                <td class="submission-report__table__cell"><span class="submission-report__table__count submission-report__table__count--visited">0</span></td>
-                <td class="submission-report__table__cell"><span class="submission-report__table__count submission-report__table__count--unvisited">0</span></td>
-            </tr>
-        </tbody>
-    </table>
+    <div ng-switch="report">
+        <p ng-switch-when="pending">Select a Group and Set above.</p>
+        <p ng-switch-when="loading">Loading...</p>
+        <table ng-switch-default class="table submission-report__table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th ng-repeat="challenge in report.challenges">{{$index + 1}}: {{challenge.title}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="userSubmission in report.userSubmissions | orderBy:'user.name'">
+                    <th>{{userSubmission.user.name}}</th>
+                    <td ng-repeat="userChallenge in userSubmission.submissions" class="submission-report__table__cell">
+                        <span class="submission-report__table__count" ng-class="{'submission-report__table__count--done': userChallenge.passCount, 'submission-report__table__count--visited': userChallenge.failCount &amp;&amp; !userChallenge.passCount, 'submission-report__table__count--unvisited': !userChallenge.submissions.length}">{{userChallenge.passCount}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 </div>

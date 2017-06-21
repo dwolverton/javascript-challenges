@@ -5,195 +5,120 @@ angular.module("jsExercises")
 
     var apiService = {
         getSets: function() {
-            return $http({
-                url: API_URL + "/sets",
-                headers: { "X-Auth-Token": userService.getAuthToken() }
-            }).then(function(response) {
-                return response.data;
-            });
+            return get("/sets");
         },
         getSet: function(setKey) {
-            return $http({
-                url: API_URL + "/sets/" + encodeURIComponent(setKey),
-                headers: { "X-Auth-Token": userService.getAuthToken() }
-            }).then(function(response) {
-                return response.data;
-            });
+            return get("/sets/" + encodeURIComponent(setKey));
         },
         getChallengesGroupedBySet: function() {
-            return $http({
-                url: API_URL + "/challenges/by-set",
-                headers: { "X-Auth-Token": userService.getAuthToken() }
-            }).then(function(response) {
-                return response.data;
-            });
+            return get("/challenges/by-set");
         },
         getChallenge: function(challengeId) {
-            return $http({
-                url: API_URL + "/challenges/" + encodeURIComponent(challengeId),
-                headers: { "X-Auth-Token": userService.getAuthToken() }
-            }).then(function(response) {
-                return response.data;
-            });
+            return get("/challenges/" + encodeURIComponent(challengeId));
         },
         saveChallenge: function(challenge) {
             if (challenge.id) {
-                return $http({
-                    method: "PUT",
-                    url: API_URL + "/challenges/" + encodeURIComponent(challenge.id),
-                    data: challenge,
-                    headers: { "X-Auth-Token": userService.getAuthToken() }
-                }).then(function(response) {
-                    return response.data;
-                });
+                return put("/challenges/" + encodeURIComponent(challenge.id), challenge);
             } else {
-                return $http({
-                    method: "POST",
-                    url: API_URL + "/challenges",
-                    data: challenge,
-                    headers: { "X-Auth-Token": userService.getAuthToken() }
-                }).then(function(response) {
-                    return response.data;
-                });
+                return post("/challenges", challenge);
             }
         },
         addSubmission: function(submission) {
-            return $http({
-                method: "post",
-                url: API_URL + "/submissions",
-                headers: { "X-Auth-Token": userService.getAuthToken() },
-                data: submission
-            }).then(function(response) {
-                return response.data;
-            });
+            return post("/submissions", submission);
         },
         /**
          * Returns a map of challenge ID to status: done or visited. unvisited
          * Items are absent from the map.
          */
         getUserSubmissionStatusesForSet: function(setKey) {
-          return $http({
-              url: API_URL + "/sets/" + encodeURIComponent(setKey) + "/my-submission-statuses",
-              headers: { "X-Auth-Token": userService.getAuthToken() }
-          }).then(function(response) {
-              return response.data;
-          });
+          return get("/sets/" + encodeURIComponent(setKey) + "/my-submission-statuses");
         },
         addChallengeToSet: function(setId, challengeId, insertBeforeChallengeId) {
-            return $http({
-                method: "post",
-                url: API_URL + "/sets/" + encodeURIComponent(setId) + "/challenges",
-                headers: { "X-Auth-Token": userService.getAuthToken() },
-                data: {
-                    setId: setId,
-                    challengeId: challengeId,
-                    insertBeforeChallengeId: insertBeforeChallengeId
-                }
+            return post("/sets/" + encodeURIComponent(setId) + "/challenges", {
+                setId: setId,
+                challengeId: challengeId,
+                insertBeforeChallengeId: insertBeforeChallengeId
             });
         },
         removeChallengeFromSet: function(setId, challengeId) {
-            return $http({
-                method: "delete",
-                url: API_URL + "/sets/" + encodeURIComponent(setId) + "/challenges/" + encodeURIComponent(challengeId),
-                headers: { "X-Auth-Token": userService.getAuthToken() }
-            });
+            return del("/sets/" + encodeURIComponent(setId) + "/challenges/" + encodeURIComponent(challengeId));
         },
         addSet: function(set) {
-            return $http({
-                method: "post",
-                url: API_URL + "/sets",
-                headers: { "X-Auth-Token": userService.getAuthToken() },
-                data: set
-            }).then(function(response) {
-                return response.data;
-            });
+            return post("/sets", set);
         },
         updateSet: function(set) {
-            return $http({
-                method: "put",
-                url: API_URL + "/sets/" + encodeURIComponent(set.id),
-                headers: { "X-Auth-Token": userService.getAuthToken() },
-                data: set
-            }).then(function(response) {
-                return response.data;
-            });
+            return put("/sets/" + encodeURIComponent(set.id), set);
         },
         removeSet: function(setId) {
-            return $http({
-                method: "delete",
-                url: API_URL + "/sets/" + encodeURIComponent(setId),
-                headers: { "X-Auth-Token": userService.getAuthToken() }
-            });
+            return del("/sets/" + encodeURIComponent(setId));
         },
         getGroups: function() {
-            return $http({
-                method: "get",
-                url: API_URL + "/groups",
-                headers: { "X-Auth-Token": userService.getAuthToken() }
-            }).then(function(response) {
-                return response.data;
-            });
+            return get("/groups");
         },
         getGroup: function(groupId) {
-            return $http({
-                method: "get",
-                url: API_URL + "/groups/" + encodeURIComponent(groupId),
-                headers: { "X-Auth-Token": userService.getAuthToken() }
-            }).then(function(response) {
-                return response.data;
-            });
+            return get("/groups/" + encodeURIComponent(groupId));
         },
         addGroup: function(group) {
-            return $http({
-                method: "post",
-                url: API_URL + "/groups",
-                headers: { "X-Auth-Token": userService.getAuthToken() },
-                data: group
-            }).then(function(response) {
-                return response.data;
-            });
+            return post("/groups", group);
         },
         updateGroup: function(group) {
-            return $http({
-                method: "put",
-                url: API_URL + "/groups/" + encodeURIComponent(group.id),
-                headers: { "X-Auth-Token": userService.getAuthToken() },
-                data: group
-            }).then(function(response) {
-                return response.data;
-            });
+            return put("/groups/" + encodeURIComponent(group.id), group);
         },
         removeGroup: function(groupId) {
-            return $http({
-                method: "delete",
-                url: API_URL + "/groups/" + encodeURIComponent(groupId),
-                headers: { "X-Auth-Token": userService.getAuthToken() }
-            });
+            return del("/groups/" + encodeURIComponent(groupId));
         },
         getGroupMembers: function(groupId) {
-            return $http({
-                method: "get",
-                url: API_URL + "/groups/" + encodeURIComponent(groupId) + "/members",
-                headers: { "X-Auth-Token": userService.getAuthToken() }
-            }).then(function(response) {
-                return response.data;
-            });
+            return get("/groups/" + encodeURIComponent(groupId) + "/members")
         },
         addGroupMembers: function(groupId, members) {
-            return $http({
-                method: "post",
-                url: API_URL + "/groups/" + encodeURIComponent(groupId) + "/members",
-                headers: { "X-Auth-Token": userService.getAuthToken() },
-                data: members
-            });
+            return post("/groups/" + encodeURIComponent(groupId) + "/members", members);
         },
         removeGroupMember: function(groupId, memberId) {
-            return $http({
-                method: "delete",
-                url: API_URL + "/groups/" + encodeURIComponent(groupId) + "/members/" + encodeURIComponent(memberId),
-                headers: { "X-Auth-Token": userService.getAuthToken() }
-            });
+            return del("/groups/" + encodeURIComponent(groupId) + "/members/" + encodeURIComponent(memberId));
+        },
+        getSubmissionsReport: function(groupId, setId) {
+            return get("/reports/submissions", { groupId: groupId, setId: setId });
         }
     };
+
+    function get(url, params) {
+        return $http({
+            method: "get",
+            url: API_URL + url,
+            headers: { "X-Auth-Token": userService.getAuthToken() },
+            params: params
+        }).then(responseData);
+    }
+
+    function post(url, data) {
+        return $http({
+            method: "post",
+            url: API_URL + url,
+            headers: { "X-Auth-Token": userService.getAuthToken() },
+            data: data
+        }).then(responseData);
+    }
+
+    function put(url, data) {
+        return $http({
+            method: "put",
+            url: API_URL + url,
+            headers: { "X-Auth-Token": userService.getAuthToken() },
+            data: data
+        }).then(responseData);
+    }
+
+    function del(url) {
+        return $http({
+            method: "delete",
+            url: API_URL + url,
+            headers: { "X-Auth-Token": userService.getAuthToken() }
+        });
+    }
+
+    function responseData(response) {
+        return response.data;
+    }
+
     return apiService;
 });
