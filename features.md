@@ -26,19 +26,22 @@
 * ~~UI For adding challenges. (admin users only)~~
 * ~~Hold onto session during refresh.~~
 * ~~Deploy~~
+* ~~reset code~~
 * ~~UI For associating challenges with sets.~~
 * ~~associate users with groups~~
   * ~~preallocate users before they log in~~
-* reporting
-  * view individual submissions
+* ~~reporting~~
+  * ~~view individual submissions~~
   * limit report to start and end date/time
+  * (improve styling for code submissions)
 * UI while waiting for initial API call
-* save progress
-* link to play a set from admin screen
 * associate sets with students / groups of students
+* save progress
+* show status for challenges based on a 'reset' date
+* link to play a set from admin screen
 * view solution (disable easy copy-paste)
 * if error line number is in eval expression, don't show line number
-* reset code
+* update a user's name
 * View console for non-console test cases
 * pass functions back as toString to avoid DataCloneError
 * auto-run and run on click options
