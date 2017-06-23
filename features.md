@@ -30,6 +30,8 @@
 * ~~associate users with groups~~
   * ~~preallocate users before they log in~~
 * reporting
+  * view individual submissions
+  * limit report to start and end date/time
 * UI while waiting for initial API call
 * save progress
 * link to play a set from admin screen

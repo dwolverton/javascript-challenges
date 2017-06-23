@@ -1,9 +1,6 @@
 angular.module("jsExercises")
 .controller("adminChallengeController", function($scope, $location, challenge, testService, apiService) {
-  if (!$scope.enforceAdmin()) {
-      return;
-  }
-  $scope.sidebar.keepOpen = false;
+  $scope.initAdminController();
   $scope.challenge = challenge;
   addTestTypes();
   $scope.readyToSave = false;

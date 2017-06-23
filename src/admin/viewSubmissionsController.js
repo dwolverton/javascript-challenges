@@ -1,9 +1,6 @@
 angular.module('jsExercises')
 .controller('viewSubmissionsController', function($scope, apiService) {
-    if (!$scope.enforceAdmin()) {
-        return;
-    }
-    $scope.sidebar.keepOpen = false;
+    $scope.initAdminController();
 
     apiService.getGroups().then(function(groups) {
         $scope.groups = groups;

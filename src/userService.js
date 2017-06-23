@@ -39,11 +39,9 @@ angular.module("jsExercises")
             location.reload();
         },
         enforceAdmin: function() {
-            if (this.isAdmin()) {
-                return true;
-            } else {
+            if (!this.isAdmin()) {
                 location.hash = "#!/";
-                return false;
+                throw 'access denied to this route';
             }
         }
     }

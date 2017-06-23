@@ -8,14 +8,17 @@ angular.module("jsExercises", ["ngRoute", "ui.bootstrap", "ui.codemirror", "as.s
         keepOpen: false
     };
     $rootScope.enforceAdmin = function() {
-        return userService.enforceAdmin();
+        userService.enforceAdmin();
     }
-})
-.controller("setsController", function($scope, challengeService) {
-    $scope.sidebar.keepOpen = false;
-    challengeService.getSets().then(function(sets) {
-        $scope.sets = sets;
-    });
+    $rootScope.initController = function() {
+        $rootScope.sidebar.keepOpen = false;
+        $rootScope.sidebar.type = 'challenges';
+    }
+    $rootScope.initAdminController = function() {
+        userService.enforceAdmin();
+        $rootScope.sidebar.keepOpen = false;
+        $rootScope.sidebar.type = 'adminNav';
+    }
 })
 .filter('highlightjs', function($sce) {
   return function(input) {

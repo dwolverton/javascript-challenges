@@ -1,6 +1,6 @@
 angular.module("jsExercises")
 .controller("challengeController", function($scope, $routeParams, $sce, challengeService, testService, serialize) {
-    $scope.sidebar.keepOpen = false;
+    $scope.initController();
     $scope.isSubmitEnabled = $scope.isResetEnabled = function() { return false };
 
     challengeService.getChallenge($routeParams.challengeSetKey, $routeParams.challengeNumber).then(function(challenge) {

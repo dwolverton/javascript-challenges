@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-route.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
         <script src="lib/codemirror.js"></script>
         <script src="lib/codemirror-mode-javascript.js"></script>
         <script src="lib/ui-codemirror.js"></script>
@@ -19,6 +19,7 @@
         <script src="lib/ng-sortable.min.js"></script>
         <script src="src/app.js" charset="utf-8"></script>
         <script src="src/challengeController.js" charset="utf-8"></script>
+        <script src="src/setsController.js" charset="utf-8"></script>
         <script src="src/challengeListController.js" charset="utf-8"></script>
         <script src="src/routeConfig.js" charset="utf-8"></script>
         <script src="src/challengeService.js" charset="utf-8"></script>
@@ -50,13 +51,18 @@
                 <a ng-if="isLoggedIn" href="#" ng-click="logOut()">Sign Out</a>
             </nav>
             <h3>{{setTitle}}</h3>
-            <p ng-repeat="challenge in challenges" ng-class="{ current: challenge.current }" class="{{'status-' + challenge.getStatus()}}">
+            <p ng-if="sidebar.type === 'challenges'" ng-repeat="challenge in challenges" ng-class="{ current: challenge.current }" class="{{'status-' + challenge.getStatus()}}">
                 <a ng-href="#!/c/{{challengeSetKey}}/{{$index + 1}}">
                     <span class="status-indicator"></span>
                     <span class="number">{{$index + 1}}.</span>
                     <span class="title">{{challenge.challenge.title}}</span>
                 </a>
             </p>
+            <div ng-if="sidebar.type === 'adminNav'" class="adminNav">
+                <p><a href="#!/admin/sets">Sets &amp; Challenges</a></p>
+                <p><a href="#!/admin/submissions">Submissions</a></p>
+                <p><a href="#!/admin/groups">User Groups</a></p>
+            </div>
         </div>
 
         <div class="wrapper">
