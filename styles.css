@@ -313,3 +313,14 @@ div.console p.level-error {
 .submission-report__tooltip li:last-child {
     margin-bottom: 0;
 }
+
+.submission-report__tooltip .tooltip-inner {
+    max-width: 400px;
+}
+
+pre.view-submissions__tooltip__code {
+    background-color: white;
+    margin: 0;
+    text-align: left;
+    width: 380px;
+}

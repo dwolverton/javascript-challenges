@@ -36,6 +36,7 @@
   * (improve styling for code submissions)
 * UI while waiting for initial API call
 * associate sets with students / groups of students
+* export challenges as JSON
 * save progress
 * show status for challenges based on a 'reset' date
 * link to play a set from admin screen
@@ -45,4 +46,4 @@
 * View console for non-console test cases
 * pass functions back as toString to avoid DataCloneError
 * auto-run and run on click options
-* ability to define your own challenges and/or test cases
+* Java

@@ -1,6 +1,9 @@
 <div class="submission-report__tooltip">
+    <script type="text/ng-template" id="view-submissions__tooltip__code.html">
+        <pre class="view-submissions__tooltip__code"><code class="js hljs javascript" ng-bind-html="submission.code | highlightjs"></code></pre>
+    </script>
     <ol>
-        <li ng-repeat="submission in userChallenge.submissions" uib-tooltip-html="submission.code | highlightjs">
+        <li ng-repeat="submission in userChallenge.submissions" uib-tooltip-template="'view-submissions__tooltip__code.html'" tooltip-position="'top'">
             {{submission.timestamp | date:'EEE, MMM d, yy h:mm a'}}
             <status-badge status="submission.status"></status-badge>
         </li>

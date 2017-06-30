@@ -57,7 +57,7 @@
                 <tr ng-repeat="userSubmission in report.userSubmissions | orderBy:'user.name'">
                     <th>{{userSubmission.user.name}}</th>
                     <td ng-repeat="userChallenge in userSubmission.submissions" class="submission-report__table__cell">
-                        <a ng-if="userChallenge.submissions.length" href="" class="submission-report__table__count" ng-class="{'submission-report__table__count--done': userChallenge.passCount, 'submission-report__table__count--visited': userChallenge.failCount &amp;&amp; !userChallenge.passCount}" uib-tooltip-template="'templates/admin/view-submissions__tooltip.html'" tooltip-trigger="'outsideClick'" tooltip-placement="right">{{userChallenge.passCount}}</a>
+                        <a ng-if="userChallenge.submissions.length" href="" class="submission-report__table__count" ng-class="{'submission-report__table__count--done': userChallenge.passCount, 'submission-report__table__count--visited': userChallenge.failCount &amp;&amp; !userChallenge.passCount}" uib-tooltip-template="'templates/admin/view-submissions__tooltip.html'" tooltip-trigger="'outsideClick'" tooltip-placement="{{$index > userSubmission.submissions.length / 2 ? 'left' : 'right'}}">{{userChallenge.passCount}}</a>
                         <span ng-if="!userChallenge.submissions.length" class="submission-report__table__count submission-report__table__count--unvisited">{{userChallenge.passCount}}</span>
                     </td>
                 </tr>
