@@ -1,4 +1,4 @@
-<div class="list-groups">
+<div class="edit-group">
     <a href="#!/admin/groups">&lt; Back to Groups List</a>
     <h3>Group Details</h3>
     <form ng-submit="updateGroup(group)">
@@ -9,8 +9,8 @@
         <button type="submit" class="btn btn-primary">Save</button>
         <button type="button" class="btn btn-default pull-right" ng-click="removeGroup(group)"><span class="glyphicon glyphicon-remove"></span> Delete Group</button>
     </form>
-    <h3>Members</h3>
 
+    <h3>Members</h3>
     <table class="table table-striped user-table">
         <thead>
             <tr>
@@ -36,4 +36,33 @@
         </div>
         <button type="submit" class="btn btn-primary">Add Members</button>
     </form>
+
+    <h3>Sets</h3>
+    <p class="edit-group__sets__instructions">Drag to reorder, add and remove sets.</p>
+    <div class="row edit-group__sets" style="height: 300px;">
+        <div class="col-sm-6">
+            <h4>Sets for This Group</h4>
+            <div as-sortable="setSortOptions" ng-model="sets.selected" class="edit-group__sets__list">
+                <div ng-repeat="set in sets.selected" as-sortable-item class="panel panel-default">
+                    <div as-sortable-item-handle class="panel-body">
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        {{set.title}}
+                    </div>
+                </div>
+                <div ng-if="!sets.selected.length" class="edit-group__sets__list__instuctions">Drag Here to Add</div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h4>Other Available Sets</h4>
+            <div as-sortable="availableSetSortOptions" ng-model="sets.available" class="edit-group__sets__list">
+                <div ng-repeat="set in sets.available" as-sortable-item class="panel panel-default">
+                    <div as-sortable-item-handle class="panel-body">
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        {{set.title}}
+                    </div>
+                </div>
+                <div ng-if="!sets.available.length" class="edit-group__sets__list__instuctions">Drag Here to Remove</div>
+            </div>
+        </div>
+    </div>
 </div>

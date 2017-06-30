@@ -14,7 +14,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-xs-9" as-sortable="sortOptions" ng-model="activeSet.challenges">
+        <div class="col-xs-9">
 
             <div class="panel panel-default" ng-show="activeSet.id">
                 <div class="panel-heading panel-heading--collapsible" ng-click="state.isDetailsOpen = !state.isDetailsOpen">
@@ -22,7 +22,7 @@
                     Set Details <span class="glyphicon glyphicon-edit"></span>
                   </h4>
                 </div>
-                <div iclass="panel-collapse collapse" uib-collapse="!state.isDetailsOpen">
+                <div class="panel-collapse collapse" uib-collapse="!state.isDetailsOpen">
                     <form class="panel-body" ng-submit="updateSet()">
                         <div class="form-group">
                           <label for="setKey">Key</label>
@@ -42,12 +42,14 @@
                 </div>
             </div>
 
-            <div ng-repeat="challenge in activeSet.challenges" as-sortable-item class="panel panel-default">
-                <div class="panel-body">
-                    <span as-sortable-item-handle class="glyphicon glyphicon-menu-hamburger"></span>
-                    {{challenge.title}}
-                    <a href="#!/admin/challenge/{{challenge.id}}" class="pull-right glyphicon glyphicon-edit" title="Edit"></a>
-                    <a href="" ng-if="activeSet.id" ng-click="removeFromSet(challenge)" class="pull-right glyphicon glyphicon-remove" title="Remove from Set"></a>
+            <div as-sortable="sortOptions" ng-model="activeSet.challenges">
+                <div ng-repeat="challenge in activeSet.challenges" as-sortable-item class="panel panel-default">
+                    <div class="panel-body">
+                        <span as-sortable-item-handle class="glyphicon glyphicon-menu-hamburger"></span>
+                        {{challenge.title}}
+                        <a href="#!/admin/challenge/{{challenge.id}}" class="pull-right glyphicon glyphicon-edit" title="Edit"></a>
+                        <a href="" ng-if="activeSet.id" ng-click="removeFromSet(challenge)" class="pull-right glyphicon glyphicon-remove" title="Remove from Set"></a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -37,4 +37,59 @@ angular.module("jsExercises")
     $scope.removeMember = function(member) {
         apiService.removeGroupMember(groupId, member.id).then(refreshMembers);
     }
+
+    // - Sets --
+    $scope.sets = {};
+    function refreshSets() {
+        Promise.all([
+            apiService.getSets(),
+            apiService.getGroupSets(groupId)
+        ]).then(function(values) {
+            $scope.$apply(function() {
+                var availableSets = values[0];
+                var sets = values[1];
+
+                availableSets = availableSets.filter(function(set) {
+                    return !sets.some(function(selectedSet) { return selectedSet.id === set.id });
+                });
+
+                console.log('refresh');
+                $scope.sets.selected = sets;
+                $scope.sets.available = availableSets;
+            });
+        });
+    }
+    refreshSets();
+
+    $scope.setSortOptions = {
+      accept: function (sourceItemHandleScope, destSortableScope) { console.log('set'); return true; },
+      itemMoved: function (event) { // from here
+          var setId = event.source.itemScope.set.id;
+          console.log('remove', setId);
+          apiService.removeSetFromGroup(groupId, setId).then(refreshSets);
+      },
+      orderChanged: addSetAtPosition,
+      containment: '.edit-group__sets'
+    };
+
+    $scope.availableSetSortOptions = {
+      accept: function (sourceItemHandleScope, destSortableScope) {
+          // Cannot reorder the available sets.
+          return sourceItemHandleScope.sortableScope !== destSortableScope;
+      },
+      itemMoved: addSetAtPosition, // from here
+      containment: '.edit-group__sets'
+    };
+
+    function addSetAtPosition(event) {
+        var setId = event.source.itemScope.set.id;
+        var position = event.dest.index;
+        var insertBeforeSetId = null;
+        if (position !== $scope.sets.selected.length - 1) {
+            // not at end
+            insertBeforeSetId = $scope.sets.selected[position + 1].id;
+        }
+        console.log('order', setId, insertBeforeSetId);
+        apiService.addSetToGroup(groupId, setId, insertBeforeSetId).then(refreshSets);
+    }
 });

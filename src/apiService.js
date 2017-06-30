@@ -35,7 +35,6 @@ angular.module("jsExercises")
         },
         addChallengeToSet: function(setId, challengeId, insertBeforeChallengeId) {
             return post("/sets/" + encodeURIComponent(setId) + "/challenges", {
-                setId: setId,
                 challengeId: challengeId,
                 insertBeforeChallengeId: insertBeforeChallengeId
             });
@@ -78,6 +77,18 @@ angular.module("jsExercises")
         },
         getSubmissionsReport: function(groupId, setId) {
             return get("/reports/submissions", { groupId: groupId, setId: setId });
+        },
+        getGroupSets: function(groupId) {
+            return get("/groups/" + encodeURIComponent(groupId) + "/sets")
+        },
+        addSetToGroup: function(groupId, setId, insertBeforeSetId) {
+            return post("/groups/" + encodeURIComponent(groupId) + "/sets", {
+                setId: setId,
+                insertBeforeSetId: insertBeforeSetId
+            });
+        },
+        removeSetFromGroup: function(groupId, setId) {
+            return del("/groups/" + encodeURIComponent(groupId) + "/sets/" + encodeURIComponent(setId));
         }
     };
 
@@ -87,7 +98,7 @@ angular.module("jsExercises")
             url: API_URL + url,
             headers: { "X-Auth-Token": userService.getAuthToken() },
             params: params
-        }).then(responseData);
+        }).then(returnResponseData);
     }
 
     function post(url, data) {
@@ -96,7 +107,7 @@ angular.module("jsExercises")
             url: API_URL + url,
             headers: { "X-Auth-Token": userService.getAuthToken() },
             data: data
-        }).then(responseData);
+        }).then(returnResponseData);
     }
 
     function put(url, data) {
@@ -105,7 +116,7 @@ angular.module("jsExercises")
             url: API_URL + url,
             headers: { "X-Auth-Token": userService.getAuthToken() },
             data: data
-        }).then(responseData);
+        }).then(returnResponseData);
     }
 
     function del(url) {
@@ -116,7 +127,7 @@ angular.module("jsExercises")
         });
     }
 
-    function responseData(response) {
+    function returnResponseData(response) {
         return response.data;
     }
 

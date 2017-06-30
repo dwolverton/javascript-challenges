@@ -324,3 +324,18 @@ pre.view-submissions__tooltip__code {
     text-align: left;
     width: 380px;
 }
+
+.edit-group__sets__instructions {
+    
+}
+
+.edit-group__sets__list {
+    border: 1px dashed #333;
+    border-radius: 10px;
+    padding: 8px 8px 5px 8px;
+}
+
+.edit-group__sets__list__instuctions {
+    font-style: italic;
+    text-align: center;
+}
