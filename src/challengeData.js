@@ -281,8 +281,8 @@ angular.module("jsExercises")
             ]
         }, {
             title: "Function Result to Variable",
-            description: "<p>Call the <code>add</code> function to with inputs 2 and 4. Store the result in a variable named <code>total</code>.</p>",
-            starterCode: "function add(num1, num2) {\n  return num1 + num2;\n}",
+            description: "<p>Call the <code>add</code> function with inputs 2 and 4. Store the result in a variable named <code>total</code>.</p>",
+            starterCode: "function add(num1, num2) {\n  return num1 + num2;\n}\n\n// Write code here.",
             solution: "function add(num1, num2) {\n  return num1 + num2;\n}\n\nvar total = add(2, 4);",
             testCases: [{
                     description: "It stores the result in a variable named total.",
@@ -306,8 +306,8 @@ angular.module("jsExercises")
             ]
         }, {
             title: "Function Result to Console",
-            description: "<p>Call the <code>add</code> function to with inputs 7 and 19. Log the answer to the console.</p>",
-            starterCode: "function add(num1, num2) {\n  return num1 + num2;\n}",
+            description: "<p>Call the <code>add</code> function with inputs 7 and 19. Log the answer to the console.</p>",
+            starterCode: "function add(num1, num2) {\n  return num1 + num2;\n}\n\n// Write code here.",
             solution: "function add(num1, num2) {\n  return num1 + num2;\n}\n\nconsole.log( add(2, 4) );",
             testCases: [{
                     description: "It logs the answer to the console.",
