@@ -33,9 +33,8 @@
 * ~~reporting~~
   * ~~view individual submissions~~
   * limit report to start and end date/time
-  * (improve styling for code submissions)
+* ~~associate sets with students / groups of students~~
 * UI while waiting for initial API call
-* associate sets with students / groups of students
 * export challenges as JSON
 * save progress
 * show status for challenges based on a 'reset' date

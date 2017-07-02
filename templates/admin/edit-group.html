@@ -38,10 +38,10 @@
     </form>
 
     <h3>Sets</h3>
-    <p class="edit-group__sets__instructions">Drag to reorder, add and remove sets.</p>
     <div class="row edit-group__sets" style="height: 300px;">
         <div class="col-sm-6">
             <h4>Sets for This Group</h4>
+            <p class="edit-group__sets__instructions">Drag here to add or reorder sets.</p>
             <div as-sortable="setSortOptions" ng-model="sets.selected" class="edit-group__sets__list">
                 <div ng-repeat="set in sets.selected" as-sortable-item class="panel panel-default">
                     <div as-sortable-item-handle class="panel-body">
@@ -54,6 +54,7 @@
         </div>
         <div class="col-sm-6">
             <h4>Other Available Sets</h4>
+            <p class="edit-group__sets__instructions">Drag here to remove a set.</p>
             <div as-sortable="availableSetSortOptions" ng-model="sets.available" class="edit-group__sets__list">
                 <div ng-repeat="set in sets.available" as-sortable-item class="panel panel-default">
                     <div as-sortable-item-handle class="panel-body">
