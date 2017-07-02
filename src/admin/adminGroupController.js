@@ -53,7 +53,6 @@ angular.module("jsExercises")
                     return !sets.some(function(selectedSet) { return selectedSet.id === set.id });
                 });
 
-                console.log('refresh');
                 $scope.sets.selected = sets;
                 $scope.sets.available = availableSets;
             });
@@ -62,10 +61,8 @@ angular.module("jsExercises")
     refreshSets();
 
     $scope.setSortOptions = {
-      accept: function (sourceItemHandleScope, destSortableScope) { console.log('set'); return true; },
       itemMoved: function (event) { // from here
           var setId = event.source.itemScope.set.id;
-          console.log('remove', setId);
           apiService.removeSetFromGroup(groupId, setId).then(refreshSets);
       },
       orderChanged: addSetAtPosition,
@@ -89,7 +86,6 @@ angular.module("jsExercises")
             // not at end
             insertBeforeSetId = $scope.sets.selected[position + 1].id;
         }
-        console.log('order', setId, insertBeforeSetId);
         apiService.addSetToGroup(groupId, setId, insertBeforeSetId).then(refreshSets);
     }
 });

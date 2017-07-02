@@ -7,6 +7,9 @@ angular.module("jsExercises")
         getSets: function() {
             return get("/sets");
         },
+        getMySets: function() {
+            return get("/sets", { mySets: true });
+        },
         getSet: function(setKey) {
             return get("/sets/" + encodeURIComponent(setKey));
         },

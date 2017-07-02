@@ -13,7 +13,7 @@ angular.module("jsExercises")
         getSets: function() {
             if (cachedSets === undefined) {
                 if (userService.isLoggedIn()) {
-                    cachedSets = apiService.getSets();
+                    cachedSets = apiService.getMySets();
                 } else {
                     cachedSets = $q.resolve(challengeData._sets);
                 }

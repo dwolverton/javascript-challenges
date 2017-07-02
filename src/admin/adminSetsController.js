@@ -80,6 +80,10 @@ angular.module("jsExercises")
         // console.log('accept', [].concat(arguments));
         dropEl = destSortableScope.element[0];
 
+        if (!setId) { // uncategorized: disable reorder
+            return sourceItemHandleScope.sortableScope !== destSortableScope;
+        }
+
         return true;
     },
     itemMoved: function (event) {
