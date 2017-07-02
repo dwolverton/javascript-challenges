@@ -34,8 +34,8 @@
   * ~~view individual submissions~~
   * limit report to start and end date/time
 * ~~associate sets with students / groups of students~~
+* ~~export challenges as JSON~~
 * UI while waiting for initial API call
-* export challenges as JSON
 * save progress
 * show status for challenges based on a 'reset' date
 * link to play a set from admin screen

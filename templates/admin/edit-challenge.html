@@ -64,4 +64,16 @@
   <pre><code class="hljs js" ng-bind-html="challenge.solution | highlightjs"></code></pre>
   <h3>Test Results</h3>
   <test-results results="testCaseResults"></test-results>
+
+  <div class="panel panel-default edit-challenge__json">
+      <div class="panel-heading panel-heading--collapsible" ng-click="showJson = !showJson">
+        <h4 class="panel-title">
+          Click to view JSON
+        </h4>
+      </div>
+      <div class="panel-collapse panel-body collapse" uib-collapse="!showJson">
+          <p>Copy-Paste this into ChallengeData.js to add to public challenges.</p>
+          <pre>{{challenge | json:4}}</pre>
+      </div>
+  </div>
 </div>

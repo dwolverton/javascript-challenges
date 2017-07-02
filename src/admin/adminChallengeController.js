@@ -17,6 +17,7 @@ angular.module("jsExercises")
 
   $scope.preview = function() {
       $scope.challengeForm.$setPristine();
+      $scope.challenge.starterCode = $scope.challenge.starterCode || "";
       var code = $scope.challenge.solution;
       var testCases = $scope.challenge.testCases;
 

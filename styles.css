@@ -325,8 +325,8 @@ pre.view-submissions__tooltip__code {
     width: 380px;
 }
 
-.edit-group__sets__instructions {
-    
+.submission-report__table__cell .tooltip.in {
+    opacity: 1;
 }
 
 .edit-group__sets__list {
@@ -338,4 +338,8 @@ pre.view-submissions__tooltip__code {
 .edit-group__sets__list__instuctions {
     font-style: italic;
     text-align: center;
+}
+
+.edit-challenge__json {
+    margin-top: 2em;
 }
