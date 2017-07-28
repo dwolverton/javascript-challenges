@@ -1,0 +1,24 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="close()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">You Got It!</h4>
+</div>
+<div class="modal-body hint-modal">
+    <div class="alert alert-success">Your code has been submitted.</div>
+
+    <h4>Your Code</h4>
+    <div class="hint-model__my-code">
+        <pre><code class="hljs js" ng-bind-html="myCode | highlightjs"></code></pre>
+    </div>
+
+    <h4>Suggested Solution</h4>
+    <div class="hint-model__solution" ng-class="{'hint-model__solution--hidden': status.hidden}">
+        <pre><code class="hljs js" ng-bind-html="solution | highlightjs"></code></pre>
+        <div class="hit-modal__solution__reveal-button-container" ng-if="status.hidden">
+            <button type="button" class="btn btn-default" ng-click="status.hidden = false">See solution. (SPOILER ALERT!)</button>
+        </div>
+    </div>
+</div>
+<div class="modal-footer hint-model__button-bar">
+    <button type="button" class="btn btn-default" ng-click="close()">Close</button>
+    <!-- <button type="button" class="btn btn-primary" ng-click="next()" ng-if="nextLink">Next Challenge <span class="glyphicon glyphicon-chevron-right"></span></button> -->
+</div>

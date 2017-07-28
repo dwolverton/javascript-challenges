@@ -1,0 +1,17 @@
+<div class="modal-body hint-modal">
+    <h4>Suggested Solution</h4>
+    <div class="hint-model__solution" ng-class="{'hint-model__solution--hidden': status.hidden}">
+        <pre><code class="hljs js" ng-bind-html="solution | highlightjs"></code></pre>
+        <div class="hit-modal__solution__reveal-button-container" ng-if="status.hidden">
+            <button type="button" class="btn btn-default" ng-click="status.hidden = false">Yes, I really want to see it. (SPOILER ALERT!)</button>
+        </div>
+    </div>
+
+    <h4>Your Code</h4>
+    <div class="hint-model__my-code">
+        <pre><code class="hljs js" ng-bind-html="myCode | highlightjs"></code></pre>
+    </div>
+</div>
+<div class="modal-footer hint-model__button-bar">
+    <button type="button" class="btn btn-default" ng-click="close()">Close</button>
+</div>

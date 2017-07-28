@@ -12,7 +12,7 @@ angular.module("jsExercises")
             title: "Loop from 0 to 4",
             description: "<p>Write a loop to log the numbers 0 through 4 to the console.</p>",
             starterCode: "",
-            solution: "for (var i = 0; i < 5; i++) {\n  console.log(i)\n}",
+            solution: "for (var i = 0; i < 5; i++) {\n  console.log(i);\n}",
             testCases: [{
                     description: "It logs 0 - 4 to the console.",
                     console: [{
@@ -48,7 +48,7 @@ angular.module("jsExercises")
             title: "Loop from 1 to 5",
             description: "<p>Write a loop to log the numbers 1 through 5 to the console.</p>",
             starterCode: "",
-            solution: "for (var i = 1; i <= 5; i++) {\n  console.log(i)\n}",
+            solution: "for (var i = 1; i <= 5; i++) {\n  console.log(i);\n}",
             testCases: [{
                     description: "It logs 1 - 5 to the console.",
                     console: [{
@@ -111,7 +111,7 @@ angular.module("jsExercises")
             title: "forEach word",
             description: '<p>Use a <em>forEach</em> loop to log all the words in this array to the console.</p><pre><code class="js">var words = [ "JavaScript", "for", "the", "win" ];</code></pre>',
             starterCode: "function printWords(words) {\n  // write code here\n}",
-            solution: "",
+            solution: "function printWords(words) {\n  words.forEach(function(word) {\n    console.log(word);\n  });\n}",
             testCases: [{
                     description: "It logs all words to the console.",
                     expression: 'printWords([ "JavaScript", "for", "the", "win" ])',
@@ -168,7 +168,7 @@ angular.module("jsExercises")
             title: "for each word",
             description: '<p>Use a <em>for</em> loop to log all the words in this array to the console.</p><pre><code class="js">var words = [ "JavaScript", "for", "the", "win" ];</code></pre>',
             starterCode: "function printWords(words) {\n  // write code here\n}",
-            solution: "",
+            solution: "function printWords(words) {\n  for (var i = 0; i < words.length; i++) {\n    console.log(words[i]);\n  }\n}",
             testCases: [{
                     description: "It logs all words to the console.",
                     expression: 'printWords([ "JavaScript", "for", "the", "win" ])',
@@ -225,7 +225,7 @@ angular.module("jsExercises")
             title: "Increment Array Values",
             description: "<p>Write a loop to add one to all the numbers in this array.</p><pre><code class='js'>var numbers = [ 3, 21, 8 ];</code></pre><p>After your loop runs, the array will contain <code>[ 4, 22, 9 ]</code>. You will be modifying each of the numbers in the array.</p>",
             starterCode: "function incrementNumbers(numbers) {\n  // write code here.\n}",
-            solution: "function incrementNumbers(numbers) {\n  for (var i = 0; i < numbers.length; i++)\n    numbers[i]++;\n  }\n}",
+            solution: "function incrementNumbers(numbers) {\n  for (var i = 0; i < numbers.length; i++) {\n    numbers[i]++;\n  }\n}",
             testCases: [{
                     expression: "var numbers = [ 3, 21, 8 ];\nincrementNumbers(numbers);\nnumbers;",
                     result: [ 4, 22, 9 ]
@@ -251,7 +251,7 @@ angular.module("jsExercises")
             title: "Add Function",
             description: '<p>Write a function named <code>add</code> that takes two inputs (number1 and number2) and outputs the sum of those numbers.</p><p>"output" here does NOT mean console.log. This is the function giving an answer back.</p>',
             starterCode: "",
-            solution: "function add(num1, num2) {\n  return num1 + num2;\n}",
+            solution: "function add(number1, number2) {\n  return number1 + number2;\n}",
             testCases: [
                 {
                     expression: "add(1, 3)",
@@ -308,7 +308,7 @@ angular.module("jsExercises")
             title: "Function Result to Console",
             description: "<p>Call the <code>add</code> function with inputs 7 and 19. Log the answer to the console.</p>",
             starterCode: "function add(num1, num2) {\n  return num1 + num2;\n}\n\n// Write code here.",
-            solution: "function add(num1, num2) {\n  return num1 + num2;\n}\n\nconsole.log( add(2, 4) );",
+            solution: "function add(num1, num2) {\n  return num1 + num2;\n}\n\nconsole.log( add(7, 19) );",
             testCases: [{
                     description: "It logs the answer to the console.",
                     console: [
