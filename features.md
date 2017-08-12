@@ -35,13 +35,13 @@
   * limit report to start and end date/time
 * ~~associate sets with students / groups of students~~
 * ~~export challenges as JSON~~
-* UI while waiting for initial API call
+* ~~UI while waiting for initial API call~~
 * ~~Feedback on submit~~
 * Refresh submissions screen (linkable form state?)
 * Show description of challenge in admin view
-* monospace text areas on edit challenge
+* ~~monospace text areas on edit challenge~~
 * reorder test cases
-* bug: code quality error messages have placeholders
+* ~~bug: code quality error messages have placeholders~~
 * duplicate challenge or paste JSON
 * save progress
 * Display 'undefined' values

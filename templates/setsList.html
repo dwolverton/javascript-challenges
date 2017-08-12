@@ -1,6 +1,9 @@
 <div class="sets-list">
     <h2>Choose a Set</h2>
     <p>Select one of the following sets of challenges.</p>
+    <p class="loading" ng-if="loading">
+        <i class='fa fa-spinner fa-spin'></i> Loading...
+    </p>
     <div class="panel panel-default" ng-repeat="set in sets">
         <div class="panel-heading">
             <h3 class="panel-title"><a href="#!/c/{{set.key}}/1">{{set.title}}</a></h3>

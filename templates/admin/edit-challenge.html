@@ -12,11 +12,11 @@
     </div>
     <div class="form-group">
       <label for="starterCode">Starter Code:</label>
-      <textarea rows="5" class="form-control" ng-model="challenge.starterCode" id="starterCode"></textarea>
+      <textarea rows="5" class="form-control form-control--code" ng-model="challenge.starterCode" id="starterCode"></textarea>
     </div>
     <div class="form-group">
       <label for="solution">Solution:</label>
-      <textarea rows="5" class="form-control" ng-model="challenge.solution" id="solution"></textarea>
+      <textarea rows="5" class="form-control form-control--code" ng-model="challenge.solution" id="solution"></textarea>
     </div>
     <h4>Test Cases</h4>
     <div ng-repeat="testCase in challenge.testCases" class="well">
@@ -30,7 +30,7 @@
       </div>
       <div class="form-group">
         <label>Expression:</label>
-        <textarea class="form-control" ng-model="testCase.expression"></textarea>
+        <textarea class="form-control form-control--code" ng-model="testCase.expression"></textarea>
       </div>
       <div class="checkbox">
         <label><input type="checkbox" ng-model="testCase.skipCode"/> Skip Code</label>

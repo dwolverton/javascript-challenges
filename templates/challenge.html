@@ -1,6 +1,10 @@
 <div class="code-challenge">
+    <p class="loading" ng-if="loading">
+        <i class='fa fa-spinner fa-spin'></i> Loading...
+    </p>
     <h2>{{title}}</h2>
     <div ng-bind-html="description | highlightjsBlocks" class="description"></div>
+
     <textarea ui-codemirror="{mode: 'javascript', lineNumbers: true}" class="code-editor" ng-model="code" ng-model-options="{debounce: 250}"></textarea>
     <div class="button-bar">
         <button type="button" class="btn btn-default" ng-disabled="!isResetEnabled()" ng-click="reset()">Reset</button>

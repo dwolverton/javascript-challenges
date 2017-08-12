@@ -366,3 +366,11 @@ pre.view-submissions__tooltip__code {
 .edit-challenge__json {
     margin-top: 2em;
 }
+
+.loading {
+    padding-left: 2em;
+}
+
+.form-control--code {
+    font-family: monospace;
+}

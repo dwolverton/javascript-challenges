@@ -2,8 +2,10 @@ angular.module("jsExercises")
 .controller("challengeController", function($scope, $routeParams, $sce, $uibModal, challengeService, testService, serialize) {
     $scope.initController();
     $scope.isSubmitEnabled = $scope.isResetEnabled = function() { return false };
+    $scope.loading = true;
 
     challengeService.getChallenge($routeParams.challengeSetKey, $routeParams.challengeNumber).then(function(challenge) {
+        $scope.loading = false;
         var hintModal;
 
         $scope.reset = function() {

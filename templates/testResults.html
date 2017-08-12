@@ -50,7 +50,7 @@
             <td ng-switch-when="lint" colspan="3" class="test-case-lint">
                 <ul ng-if="test.result.errors.length">
                     <li ng-repeat="error in test.result.errors">
-                        {{error.raw}}
+                        {{error.reason}}
                         (at or near <code ng-bind-html="error.evidence | highlightjs"></code> on line <span  class="lineno">{{error.line}}:{{error.character}}</span>)
                     </li>
                 </ul>
