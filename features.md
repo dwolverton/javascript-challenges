@@ -37,6 +37,7 @@
 * ~~export challenges as JSON~~
 * ~~UI while waiting for initial API call~~
 * ~~Feedback on submit~~
+* ~~add while loop to built-in sets~~
 * Refresh submissions screen (linkable form state?)
 * Show description of challenge in admin view
 * ~~monospace text areas on edit challenge~~

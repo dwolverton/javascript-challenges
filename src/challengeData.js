@@ -222,6 +222,29 @@ angular.module("jsExercises")
                 }
             ]
         }, {
+            "title": "While Loop",
+            "description": "<p>How many licks does it take to get to the tootsie roll center of a tootsie pop?</p>\n\n<p>Write a while loop that keeps licking (removing <em>3</em> diameter from) the pop until the pop is gone (diameter is not greater than zero). Additionally keep track of how many licks you've taken. The code sample starts out with 2 variables at the beginning. Use those to keep track progress.</p>\n\n<p>You do not need to console.log anything. The tests just check that the numberOfLicks variable is right at the end.</p>",
+            "testCases": [
+                {
+                    "expression": "numberOfLicks",
+                    "result": 334
+                },
+                {
+                    "expression": "!!__code__.match(/\\bwhile\\s*\\(/)",
+                    "expressionDisplay": "while loop is used",
+                    "description": "It uses a while loop.",
+                    "result": true
+                },
+                {
+                    "description": "It does NOT use a for loop.",
+                    "expressionDisplay": "for loop is used",
+                    "expression": "!!__code__.match(/\\bfor\\s*\\(/)",
+                    "result": false
+                }
+            ],
+            "starterCode": "var diameter = 1000;\nvar numberOfLicks = 0;\n\n// Write code here.",
+            "solution": "var diameter = 1000;\nvar numberOfLicks = 0;\n\nwhile (diameter > 0) {\n  diameter -= 3;\n  numberOfLicks++;\n}"
+        }, {
             title: "Increment Array Values",
             description: "<p>Write a loop to add one to all the numbers in this array.</p><pre><code class='js'>var numbers = [ 3, 21, 8 ];</code></pre><p>After your loop runs, the array will contain <code>[ 4, 22, 9 ]</code>. You will be modifying each of the numbers in the array.</p>",
             starterCode: "function incrementNumbers(numbers) {\n  // write code here.\n}",
