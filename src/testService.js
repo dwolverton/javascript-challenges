@@ -103,14 +103,19 @@ angular.module("jsExercises")
         runTestCase: function(testCase, code) {
 
             function handleResult(result) {
-                var resultMatches = doesResultMatch(testCase, result);
-                var logsMatch = doLogsMatch(testCase, result);
+                var consoleTest = isConsoleTest(testCase);
+                var isPass;
+                if (consoleTest) {
+                    isPass = doLogsMatch(testCase, result);
+                } else {
+                    isPass = doesResultMatch(testCase, result);
+                }
                 var outcome = {
                     expressionResult: result.result,
                     console: result.console,
-                    status: resultMatches && logsMatch ? "pass" : "fail"
+                    status: isPass ? "pass" : "fail"
                 };
-                if (!logsMatch) {
+                if (consoleTest && !isPass) {
                     outcome.error = { message: "Console logs do not match." };
                 }
                 return outcome;
@@ -132,12 +137,12 @@ angular.module("jsExercises")
                 }
             }
 
+            function isConsoleTest(testCase) {
+                return angular.isArray(testCase.console);
+            }
+
             function doLogsMatch(testCase, result) {
-                if (angular.isArray(testCase.console)) {
-                    return angular.equals(testCase.console, result.console);
-                } else {
-                    return true;
-                }
+                return angular.equals(testCase.console, result.console);
             }
 
             function handleError(result) {

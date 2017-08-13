@@ -224,6 +224,26 @@ describe("testService", function() {
         });
     });
 
+    it("console test cases ignore results", function(done) {
+        var code = "console.log('a'); console.log('b');";
+        var testCase = {
+            expression: "'something'",
+            console: [
+                { level: "log", values: ["a"] },
+                { level: "log", values: ["b"] }
+            ]
+        };
+
+        testService.runTestCase(testCase, code).then(function(result) {
+            expect(result).toEqual({
+                expressionResult: 'something',
+                console: testCase.console,
+                status: "pass"
+            });
+            done();
+        });
+    });
+
     it("can run multiple test cases", function(done) {
         testService.runTestCases(mock.challenge.testCases, mock.challenge.solution).then(function(result) {
             expect(result).toEqual([{ case: mock.challenge.testCases[0], result: {
