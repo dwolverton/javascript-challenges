@@ -5,6 +5,7 @@ html, body {
 .wrapper {
     margin: 0 2.5em 0 2.5em;
     padding: .5em 0 1em 0;
+    transition: margin-left .2s;
 }
 
 .open-sidebar .wrapper {
@@ -194,7 +195,7 @@ div.console p.level-error {
     transition: width .2s;
 }
 
-.challenge-list.pinned, .challenge-list:hover, .open-sidebar .challenge-list {
+.challenge-list.pinned, .open-sidebar .challenge-list {
     width: 250px;
     box-shadow: 2px 0 6px silver;
 }
@@ -304,6 +305,9 @@ div.console p.level-error {
     color: red;
 }
 
+.submission-report__form {
+    margin-left: 0;
+}
 
 .submission-report__table__count {
     padding: 1px 5px;

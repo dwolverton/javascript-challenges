@@ -38,7 +38,6 @@
 * ~~UI while waiting for initial API call~~
 * ~~Feedback on submit~~
 * ~~add while loop to built-in sets~~
-* Refresh submissions screen (linkable form state?) (workaround: change time)
 * Show description of challenge in admin view
 * ~~monospace text areas on edit challenge~~
 * reorder test cases
@@ -59,3 +58,4 @@
 * auto-run and run on click options
 * Teachers comment on challenges and sets visible only to admins.
 * Java
+* Refresh submissions screen (linkable form state?) (workaround: change time)
