@@ -32,13 +32,13 @@
   * ~~preallocate users before they log in~~
 * ~~reporting~~
   * ~~view individual submissions~~
-  * limit report to start and end date/time
+  * ~~limit report to start and end date/time~~
 * ~~associate sets with students / groups of students~~
 * ~~export challenges as JSON~~
 * ~~UI while waiting for initial API call~~
 * ~~Feedback on submit~~
 * ~~add while loop to built-in sets~~
-* Refresh submissions screen (linkable form state?)
+* Refresh submissions screen (linkable form state?) (workaround: change time)
 * Show description of challenge in admin view
 * ~~monospace text areas on edit challenge~~
 * reorder test cases

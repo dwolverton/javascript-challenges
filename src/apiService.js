@@ -78,8 +78,12 @@ angular.module("jsExercises")
         removeGroupMember: function(groupId, memberId) {
             return del("/groups/" + encodeURIComponent(groupId) + "/members/" + encodeURIComponent(memberId));
         },
-        getSubmissionsReport: function(groupId, setId) {
-            return get("/reports/submissions", { groupId: groupId, setId: setId });
+        getSubmissionsReport: function(groupId, setId, startDate, endDate) {
+            var params = { groupId: groupId, setId: setId };
+            if (startDate) params.startDate = startDate;
+            if (endDate) params.endDate = endDate;
+
+            return get("/reports/submissions", params);
         },
         getGroupSets: function(groupId) {
             return get("/groups/" + encodeURIComponent(groupId) + "/sets")
