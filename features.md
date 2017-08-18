@@ -38,24 +38,23 @@
 * ~~UI while waiting for initial API call~~
 * ~~Feedback on submit~~
 * ~~add while loop to built-in sets~~
-* Show description of challenge in admin view
 * ~~monospace text areas on edit challenge~~
-* reorder test cases
+* ~~reorder test cases~~
 * ~~bug: code quality error messages have placeholders~~
 * duplicate challenge or paste JSON
 * save progress
 * Display 'undefined' values
+* auto-run and run on click options
 * See your previous solutions.
 * ~~See sample solution after you figure it out.~~
 * show status for challenges based on a 'reset' date
-* Show challenges in sidebar when on select set screen (or lock sidebar open)
 * link to play a set from admin screen
-* view solution (disable easy copy-paste)
+* ~~view solution (disable easy copy-paste)~~
 * if error line number is in eval expression, don't show line number
 * update a user's name
 * View console for non-console test cases
 * pass functions back as toString to avoid DataCloneError
-* auto-run and run on click options
 * Teachers comment on challenges and sets visible only to admins.
 * Java
+* Show description of challenge in admin view
 * Refresh submissions screen (linkable form state?) (workaround: change time)

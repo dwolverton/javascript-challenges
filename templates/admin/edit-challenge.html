@@ -19,32 +19,35 @@
       <textarea rows="5" class="form-control form-control--code" ng-model="challenge.solution" id="solution"></textarea>
     </div>
     <h4>Test Cases</h4>
-    <div ng-repeat="testCase in challenge.testCases" class="well">
-      <div class="form-group">
-        <label>Description:</label>
-        <input type="text" class="form-control" ng-model="testCase.description">
-      </div>
-      <div class="form-group">
-        <label>Expression Display:</label>
-        <input type="text" class="form-control" ng-model="testCase.expressionDisplay">
-      </div>
-      <div class="form-group">
-        <label>Expression:</label>
-        <textarea class="form-control form-control--code" ng-model="testCase.expression"></textarea>
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox" ng-model="testCase.skipCode"/> Skip Code</label>
-      </div>
-      <div style="float: right;">
-        <button type="button" class="btn btn-default" ng-click="removeTestCase($index)"><span class="glyphicon glyphicon-minus"></span> Remove Test Case</button>
-      </div>
-      <div class="form-group">
-        <label>Test Type:</label>
-        <div>
-          <label class="radio-inline"><input type="radio" ng-model="testCase.type" name="tc-type-{{$index}}" value="result"/> Result</label>
-          <label class="radio-inline"><input type="radio" ng-model="testCase.type" name="tc-type-{{$index}}" value="console"/> Console</label>
+    <div as-sortable="" ng-model="challenge.testCases">
+        <div ng-repeat="testCase in challenge.testCases" as-sortable-item class="well">
+          <span class="test-case-sortable-handle" as-sortable-item-handle ><span class="glyphicon glyphicon-menu-hamburger"></span> (drag to reorder)</span>
+          <div class="form-group">
+            <label>Description:</label>
+            <input type="text" class="form-control" ng-model="testCase.description">
+          </div>
+          <div class="form-group">
+            <label>Expression Display:</label>
+            <input type="text" class="form-control" ng-model="testCase.expressionDisplay">
+          </div>
+          <div class="form-group">
+            <label>Expression:</label>
+            <textarea class="form-control form-control--code" ng-model="testCase.expression"></textarea>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" ng-model="testCase.skipCode"/> Skip Code</label>
+          </div>
+          <div style="float: right;">
+            <button type="button" class="btn btn-default" ng-click="removeTestCase($index)"><span class="glyphicon glyphicon-minus"></span> Remove Test Case</button>
+          </div>
+          <div class="form-group">
+            <label>Test Type:</label>
+            <div>
+              <label class="radio-inline"><input type="radio" ng-model="testCase.type" name="tc-type-{{$index}}" value="result"/> Result</label>
+              <label class="radio-inline"><input type="radio" ng-model="testCase.type" name="tc-type-{{$index}}" value="console"/> Console</label>
+            </div>
+          </div>
         </div>
-      </div>
     </div>
     <div class="form-group">
         <button type="button" class="btn btn-default" ng-click="addTestCase()"><span class="glyphicon glyphicon-plus"></span> Add Test Case</button>

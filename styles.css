@@ -371,6 +371,11 @@ pre.view-submissions__tooltip__code {
     margin-top: 2em;
 }
 
+.test-case-sortable-handle {
+    display: block;
+    float: right;
+}
+
 .loading {
     padding-left: 2em;
 }
