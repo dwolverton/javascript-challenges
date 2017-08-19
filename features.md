@@ -41,8 +41,8 @@
 * ~~monospace text areas on edit challenge~~
 * ~~reorder test cases~~
 * ~~bug: code quality error messages have placeholders~~
-* duplicate challenge or paste JSON
-* delete a challenge
+* ~~duplicate challenge or paste JSON~~
+* ~~delete a challenge~~
 * save progress
 * Display 'undefined' values
 * auto-run and run on click options
