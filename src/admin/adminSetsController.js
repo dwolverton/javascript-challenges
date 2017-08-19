@@ -1,5 +1,5 @@
 angular.module("jsExercises")
-.controller("adminSetsController", function($scope, challengeService, $routeParams, $location) {
+.controller("adminSetsController", function($scope, challengeService, apiService, $routeParams, $location) {
   $scope.initAdminController();
   $scope.state = {
       isDetailsOpen: false
@@ -20,9 +20,7 @@ angular.module("jsExercises")
 
           $scope.sets = sets;
 
-          if (setId) {
-              $scope.activeSet = sets.find(function(set) { return set.id === setId; });
-          }
+          $scope.activeSet = setId && sets.find(function(set) { return set.id === setId; });
           if (!$scope.activeSet) {
               $scope.activeSet = uncategorized;
               setId = null;
@@ -60,6 +58,21 @@ angular.module("jsExercises")
 
   $scope.removeFromSet = function(challenge) {
       challengeService.removeChallengeFromSet(setId, challenge.id).then(refresh);
+  }
+  $scope.duplicateChallenge = function(challenge) {
+      apiService.getChallenge(challenge.id).then(function(challenge) {
+          challenge = Object.assign({}, challenge); // shallow clone
+          delete challenge.id;
+          challenge.title += ' (Copied)';
+          apiService.saveChallenge(challenge).then(function(savedChallenge) {
+            //   $location.path("/admin/challenge/" + encodeURIComponent(savedChallenge.id));
+              if ($location.path() === "/admin/sets") {
+                  refresh();
+              } else {
+                $location.path("/admin/sets");
+            }
+          });
+      });
   }
 
   var prevDropEl = null, dropEl = null;

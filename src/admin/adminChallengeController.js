@@ -65,6 +65,12 @@ angular.module("jsExercises")
       });
   };
 
+  $scope.remove = function() {
+      apiService.deleteChallenge(challenge.id).then(function() {
+          $location.path("/admin/sets");
+      });
+  }
+
   $scope.$watch('challenge', function() {
       $scope.readyToSave = false;
   }, true);

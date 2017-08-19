@@ -26,6 +26,9 @@ angular.module("jsExercises")
                 return post("/challenges", challenge);
             }
         },
+        deleteChallenge: function(challengeId) {
+            return del("/challenges/" + encodeURIComponent(challengeId));
+        },
         addSubmission: function(submission) {
             return post("/submissions", submission);
         },

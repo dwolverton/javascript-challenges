@@ -289,8 +289,11 @@ div.console p.level-error {
     background-color: #eee;
 }
 
-.edit-sets .glyphicon-remove {
+.list-panel-options > * {
     margin-right: .5em;
+}
+.list-panel-options > :first-child {
+    margin-right: 0;
 }
 
 .panel-heading--collapsible {
@@ -365,6 +368,15 @@ pre.view-submissions__tooltip__code {
 .edit-group__sets__list__instuctions {
     font-style: italic;
     text-align: center;
+}
+
+.edit-challenge__delete {
+    float: right;
+}
+
+.edit-challenge__delete--confirm {
+    float: right;
+    margin-right: 100px;
 }
 
 .edit-challenge__json {
