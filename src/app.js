@@ -33,10 +33,12 @@ angular.module("jsExercises", ["ngRoute", "ui.bootstrap", "ui.codemirror", "as.s
         wrapper.innerHTML = input;
 
         var modified = false;
-        wrapper.querySelectorAll("pre code").forEach(function(codeBlock) {
+        var codeBlocks = wrapper.querySelectorAll("pre code");
+        for (var i = 0; i < codeBlocks.length; i++) {
+            var codeBlock = codeBlocks[i];
             hljs.highlightBlock(codeBlock);
             modified = true;
-        });
+        }
         if (modified) {
             input = wrapper.innerHTML;
         }
