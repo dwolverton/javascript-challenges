@@ -8,11 +8,31 @@ angular.module("jsExercises")
         $scope.loading = false;
         var hintModal;
 
+        var runTestsForCode = serialize(function(done, code) {
+            testService.runTestCases(challenge.testCases, code).then(function (testResults) {
+                $scope.testCaseResults = testResults;
+                $scope.overallResult = testResults.reduce(function(prev, test) {
+                    if (test.result.status === 'error') {
+                        return 'error';
+                    } else if (test.result.status === 'fail' && prev !== 'error') {
+                        return 'fail';
+                    } else {
+                        return prev;
+                    }
+                }, 'pass');
+                $scope.lastRunCode = code;
+            }).finally(done);
+        });
+
+        $scope.run = function() {
+            runTestsForCode($scope.code);
+        }
         $scope.reset = function() {
             $scope.code = challenge.starterCode || "";
+            $scope.run();
         };
         $scope.submit = function() {
-            challengeService.submit(challenge.setId, challenge.id, $scope.code, $scope.overallResult === 'pass');
+            challengeService.submit(challenge.setId, challenge.id, $scope.lastRunCode, $scope.overallResult === 'pass');
             var nextChallengeNumber = parseInt($routeParams.challengeNumber) + 1;
             showHint(true, "/c/" + $routeParams.challengeSetKey + "/" + nextChallengeNumber);
         };
@@ -59,25 +79,25 @@ angular.module("jsExercises")
                 hintModal.close();
             }
         })
+        $scope.keyPress = function(event) {
+            if ((event.ctrlKey || event.metaKey) && event.keyCode === 13) {
+                $scope.run();
+            }
+        };
+
+        var stopAutoRun = null;
+        $scope.$watch("preferences.autoRun", function(autoRun) {
+            if (autoRun) {
+                stopAutoRun = $scope.$watch("code", $scope.run);
+            } else if (stopAutoRun) {
+                stopAutoRun();
+            }
+        });
+        $scope.ctrlKeySymbol = navigator.platform && navigator.platform.startsWith("Mac") ? "⌘" : "Ctrl";
 
         $scope.testCaseResults = [];
         $scope.title = challenge.title;
         $scope.description = challenge.description;
         $scope.reset();
-
-        $scope.$watch('code', serialize(function(done, code) {
-            testService.runTestCases(challenge.testCases, code).then(function (testResults) {
-                $scope.testCaseResults = testResults;
-                $scope.overallResult = testResults.reduce(function(prev, test) {
-                    if (test.result.status === 'error') {
-                        return 'error';
-                    } else if (test.result.status === 'fail' && prev !== 'error') {
-                        return 'fail';
-                    } else {
-                        return prev;
-                    }
-                }, 'pass');
-            }).finally(done);
-        }));
     });
 });

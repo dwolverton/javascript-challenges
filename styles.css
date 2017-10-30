@@ -31,6 +31,14 @@ pre {
     margin-bottom: -35px;
 }
 
+.button-bar .checkbox {
+    display: inline;
+}
+
+.auto-run-checkbox {
+    margin-right: .5em;
+}
+
 /* -- Test Results -- */
 h3 .test-status-indicator {
     font-size: 75%;

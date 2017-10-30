@@ -43,19 +43,19 @@
 * ~~bug: code quality error messages have placeholders~~
 * ~~duplicate challenge or paste JSON~~
 * ~~delete a challenge~~
+* ~~See sample solution after you figure it out.~~
+* ~~view solution (disable easy copy-paste)~~
+* ~~auto-run and run on click options~~
+* show status for challenges based on a 'reset' date
+* View console for non-console test cases
 * save progress
 * Display 'undefined' values
-* auto-run and run on click options
+* pass functions back as toString to avoid DataCloneError
 * See your previous solutions.
-* ~~See sample solution after you figure it out.~~
-* show status for challenges based on a 'reset' date
-* link to play a set from admin screen
-* ~~view solution (disable easy copy-paste)~~
 * if error line number is in eval expression, don't show line number
 * update a user's name
-* View console for non-console test cases
-* pass functions back as toString to avoid DataCloneError
 * Teachers comment on challenges and sets visible only to admins.
+* specify wrapper code when running challenge code
 * Java
 * Show description of challenge in admin view
 * Refresh submissions screen (linkable form state?) (workaround: change time)

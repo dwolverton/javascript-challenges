@@ -20,6 +20,12 @@ angular.module("jsExercises", ["ngRoute", "ui.bootstrap", "ui.codemirror", "as.s
         $rootScope.sidebar.type = 'adminNav';
     }
 })
+.run(function($rootScope, preferenceService) {
+    $rootScope.preferences = preferenceService.read();
+    $rootScope.$watch("preferences", function(newVal) {
+        preferenceService.write(newVal);
+    }, true);
+})
 .filter('highlightjs', function($sce) {
   return function(input) {
     if (input) return $sce.trustAsHtml( hljs.highlight('js', input).value );
