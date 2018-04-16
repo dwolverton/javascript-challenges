@@ -2,6 +2,7 @@ angular.module("jsExercises")
 .factory("testService", function($q) {
     var LOG_LIMIT = 110;
     var RUNNER_TIMEOUT = 500;
+    var JSHINT_OPTIONS = { esversion: 6 };
 
     function execCodeAndTestExpression(code, expression) {
         var deferred = $q.defer();
@@ -164,7 +165,7 @@ angular.module("jsExercises")
                 expressionDisplay: "Code Quality Check"
             }
 
-            JSHINT(code);
+            JSHINT(code, JSHINT_OPTIONS);
             if (JSHINT.errors && JSHINT.errors.length) {
                 return {
                     case: LINT_CASE,
