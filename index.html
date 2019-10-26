@@ -45,7 +45,7 @@
         <link rel="stylesheet" href="lib/ng-sortable.min.css">
         <link rel="stylesheet" href="lib/ng-sortable.style.min.css">
     </head>
-    <body ng-app="jsExercises" ng-class="{'open-sidebar': sidebar.keepOpen || sidebar.isOpen}">
+    <body ng-app="jsExercises" ng-class="{'open-sidebar': sidebar.keepOpen || sidebar.isOpen, 'pinned-sidebar': sidebar.keepOpen}">
         <div ng-controller="challengeListController" class="challenge-list"
              ng-mouseenter="sidebar.isOpen = true" ng-mouseleave="sidebar.isOpen = false">
             <nav>

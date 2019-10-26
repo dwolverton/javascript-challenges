@@ -1,12 +1,17 @@
 angular.module("jsExercises", ["ngRoute", "ui.bootstrap", "ui.codemirror", "as.sortable"])
 .constant("serverUrl", (localStorage && localStorage.jsChallengeApiUrl) || "https://gc-code-challenge.herokuapp.com")
-.run(function($rootScope, serverUrl, userService) {
+.run(function($rootScope, serverUrl, userService, $timeout) {
     var redirectUri = encodeURIComponent(serverUrl + "/slack-login");
     var returnUri = encodeURIComponent(location.href);
     $rootScope.slackLoginUrl = "https://slack.com/oauth/authorize?scope=identity.basic,identity.email&client_id=4975543103.166932015414&team_id=T04UPFZ31&redirect_uri=" + redirectUri + "&state=" + returnUri;
     $rootScope.sidebar = {
         keepOpen: false
     };
+    $rootScope.$on("$routeChangeSuccess", function() {
+        $timeout(() => {
+            $rootScope.sidebar.isOpen = false;
+        }, 0);
+    });
     $rootScope.enforceAdmin = function() {
         userService.enforceAdmin();
     }

@@ -8,7 +8,7 @@ html, body {
     transition: margin-left .2s;
 }
 
-.open-sidebar .wrapper {
+.pinned-sidebar .wrapper {
     margin-left: 265px;
 }
 
@@ -203,7 +203,7 @@ div.console p.level-error {
     transition: width .2s;
 }
 
-.challenge-list.pinned, .open-sidebar .challenge-list {
+.open-sidebar .challenge-list {
     width: 250px;
     box-shadow: 2px 0 6px silver;
 }

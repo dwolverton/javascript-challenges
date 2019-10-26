@@ -13,10 +13,10 @@ angular.module("jsExercises")
         redirectTo: "/admin/sets"
     }).when("/admin/sets", {
         controller: "adminSetsController",
-        templateUrl: "templates/admin/edit-sets"
+        templateUrl: "templates/admin/edit-sets.html"
     }).when("/admin/sets/:setId", {
         controller: "adminSetsController",
-        templateUrl: "templates/admin/edit-sets"
+        templateUrl: "templates/admin/edit-sets.html"
     }).when("/admin/challenge/new", {
         controller: "adminChallengeController",
         templateUrl: "templates/admin/edit-challenge.html",
