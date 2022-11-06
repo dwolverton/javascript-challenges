@@ -1,8 +1,6 @@
 angular.module("jsExercises")
 .factory("challengeService", function($rootScope, $http, $q, $sce, challengeData, apiService, userService) {
 
-    var basic = challengeData.basic;
-    var basicPromise = $q.resolve(basic);
     var setsCache = {};
     var cachedSets;
 
@@ -27,7 +25,7 @@ angular.module("jsExercises")
                 if (userService.isLoggedIn()) {
                     cached = apiService.getSet(setKey);
                 } else {
-                    cached = basicPromise;
+                    cached = $q.resolve(challengeData[setKey]);
                 }
                 setsCache[setKey] = cached;
             }

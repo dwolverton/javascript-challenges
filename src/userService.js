@@ -1,36 +1,15 @@
 (function() {
 angular.module("jsExercises")
-.run(function($rootScope, $location) {
-    if ($location.hash().startsWith("login=")) {
-        var token = $location.hash().match(/login=([a-zA-Z0-9\/\+]+)/)[1];
-        var isAdmin = $location.hash().indexOf('admin=true') !== -1;
-        loginWithInfo({
-            id: token,
-            isAdmin: isAdmin
-        });
-        $location.hash("");
-    } else if (getPersistentUserInfo()) {
-        loginWithInfo(getPersistentUserInfo());
-    } else {
-        $rootScope.isLoggedIn = false;
-    }
-
-    function loginWithInfo(userInfo) {
-      $rootScope.loggedInUser = userInfo;
-      $rootScope.isLoggedIn = true;
-      setPersistentUserInfo(userInfo);
-    }
-})
 .factory("userService", function($rootScope, $location) {
     var userService = {
         isLoggedIn: function() {
-            return $rootScope.isLoggedIn;
+            return false;
         },
         isAdmin: function() {
-            return $rootScope.loggedInUser ? $rootScope.loggedInUser.isAdmin : false;
+            return false;
         },
         getAuthToken: function() {
-            return $rootScope.loggedInUser ? $rootScope.loggedInUser.id : null;
+            return null;
         },
         logOut: function() {
             $rootScope.isLoggedIn = false;
