@@ -1,7 +1,7 @@
 {
   "name": "JS-Challenge",
   "description": "JS Challenge",
-  "scripts" : {
+  "scripts": {
     "test": "karma start"
   },
   "devDependencies": {
@@ -9,7 +9,7 @@
     "jasmine-core": "^2.5.2",
     "karma": "^6.4.1",
     "karma-jasmine": "^1.1.0",
-    "karma-phantomjs-launcher": "^1.0.2"
+    "karma-phantomjs-launcher": "^1.0.4"
   },
   "dependencies": {
     "angular": "^1.8.3"
